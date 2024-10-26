@@ -5,6 +5,8 @@ const databaseModels = {
   COURSE_SECTION: 'CourseSection',
   COURSE_CHAPTER: 'CourseChapter',
   USER_COURSE: 'UserCourse',
+  QUESTION: 'Question',
+  SHEET: 'Sheet',
 };
 
 const modelSelectParams = {
