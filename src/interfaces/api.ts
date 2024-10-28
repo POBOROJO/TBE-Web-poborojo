@@ -128,6 +128,13 @@ export interface AddInterviewSheetRequestPayloadProps {
   roadmap: RoadmapsType;
 }
 
+export interface AddInterviewQuestionRequestPayloadProps {
+  title: string;
+  question: string;
+  answer: string;
+  frequency: QuestionFrequencyType;
+}
+
 export interface UpdateCourseRequestPayloadProps {
   updatedData: {
     title?: string;

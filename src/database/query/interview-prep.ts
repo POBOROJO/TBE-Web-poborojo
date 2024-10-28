@@ -1,5 +1,5 @@
 import {
-  AddInterviewSheetRequestPayloadProps,
+  AddInterviewQuestionRequestPayloadProps,
   DatabaseQueryResponseType,
 } from '@/interfaces';
 import { InterviewSheet } from '@/database';
@@ -50,8 +50,30 @@ const getInterviewSheetBySlugFromDB = async (
   }
 };
 
+const addQuestionToInterviewSheetInDB = async (
+  sheetId: string,
+  question: AddInterviewQuestionRequestPayloadProps
+): Promise<DatabaseQueryResponseType> => {
+  try {
+    const updatedSheet = await InterviewSheet.findOneAndUpdate(
+      { _id: sheetId },
+      { $push: { questions: question } },
+      { new: true }
+    );
+
+    if (!updatedSheet) {
+      return { error: 'Interview sheet not found' };
+    }
+
+    return { data: updatedSheet };
+  } catch (error) {
+    return { error: 'Failed to add question to interview sheet' };
+  }
+};
+
 export {
   addAInterviewSheetToDB,
   getAllInterviewSheetsFromDB,
   getInterviewSheetBySlugFromDB,
+  addQuestionToInterviewSheetInDB,
 };
