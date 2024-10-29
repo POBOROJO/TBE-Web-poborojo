@@ -2,8 +2,9 @@ import {
   AddInterviewSheetRequestPayloadProps,
   AddInterviewQuestionRequestPayloadProps,
   DatabaseQueryResponseType,
+  SheetEnrollmentRequestProps,
 } from '@/interfaces';
-import { InterviewSheet } from '@/database';
+import { InterviewSheet, UserSheet } from '@/database';
 import { modelSelectParams } from '@/constant';
 
 const addAInterviewSheetToDB = async (
@@ -72,9 +73,35 @@ const addQuestionToInterviewSheetInDB = async (
   }
 };
 
+const enrollInASheet = async ({
+  userId,
+  sheetId,
+}: SheetEnrollmentRequestProps): Promise<DatabaseQueryResponseType> => {
+  try {
+    const userSheet = await UserSheet.create({ userId, sheetId });
+    return { data: userSheet };
+  } catch (error) {
+    return { error: 'Failed while enrolling in a sheet' };
+  }
+};
+
+const getEnrolledSheetFromDB = async ({
+  userId,
+  sheetId,
+}: SheetEnrollmentRequestProps): Promise<DatabaseQueryResponseType> => {
+  try {
+    const enrolledSheet = await UserSheet.findOne({ userId, sheetId });
+    return { data: enrolledSheet };
+  } catch (error) {
+    return { error: 'Failed while fetching enrolled sheet' };
+  }
+};
+
 export {
   addAInterviewSheetToDB,
   getAllInterviewSheetsFromDB,
   getInterviewSheetBySlugFromDB,
   addQuestionToInterviewSheetInDB,
+  enrollInASheet,
+  getEnrolledSheetFromDB,
 };
