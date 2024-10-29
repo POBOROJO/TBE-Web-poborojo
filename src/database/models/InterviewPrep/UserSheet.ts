@@ -1,12 +1,11 @@
-import { UserSheetModel } from '@/interfaces';
+import { UserSheetModel , UserSheetQuestionModel} from '@/interfaces';
 import { Model, Schema, model, models } from 'mongoose';
 import { databaseModels } from '@/constant';
 
-const UserQuestionSchema = new Schema(
+const UserQuestionSchema = new Schema<UserSheetQuestionModel>(
   {
     questionId: {
       type: Schema.Types.ObjectId,
-      ref: databaseModels.INTERVIEW_SHEET_QUESTION,
       required: [true, 'Question ID is required'],
     },
     isCompleted: {
@@ -24,7 +23,7 @@ const UserQuestionSchema = new Schema(
   },
   {
     timestamps: true,
-    _id: false, // We don't need an _id field for each question
+    _id: true, // We need an _id field for each question 
   }
 );
 

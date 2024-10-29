@@ -6,7 +6,6 @@ const databaseModels = {
   COURSE_SECTION: 'CourseSection',
   COURSE_CHAPTER: 'CourseChapter',
   USER_COURSE: 'UserCourse',
-  INTERVIEW_SHEET_QUESTION: 'InterviewSheetQuestion',
   USER_SHEET: 'UserSheet',
 };
 

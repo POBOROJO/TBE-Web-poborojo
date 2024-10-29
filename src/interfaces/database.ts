@@ -80,7 +80,7 @@ export interface UserSheetModel extends Document {
 }
 
 export interface UserSheetQuestionModel {
-  chapterId: string;
+  questionId: typeof Schema.Types.ObjectId;
   isCompleted?: boolean;
 }
 
