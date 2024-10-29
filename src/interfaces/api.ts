@@ -201,6 +201,11 @@ export interface UpdateUserChapterInCourseRequestProps {
   isCompleted: boolean;
 }
 
+export interface SheetEnrollmentRequestProps {
+  sheetId: string;
+  userId: string;
+}
+
 export interface ExtendedCourseChapterModel extends CourseChapterModel {
   isCompleted: boolean; // Add `isCompleted` flag
 }
