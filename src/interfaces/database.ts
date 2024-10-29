@@ -72,6 +72,18 @@ export interface InterviewSheetQuestionModel {
   toObject: () => UserCourseModel;
 }
 
+export interface UserSheetModel extends Document {
+  userId: typeof Schema.Types.ObjectId; 
+  sheetId: typeof Schema.Types.ObjectId;
+  sheet: InterviewSheetModel; 
+  questions: UserSheetQuestionModel[]; 
+}
+
+export interface UserSheetQuestionModel {
+  questionId: typeof Schema.Types.ObjectId;
+  isCompleted?: boolean;
+}
+
 export interface CourseChapterModel {
   _id: typeof Schema.Types.ObjectId;
   name: string;
