@@ -40,6 +40,22 @@ export interface ProjectDocumentModel extends Document {
   isActive: boolean;
 }
 
+export interface UserProjectModel extends Document {
+  userId: typeof Schema.Types.ObjectId;
+  projectId: typeof Schema.Types.ObjectId;
+  sections: UserProjectSectionModel[];
+}
+
+export interface UserProjectSectionModel {
+  sectionId: string; 
+  chapters: UserProjectChapterModel[]; 
+}
+
+export interface UserProjectChapterModel {
+  chapterId: string;
+  isCompleted?: boolean;
+}
+
 export interface CourseModel extends Document {
   name: string;
   meta: string;
