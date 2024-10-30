@@ -97,6 +97,29 @@ const getEnrolledSheetFromDB = async ({
   }
 };
 
+const markQuestionCompletedByUser = async (
+  userId: string,
+  sheetId: string,
+  questionId: string,
+  isCompleted: boolean
+): Promise<DatabaseQueryResponseType> => {
+  try {
+    const updatedSheet = await UserSheet.findOneAndUpdate(
+      { userId, sheetId, 'questions.questionId': questionId },
+      { $set: { 'questions.$.isCompleted': isCompleted } },
+      { new: true }
+    );
+
+    if (!updatedSheet) {
+      return { error: 'User or question not found' };
+    }
+
+    return { data: updatedSheet };
+  } catch (error) {
+    return { error: 'Failed to mark question as completed' };
+  }
+};
+
 export {
   addAInterviewSheetToDB,
   getAllInterviewSheetsFromDB,
@@ -104,4 +127,5 @@ export {
   addQuestionToInterviewSheetInDB,
   enrollInASheet,
   getEnrolledSheetFromDB,
+  markQuestionCompletedByUser,
 };

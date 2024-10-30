@@ -220,3 +220,10 @@ export interface BaseInterviewSheetResponseProps
   isEnrolled?: boolean;
   questions?: InterviewSheetQuestionModel[];
 }
+
+export interface MarkQuestionCompletedRequestProps {
+  userId: string;
+  sheetId: string;
+  questionId: string;
+  isCompleted: boolean;
+}
