@@ -227,3 +227,7 @@ export interface MarkQuestionCompletedRequestProps {
   questionId: string;
   isCompleted: boolean;
 }
+
+export interface GetAllQuestionsRequestProps {
+  userId: string;
+}

@@ -120,6 +120,24 @@ const markQuestionCompletedByUser = async (
   }
 };
 
+const getAllQuestionsByUser = async (userId: string) => {
+  try {
+    const userSheets = await UserSheet.find({ userId }).populate(
+      'questions.questionId'
+    );
+
+    if (!userSheets.length) {
+      return { data: [], error: 'No questions found for this user' };
+    }
+
+    const allQuestions = userSheets.flatMap((sheet) => sheet.questions);
+
+    return { data: allQuestions, error: null };
+  } catch (error) {
+    return { data: null, error: 'Error fetching questions from the database' };
+  }
+};
+
 export {
   addAInterviewSheetToDB,
   getAllInterviewSheetsFromDB,
@@ -128,4 +146,5 @@ export {
   enrollInASheet,
   getEnrolledSheetFromDB,
   markQuestionCompletedByUser,
+  getAllQuestionsByUser,
 };
