@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionLinkItem,
@@ -8,12 +8,35 @@ import {
   SEO,
   Section,
   Text,
+  ProgressBar,
+  Button,
 } from '@/components';
 import { ProjectPageProps } from '@/interfaces';
 import { getProjectPageProps, getSelectedProjectChapterMeta } from '@/utils';
+import { useApi, useUser } from '@/hooks';
+import { routes } from '@/constant';
 
 const ProjectPage = ({ project, meta, seoMeta, slug }: ProjectPageProps) => {
   const [projectMeta, setProjectMeta] = useState<string>(meta);
+  const [sections, setSections] = useState(project.sections);
+  const [currentChapterId, setCurrentChapterId] = useState<string | null>(null);
+  const [isChapterCompleted, setIsChapterCompleted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const totalChapters = sections.reduce((acc, section) => acc + section.chapters.length, 0);
+  const completedChapters = sections.reduce(
+    (acc, section) => acc + section.chapters.filter((chapter) => chapter.isCompleted).length,
+    0
+  );
+
+  useEffect(() => {
+    if (currentChapterId) {
+      const chapter = sections
+        .flatMap((section) => section.chapters)
+        .find((ch) => ch.chapterId === currentChapterId);
+      setIsChapterCompleted(chapter?.isCompleted ?? false);
+    }
+  }, [currentChapterId, sections]);
 
   const handleChapterClick = ({ sectionId, chapterId }: any) => {
     const selectedChapter = getSelectedProjectChapterMeta(

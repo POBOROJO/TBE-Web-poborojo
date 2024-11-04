@@ -138,6 +138,23 @@ const getAllQuestionsByUser = async (userId: string) => {
   }
 };
 
+const getAllQuestionsBySheetId = async (
+  sheetId: string
+): Promise<DatabaseQueryResponseType> => {
+  try {
+    // Find the interview sheet by ID and only return the questions field
+    const sheet = await InterviewSheet.findById(sheetId).select('questions');
+
+    if (!sheet) {
+      return { error: 'Interview sheet not found' };
+    }
+
+    return { data: sheet.questions };
+  } catch (error) {
+    return { error: `Failed while fetching questions: ${error.message}` };
+  }
+};
+
 export {
   addAInterviewSheetToDB,
   getAllInterviewSheetsFromDB,
@@ -147,4 +164,5 @@ export {
   getEnrolledSheetFromDB,
   markQuestionCompletedByUser,
   getAllQuestionsByUser,
+  getAllQuestionsBySheetId,
 };
