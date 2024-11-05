@@ -17,7 +17,7 @@ const Home = ({ seoMeta }: PageProps) => {
     url: routes.api.interviewPrep,
   });
 
-  const courses: PrimaryCardWithCTAProps[] = useAPIResponseMapper(
+  const sheets: PrimaryCardWithCTAProps[] = useAPIResponseMapper(
     response?.data,
     mapInterviewSheetResponseToCard
   );
@@ -26,7 +26,7 @@ const Home = ({ seoMeta }: PageProps) => {
     return <LoadingSpinner />;
   }
 
-  const noSheetFoundUI = (!courses || courses.length === 0) && (
+  const noSheetFoundUI = (!sheets || sheets.length === 0) && (
     <FlexContainer
       justifyCenter={true}
       className='w-screen h-screen item-center justify-center flex-col'
@@ -39,7 +39,7 @@ const Home = ({ seoMeta }: PageProps) => {
           variant: 'PRIMARY',
           text: 'Go Back To Home',
         }}
-        href={routes.shiksha}
+        href={routes.interviewPrep}
       ></LinkButton>
     </FlexContainer>
   );
@@ -50,7 +50,7 @@ const Home = ({ seoMeta }: PageProps) => {
       <CardContainerB
         heading='Explore'
         focusText='Sheets'
-        cards={courses}
+        cards={sheets}
         borderColour={2}
         subtext='Pick A Sheet and Start Preparing'
         sectionClassName='px-2 py-4'
