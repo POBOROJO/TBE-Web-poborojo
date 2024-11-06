@@ -34,26 +34,33 @@ const getPreFetchProps = async ({ query, resolvedUrl }: any) => {
   };
 };
 
-const getProjectPageProps = async ({ query }: any) => {
+const getProjectPageProps = async (context: any) => {
+  const { req, query } = context;
   const { projectSlug, projectId, sectionId, chapterId } = query;
 
   let slug = '/';
 
   if (projectSlug) {
-    slug = '/projects/' + projectSlug;
+    slug = `/projects/${projectSlug}`;
   }
 
-  if (projectId) {
+  const seoMeta = getSEOMeta(slug as PageSlug);
+
+  if (projectId && seoMeta) {
     try {
-      const seoMeta = getSEOMeta(slug as PageSlug);
+      // Authenticate user
+      const user = await isUserAuthenticated(req);
 
-      const { status, data } = await fetchAPIData(`projects/${projectId}`);
+      // Fetch project data using the new route builder function
+      const { status, data } = await fetchAPIData(
+        routes.api.projectByIdWithUser(projectId, user?.id)
+      );
 
-      // If the project data is not found, return the message
+      // If the project data is not found, redirect to 404
       if (!status) {
         return {
           redirect: {
-            destination: '/404',
+            destination: routes[404],
           },
           props: { slug },
         };
@@ -61,15 +68,21 @@ const getProjectPageProps = async ({ query }: any) => {
 
       const project: ProjectPickedPageProps = data;
       let { meta } = project;
+      let currentChapterId = '';
 
+      // If section and chapter IDs are provided, get specific chapter metadata
       if (sectionId && chapterId) {
+        currentChapterId = chapterId;
+
         const selectedChapterMeta = getSelectedProjectChapterMeta(
           project,
           sectionId,
           chapterId
         );
 
-        if (selectedChapterMeta) meta = selectedChapterMeta;
+        if (selectedChapterMeta) {
+          meta = selectedChapterMeta;
+        }
       }
 
       return {
@@ -78,6 +91,7 @@ const getProjectPageProps = async ({ query }: any) => {
           seoMeta,
           project,
           meta,
+          currentChapterId,
         },
       };
     } catch (error) {
@@ -85,9 +99,10 @@ const getProjectPageProps = async ({ query }: any) => {
     }
   }
 
+  // Redirect to 404 if projectId is missing or seoMeta is not set
   return {
     redirect: {
-      destination: '/404',
+      destination: routes[404],
     },
     props: { slug },
   };

@@ -1,11 +1,15 @@
-import { UserProjectModel, UserProjectSectionModel, UserProjectChapterModel } from '@/interfaces';
+import {
+  UserProjectModel,
+  UserProjectSectionModel,
+  UserProjectChapterModel,
+} from '@/interfaces';
 import { Model, Schema, model, models } from 'mongoose';
 import { databaseModels } from '@/constant';
 
 const UserProjectChapterSchema = new Schema<UserProjectChapterModel>(
   {
     chapterId: {
-      type: String,  
+      type: String,
       required: [true, 'Chapter ID is required'],
     },
     isCompleted: {
@@ -23,21 +27,21 @@ const UserProjectChapterSchema = new Schema<UserProjectChapterModel>(
   },
   {
     timestamps: true,
-    _id: false, 
+    _id: false,
   }
 );
 
 const UserProjectSectionSchema = new Schema<UserProjectSectionModel>(
   {
     sectionId: {
-      type: String,  
+      type: String,
       required: [true, 'Section ID is required'],
     },
-    chapters: [UserProjectChapterSchema],  
+    chapters: [UserProjectChapterSchema],
   },
   {
     timestamps: true,
-    _id: false, 
+    _id: false,
   }
 );
 
@@ -55,7 +59,7 @@ const UserProjectSchema = new Schema<UserProjectModel>(
       required: [true, 'Project ID is required'],
       index: true,
     },
-    sections: [UserProjectSectionSchema],  
+    sections: [UserProjectSectionSchema],
   },
   {
     timestamps: true,

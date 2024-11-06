@@ -35,10 +35,20 @@ const routes = {
     myCourses: '/user/shiksha',
     interviewPrep: '/interview-prep',
     enrollCourse: '/user/shiksha/enroll',
+    enrollProject: '/user/projects/enroll',
     markCourseChapterAsCompleted: '/user/shiksha/course',
+    markProjectChapterAsCompleted: '/user/projects/project',
     courseById: (course: string) => `/shiksha/${course}`,
     courseByIdWithUser: (course: string, userId?: string) => {
       let url = `/shiksha/${course}`;
+      if (userId) {
+        url += `?userId=${userId}`;
+      }
+      return url;
+    },
+    projectById: (project: string) => `/projects/${project}`,
+    projectByIdWithUser: (project: string, userId?: string) => {
+      let url = `/projects/${project}`;
       if (userId) {
         url += `?userId=${userId}`;
       }

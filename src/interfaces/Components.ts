@@ -270,9 +270,11 @@ export interface ProjectHeroMetaContainerProps {
 }
 
 export interface ProjectHeroContainerProps {
+  id: string;
   name: string;
   roadmap: string;
   difficultyLevel: string;
+  isEnrolled?: boolean;
 }
 
 export interface CourseHeroContainerProps {

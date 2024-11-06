@@ -17,11 +17,14 @@ export type ProjectPickedPageProps = Pick<
   | 'difficultyLevel'
   | 'sections'
   | 'requiredSkills'
->;
+> & {
+  isEnrolled?: boolean;
+};
 
 export interface ProjectPageProps extends PageProps {
   project: ProjectPickedPageProps;
   meta: string;
+  currentChapterId: string;
 }
 
 export interface CoursePageProps extends PageProps {

@@ -15,6 +15,7 @@ export interface UserModel {
 }
 
 export interface ProjectChapter {
+  isCompleted: boolean;
   chapterId: string;
   chapterName: string;
   content: string;
@@ -47,8 +48,8 @@ export interface UserProjectModel extends Document {
 }
 
 export interface UserProjectSectionModel {
-  sectionId: string; 
-  chapters: UserProjectChapterModel[]; 
+  sectionId: string;
+  chapters: UserProjectChapterModel[];
 }
 
 export interface UserProjectChapterModel {
@@ -89,10 +90,10 @@ export interface InterviewSheetQuestionModel {
 }
 
 export interface UserSheetModel extends Document {
-  userId: typeof Schema.Types.ObjectId; 
+  userId: typeof Schema.Types.ObjectId;
   sheetId: typeof Schema.Types.ObjectId;
-  sheet: InterviewSheetModel; 
-  questions: UserSheetQuestionModel[]; 
+  sheet: InterviewSheetModel;
+  questions: UserSheetQuestionModel[];
 }
 
 export interface UserSheetQuestionModel {
