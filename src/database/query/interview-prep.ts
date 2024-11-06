@@ -3,6 +3,7 @@ import {
   AddInterviewQuestionRequestPayloadProps,
   DatabaseQueryResponseType,
   SheetEnrollmentRequestProps,
+  BaseInterviewSheetResponseProps,
 } from '@/interfaces';
 import { InterviewSheet, UserSheet } from '@/database';
 import { modelSelectParams } from '@/constant';
@@ -138,20 +139,71 @@ const getAllQuestionsByUser = async (userId: string) => {
   }
 };
 
-const getAllQuestionsBySheetId = async (
-  sheetId: string
+const getASheetFromDBById = async (
+  sheetId: string,
+  userId?: string
 ): Promise<DatabaseQueryResponseType> => {
   try {
-    // Find the interview sheet by ID and only return the questions field
-    const sheet = await InterviewSheet.findById(sheetId).select('questions');
+    const sheet = await InterviewSheet.findById(sheetId);
 
     if (!sheet) {
-      return { error: 'Interview sheet not found' };
+      return { error: 'Sheet not found' };
     }
 
-    return { data: sheet.questions };
+    if (userId) {
+      const { data } = await getEnrolledSheetFromDB({ userId, sheetId });
+
+      return {
+        data: {
+          ...sheet.toObject(),
+          isEnrolled: !!data,
+        } as BaseInterviewSheetResponseProps,
+      };
+    }
+
+    return { data: sheet };
   } catch (error) {
-    return { error: `Failed while fetching questions: ${error.message}` };
+    return { error: `Failed while fetching a course ${error}` };
+  }
+};
+
+const getASheetForUserFromDB = async (userId: string, sheetId: string) => {
+  try {
+    const userSheet = await UserSheet.findOne({ userId, sheetId })
+      .populate({
+        path: 'sheet',
+      })
+      .exec();
+
+    if (!userSheet) {
+      const { data: sheet } = await getASheetFromDBById(sheetId);
+      return { data: { ...sheet.toObject(), isEnrolled: false } };
+    }
+
+    const mappedQuestions = userSheet.sheet.questions.map((question) => {
+      const isCompleted = userSheet.questions.find(
+        (uc) => uc.questionId.toString() === question._id.toString()
+      )?.isCompleted;
+
+      return {
+        ...question.toObject(),
+        isCompleted,
+      };
+    });
+
+    const updatedSheetResponse = {
+      ...userSheet.sheet.toObject(),
+      chapters: mappedQuestions,
+    };
+
+    return {
+      data: {
+        ...updatedSheetResponse,
+        isEnrolled: true,
+      } as BaseInterviewSheetResponseProps,
+    };
+  } catch (error) {
+    return { error: 'Failed to fetch courses with chapter status' };
   }
 };
 
@@ -164,5 +216,5 @@ export {
   getEnrolledSheetFromDB,
   markQuestionCompletedByUser,
   getAllQuestionsByUser,
-  getAllQuestionsBySheetId,
+  getASheetForUserFromDB,
 };
