@@ -12,6 +12,7 @@ const databaseModels = {
 
 const modelSelectParams = {
   coursePreview: '_id name slug coverImageURL description liveOn',
+  projectPreview: '_id name slug coverImageURL description liveOn',
 };
 
 export { databaseModels, modelSelectParams };
