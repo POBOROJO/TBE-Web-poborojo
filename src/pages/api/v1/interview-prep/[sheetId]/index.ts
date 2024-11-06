@@ -2,16 +2,16 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { apiStatusCodes } from '@/constant';
 import { sendAPIResponse } from '@/utils';
 import { connectDB } from '@/middlewares';
-import { getAllQuestionsBySheetId } from '@/database';
+import { getASheetForUserFromDB } from '@/database';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await connectDB();
   const { method, query } = req;
-  const { sheetId } = query as { sheetId: string };
+  const { sheetId, userId } = query as { sheetId: string; userId:string };
 
   switch (method) {
     case 'GET':
-      return handleGetAllQuestions(req, res, sheetId);
+      return handleGetSheetById(req, res, userId, sheetId);
     default:
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
@@ -22,13 +22,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const handleGetAllQuestions = async (
+const handleGetSheetById = async (
   req: NextApiRequest,
   res: NextApiResponse,
+  userId: string,
   sheetId: string
 ) => {
   try {
-    const { data, error } = await getAllQuestionsBySheetId(sheetId);
+    const { data, error } = await getASheetForUserFromDB(userId, sheetId);
 
     if (error) {
       return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
