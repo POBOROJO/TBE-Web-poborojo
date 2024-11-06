@@ -4,6 +4,7 @@ import {
   InterviewSheetModel,
   InterviewSheetQuestionModel,
   ProjectChapter,
+  ProjectDocumentModel,
 } from '.';
 
 export type APIMethodTypes = 'GET' | 'POST' | 'PATCH';
@@ -161,6 +162,11 @@ export interface EnrollCourseInDBRequestProps {
   courseId: string;
 }
 
+export interface EnrollProjectInDBRequestProps {
+  userId: string;
+  projectId: string;
+}
+
 export type SkillsType =
   | 'HTML'
   | 'CSS'
@@ -194,9 +200,22 @@ export interface CourseEnrollmentRequestProps {
   userId: string;
 }
 
+export interface ProjectEnrollmentRequestProps {
+  projectId: string;
+  userId: string;
+}
+
 export interface UpdateUserChapterInCourseRequestProps {
   userId: string;
   courseId: string;
+  chapterId: string;
+  isCompleted: boolean;
+}
+
+export interface UpdateUserChapterInProjectRequestProps {
+  userId: string;
+  projectId: string;
+  sectionId: string;
   chapterId: string;
   isCompleted: boolean;
 }

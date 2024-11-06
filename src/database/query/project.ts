@@ -7,8 +7,12 @@ import {
   UpateSectionRequestPayloadProps,
   UpdateChapterDBRequestProps,
   UpdateProjectRequestPayloadProps,
+  UpdateUserChapterInProjectRequestProps,
+  EnrollProjectInDBRequestProps,
+  ProjectPickedPageProps,
 } from '@/interfaces';
-import { Project } from '@/database';
+
+import { Project, UserProject } from '@/database';
 
 const addAProjectToDB = async ({
   name,
@@ -68,7 +72,8 @@ const getProjectBySlugFromDB = async (
 };
 
 const getProjectByIDFromDB = async (
-  projectId: string
+  projectId: string,
+  userId?: string
 ): Promise<DatabaseQueryResponseType> => {
   try {
     const project = await Project.findOne({ _id: projectId });
@@ -77,9 +82,21 @@ const getProjectByIDFromDB = async (
       return { error: 'Project not found' };
     }
 
+    // Check if user is enrolled in the project if userId is provided
+    if (userId) {
+      const { data } = await getEnrolledProjectFromDB({ userId, projectId });
+
+      return {
+        data: {
+          ...project.toObject(),
+          isEnrolled: !!data, // Set isEnrolled to true if data exists, otherwise false
+        } as ProjectPickedPageProps,
+      };
+    }
+
     return { data: project };
   } catch (error) {
-    return { error };
+    return { error: `Failed while fetching a project: ${error}` };
   }
 };
 
@@ -401,6 +418,102 @@ const deleteChapterFromSectionInDB = async ({
   }
 };
 
+const updateUserProjectChapterInDB = async ({
+  userId,
+  projectId,
+  sectionId,
+  chapterId,
+  isCompleted,
+}: UpdateUserChapterInProjectRequestProps) => {
+  try {
+    // Find the UserProject document
+    const userProject = await UserProject.findOne({ userId, projectId });
+
+    if (!userProject) {
+      return { error: 'User project not found' };
+    }
+
+    // Find the specific section in the sections array
+    const sectionIndex = userProject.sections.findIndex(
+      (section) => section.sectionId.toString() === sectionId.toString()
+    );
+
+    if (sectionIndex === -1) {
+      return { error: 'Section not found in user project' };
+    }
+
+    // Find the specific chapter in the chapters array within the section
+    const chapterIndex = userProject.sections[sectionIndex].chapters.findIndex(
+      (chapter) => chapter.chapterId.toString() === chapterId.toString()
+    );
+
+    if (chapterIndex === -1) {
+      // If chapter is not found, add it with the given status
+      userProject.sections[sectionIndex].chapters.push({
+        chapterId: chapterId,
+        isCompleted: isCompleted,
+      });
+    } else {
+      // If chapter is found, update the isCompleted status and update timestamp
+      userProject.sections[sectionIndex].chapters[chapterIndex].isCompleted =
+        isCompleted;
+      userProject.sections[sectionIndex].chapters[chapterIndex].updatedAt =
+        new Date();
+    }
+
+    // Save the updated document
+    await userProject.save();
+
+    return { data: userProject };
+  } catch (error) {
+    return { error: 'Failed to update chapter in user project' };
+  }
+};
+
+const enrollInAProject = async ({
+  userId,
+  projectId,
+}: EnrollProjectInDBRequestProps): Promise<DatabaseQueryResponseType> => {
+  try {
+    const project = await Project.findById(projectId).lean();
+    if (!project) {
+      return { error: 'Project not found' };
+    }
+
+    const sections = project.sections.map((section: any) => ({
+      sectionId: section.sectionId,
+      chapters: section.chapters.map((chapter: any) => ({
+        chapterId: chapter.chapterId,
+        isCompleted: false,
+      })),
+    }));
+
+    // Create user project data with the initialized sections
+    const userProject = await UserProject.create({
+      userId,
+      projectId,
+      sections,
+    });
+
+    return { data: userProject };
+  } catch (error) {
+    console.error('Error enrolling in project:', error);
+    return { error: 'Failed while enrolling in a project' };
+  }
+};
+
+const getEnrolledProjectFromDB = async ({
+  userId,
+  projectId,
+}: EnrollProjectInDBRequestProps): Promise<DatabaseQueryResponseType> => {
+  try {
+    const enrolledProject = await UserProject.findOne({ userId, projectId });
+    return { data: enrolledProject };
+  } catch (error) {
+    return { error: 'Failed while fetching enrolled project' };
+  }
+};
+
 export {
   addAProjectToDB,
   getProjectsFromDB,
@@ -417,4 +530,7 @@ export {
   updateChapterInSectionInDB,
   deleteChapterFromSectionInDB,
   getChapterFromSectionInDB,
+  updateUserProjectChapterInDB,
+  enrollInAProject,
+  getEnrolledProjectFromDB,
 };

@@ -1,6 +1,7 @@
 const databaseModels = {
   PROJECT: 'Project',
   USER: 'User',
+  USER_PROJECT: 'UserProject',
   COURSE: 'Course',
   INTERVIEW_SHEET: 'InterviewSheet',
   COURSE_SECTION: 'CourseSection',
