@@ -452,8 +452,6 @@ const updateUserProjectChapterInDB = async ({
       userProject.sections[sectionIndex].chapters.push({
         chapterId: chapterId,
         isCompleted: isCompleted,
-        createdAt: new Date(),
-        updatedAt: new Date(),
       });
     } else {
       // If chapter is found, update the isCompleted status and update timestamp
@@ -484,13 +482,9 @@ const enrollInAProject = async ({
 
     const sections = project.sections.map((section: any) => ({
       sectionId: section.sectionId,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
       chapters: section.chapters.map((chapter: any) => ({
         chapterId: chapter.chapterId,
         isCompleted: false,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       })),
     }));
 
@@ -499,8 +493,6 @@ const enrollInAProject = async ({
       userId,
       projectId,
       sections,
-      createdAt: new Date(),
-      updatedAt: new Date(),
     });
 
     return { data: userProject };
