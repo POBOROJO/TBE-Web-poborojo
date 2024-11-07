@@ -10,9 +10,11 @@ import {
   UpdateUserChapterInProjectRequestProps,
   EnrollProjectInDBRequestProps,
   ProjectPickedPageProps,
+  BaseProjectResponseProps,
 } from '@/interfaces';
 
 import { Project, UserProject } from '@/database';
+import { modelSelectParams } from '@/constant';
 
 const addAProjectToDB = async ({
   name,
@@ -502,6 +504,25 @@ const enrollInAProject = async ({
   }
 };
 
+const getAllEnrolledProjectsFromDB = async (
+  userId: string
+): Promise<DatabaseQueryResponseType> => {
+  try {
+    const enrolledProjects = await UserProject.find({ userId })
+      .populate({
+        path: 'project',
+        select: modelSelectParams.projectPreview,
+      })
+      .exec();
+
+    return {
+      data: enrolledProjects.map((project) => project.project),
+    };
+  } catch (error) {
+    return { error: 'Failed while fetching enrolled projects' };
+  }
+};
+
 const getEnrolledProjectFromDB = async ({
   userId,
   projectId,
@@ -533,4 +554,5 @@ export {
   updateUserProjectChapterInDB,
   enrollInAProject,
   getEnrolledProjectFromDB,
+  getAllEnrolledProjectsFromDB,
 };
