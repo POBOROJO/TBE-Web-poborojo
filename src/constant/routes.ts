@@ -34,6 +34,7 @@ const routes = {
     shiksha: '/shiksha',
     myCourses: '/user/shiksha',
     myProjects: '/user/projects',
+    mySheets: '/user/interview-prep',
     interviewPrep: '/interview-prep',
     enrollCourse: '/user/shiksha/enroll',
     enrollProject: '/user/projects/enroll',

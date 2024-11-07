@@ -98,6 +98,29 @@ const getEnrolledSheetFromDB = async ({
   }
 };
 
+const getAllEnrolledSheetsFromDB = async (
+  userId: string
+): Promise<DatabaseQueryResponseType> => {
+  try {
+    console.log('getting sheets');
+    console.log('userId ', userId);
+    const enrolledSheets = await UserSheet.find({ userId })
+      .populate({
+        path: 'sheet',
+        select: modelSelectParams.coursePreview,
+      })
+      .exec();
+
+    console.log('sheets: ', enrolledSheets);
+
+    return {
+      data: enrolledSheets.map((sheet) => sheet.sheet),
+    };
+  } catch (error) {
+    return { error: 'Failed while fetching enrolled sheets' };
+  }
+};
+
 const markQuestionCompletedByUser = async (
   userId: string,
   sheetId: string,
@@ -217,4 +240,5 @@ export {
   markQuestionCompletedByUser,
   getAllQuestionsByUser,
   getASheetForUserFromDB,
+  getAllEnrolledSheetsFromDB,
 };
