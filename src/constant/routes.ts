@@ -18,6 +18,10 @@ const routes = {
   },
   interviewPrep: '/interview-prep',
   interviewPrepExplore: '/interview-prep/explore',
+  allSheets: {
+    javaScriptInterviewSheet: '/interview-prep/javascript-interview-sheet',
+    javaScriptBasicsInterviewSheet: '/interview-prep/javascript-basics-interview-sheet',
+  },
   workshops: '/workshops',
   os: '/os',
   contactUs: '/contact',
@@ -36,11 +40,20 @@ const routes = {
     interviewPrep: '/interview-prep',
     enrollCourse: '/user/shiksha/enroll',
     enrollProject: '/user/projects/enroll',
+    enrollSheet: '/user/interview-prep/enroll',
     markCourseChapterAsCompleted: '/user/shiksha/course',
     markProjectChapterAsCompleted: '/user/projects/project',
+    markSheetQuestionAsCompleted: '/user/interview-prep/sheet',
     courseById: (course: string) => `/shiksha/${course}`,
     courseByIdWithUser: (course: string, userId?: string) => {
       let url = `/shiksha/${course}`;
+      if (userId) {
+        url += `?userId=${userId}`;
+      }
+      return url;
+    },
+    sheetByIdWithUser: (sheet: string, userId?: string) => {
+      let url = `/interview-prep/${sheet}`;
       if (userId) {
         url += `?userId=${userId}`;
       }

@@ -80,6 +80,20 @@ const getSEOMeta = (basePath: any): GetSEOMetaResponseType => {
       url: routes.allCourses.basicsOfProgrammingWithJS,
       ...commonMeta,
     },
+    [`${routes.allSheets.javaScriptInterviewSheet}`]: {
+      title: `JavaScript Interview Sheet | The Boring Education`,
+      siteName: `JavaScript Interview Sheet`,
+      description: `Prepare for JavaScript interviews with essential questions.`,
+      url: routes.allSheets.javaScriptInterviewSheet,
+      ...commonMeta,
+    },
+    [`${routes.allSheets.javaScriptBasicsInterviewSheet}`]: {
+      title: `JavaScript Basics Interview Sheet | The Boring Education`,
+      siteName: `JavaScript Basics Interview Sheet`,
+      description: `Learn JavaScript basics for interview preparation.`,
+      url: routes.allSheets.javaScriptBasicsInterviewSheet,
+      ...commonMeta,
+    },
     [`${routes.contactUs}`]: {
       title: 'Contact | The Boring Education',
       siteName: 'The Boring Education',

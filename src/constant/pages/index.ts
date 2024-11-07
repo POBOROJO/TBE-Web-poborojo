@@ -158,6 +158,29 @@ const SHIKSHA_COURSES: PrimaryCardWithCTAProps[] = [
   },
 ];
 
+const INTERVIEW_PREP_SHEETS: PrimaryCardWithCTAProps[] = [
+  {
+    id: 'javascript-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/tbp-pharmasift-1.svg`,
+    imageAltText: 'Prepare for JavaScript interviews with essential questions.',
+    title: 'JavaScript Interview Sheet',
+    content: 'Prepare for JavaScript interviews with essential questions.',
+    href: routes.allSheets.javaScriptInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
+  },
+  {
+    id: 'javascript-basics-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/tbp-pharmasift-1.svg`,
+    imageAltText: 'Learn JavaScript basics for interview preparation.',
+    title: 'JavaScript Basics Interview Sheet',
+    content: 'Learn JavaScript basics for interview preparation.',
+    href: routes.allSheets.javaScriptBasicsInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
+  },
+];
+
 const USP: PrimaryCardProps[] = [
   {
     id: v4(),
