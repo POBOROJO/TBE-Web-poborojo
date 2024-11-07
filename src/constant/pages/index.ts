@@ -169,16 +169,6 @@ const INTERVIEW_PREP_SHEETS: PrimaryCardWithCTAProps[] = [
     active: true,
     ctaText: 'View Sheet',
   },
-  {
-    id: 'javascript-basics-interview-sheet',
-    image: `${STATIC_FILE_PATH.svg}/tbp-pharmasift-1.svg`,
-    imageAltText: 'Learn JavaScript basics for interview preparation.',
-    title: 'JavaScript Basics Interview Sheet',
-    content: 'Learn JavaScript basics for interview preparation.',
-    href: routes.allSheets.javaScriptBasicsInterviewSheet,
-    active: true,
-    ctaText: 'View Sheet',
-  },
 ];
 
 const USP: PrimaryCardProps[] = [
@@ -360,5 +350,6 @@ export {
   MY_PREV_EXPERIENCE,
   TBP_PROJECTS,
   SHIKSHA_COURSES,
+  INTERVIEW_PREP_SHEETS,
   TBIP_FEATURES,
 };

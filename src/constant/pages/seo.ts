@@ -1,6 +1,6 @@
 import { GetSEOMetaResponseType } from '@/interfaces';
 import { routes } from '../routes';
-import { SHIKSHA_COURSES, TBP_PROJECTS, products } from '..';
+import { SHIKSHA_COURSES, TBP_PROJECTS, products, INTERVIEW_PREP_SHEETS } from '..';
 
 const commonMeta = {
   type: 'website',
@@ -81,17 +81,10 @@ const getSEOMeta = (basePath: any): GetSEOMetaResponseType => {
       ...commonMeta,
     },
     [`${routes.allSheets.javaScriptInterviewSheet}`]: {
-      title: `JavaScript Interview Sheet | The Boring Education`,
-      siteName: `JavaScript Interview Sheet`,
-      description: `Prepare for JavaScript interviews with essential questions.`,
+      title: `${INTERVIEW_PREP_SHEETS[0].title} | The Boring Education`,
+      siteName: INTERVIEW_PREP_SHEETS[0].title,
+      description: INTERVIEW_PREP_SHEETS[0].content,
       url: routes.allSheets.javaScriptInterviewSheet,
-      ...commonMeta,
-    },
-    [`${routes.allSheets.javaScriptBasicsInterviewSheet}`]: {
-      title: `JavaScript Basics Interview Sheet | The Boring Education`,
-      siteName: `JavaScript Basics Interview Sheet`,
-      description: `Learn JavaScript basics for interview preparation.`,
-      url: routes.allSheets.javaScriptBasicsInterviewSheet,
       ...commonMeta,
     },
     [`${routes.contactUs}`]: {

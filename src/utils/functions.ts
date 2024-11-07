@@ -226,7 +226,7 @@ const mapInterviewSheetResponseToCard = (
         title: name,
         imageAltText: name,
         content: description,
-        href: `/shiksha/${slug}/?sheetId=${_id}`,
+        href: `/interview-prep/${slug}/?sheetId=${_id}`,
         isEnrolled,
         active: isActive,
         ctaText,

@@ -20,7 +20,6 @@ const routes = {
   interviewPrepExplore: '/interview-prep/explore',
   allSheets: {
     javaScriptInterviewSheet: '/interview-prep/javascript-interview-sheet',
-    javaScriptBasicsInterviewSheet: '/interview-prep/javascript-basics-interview-sheet',
   },
   workshops: '/workshops',
   os: '/os',
