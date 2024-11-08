@@ -79,9 +79,25 @@ const enrollInASheet = async ({
   sheetId,
 }: SheetEnrollmentRequestProps): Promise<DatabaseQueryResponseType> => {
   try {
-    const userSheet = await UserSheet.create({ userId, sheetId });
+    const sheet = await InterviewSheet.findById(sheetId).lean();
+    if (!sheet) {
+      return { error: 'Sheet not found' };
+    }
+
+    const questions = sheet.questions.map((question: any) => ({
+      questionId: question._id,
+      isCompleted: false,
+    }));
+
+    const userSheet = await UserSheet.create({
+      userId,
+      sheetId,
+      questions,
+    });
+
     return { data: userSheet };
   } catch (error) {
+    console.error('Error enrolling in sheet:', error);
     return { error: 'Failed while enrolling in a sheet' };
   }
 };
@@ -216,7 +232,7 @@ const getASheetForUserFromDB = async (userId: string, sheetId: string) => {
 
     const updatedSheetResponse = {
       ...userSheet.sheet.toObject(),
-      chapters: mappedQuestions,
+      questions: mappedQuestions,
     };
 
     return {
