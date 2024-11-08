@@ -5,6 +5,7 @@ import { connectDB } from '@/middlewares';
 import {
   deleteProjectFromDB,
   getProjectByIDFromDB,
+  getAProjectForUserFromDB,
   updateProjectInDB,
 } from '@/database';
 import { UpdateProjectRequestPayloadProps } from '@/interfaces';
@@ -13,11 +14,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await connectDB();
 
   const { query } = req;
-  const { projectId } = query;
+  const { projectId, userId } = query as { projectId: string; userId: string };
 
   switch (req.method) {
     case 'GET':
-      return handleGetProject(req, res);
+      return handleGetProjectById(req, res, userId, projectId);
     case 'PATCH':
       return handleUpdateProject(req, res, projectId as string);
     case 'DELETE':
@@ -32,9 +33,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const handleGetProject = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { projectId } = req.query;
-
+const handleGetProjectById = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  userId: string,
+  projectId: string
+) => {
   if (!projectId) {
     return res.status(apiStatusCodes.BAD_REQUEST).json(
       sendAPIResponse({
@@ -44,7 +48,7 @@ const handleGetProject = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  const { data, error } = await getProjectByIDFromDB(projectId as string);
+  const { data, error } = await getAProjectForUserFromDB(userId, projectId);
 
   if (error) {
     return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(

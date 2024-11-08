@@ -535,6 +535,65 @@ const getEnrolledProjectFromDB = async ({
   }
 };
 
+const getAProjectForUserFromDB = async (userId: string, projectId: string) => {
+  try {
+    const userProject = await UserProject.findOne({ userId, projectId })
+      .populate({
+        path: 'project',
+      })
+      .exec();
+
+    if (!userProject) {
+      const project = await Project.findById(projectId).exec();
+      if (!project) {
+        return { error: 'Project not found' };
+      }
+      return {
+        data: {
+          ...project.toObject(),
+          sections: project.sections || [],
+          isEnrolled: false,
+        },
+      };
+    }
+
+    const mappedSections = userProject.sections.map((userSection) => {
+      const correspondingProjectSection = userProject.project.sections.find(
+        (section) => section.sectionId === userSection.sectionId
+      );
+
+      const chapters = correspondingProjectSection.chapters.map((chapter) => {
+        const isCompleted = userSection.chapters.some(
+          (userChapter) =>
+            userChapter.chapterId === chapter.chapterId &&
+            userChapter.isCompleted
+        );
+
+        return {
+          ...chapter.toObject(),
+          isCompleted: !!isCompleted,
+        };
+      });
+
+      return {
+        ...correspondingProjectSection.toObject(),
+        chapters,
+      };
+    });
+
+    const updatedProjectResponse = {
+      ...userProject.project.toObject(),
+      sections: mappedSections,
+      isEnrolled: true,
+    };
+
+    return { data: updatedProjectResponse };
+  } catch (error) {
+    console.error('Error fetching project for user:', error);
+    return { error: 'Failed to fetch project with task status' };
+  }
+};
+
 export {
   addAProjectToDB,
   getProjectsFromDB,
@@ -555,4 +614,5 @@ export {
   enrollInAProject,
   getEnrolledProjectFromDB,
   getAllEnrolledProjectsFromDB,
+  getAProjectForUserFromDB,
 };
