@@ -1,4 +1,4 @@
-import { BaseShikshaCourseResponseProps } from '.';
+import { BaseShikshaCourseResponseProps, BaseInterviewSheetResponseProps } from '.';
 import { ProjectDocumentModel } from './database';
 import { GetSEOMetaResponseType } from './global';
 
@@ -31,4 +31,10 @@ export interface CoursePageProps extends PageProps {
   course: BaseShikshaCourseResponseProps;
   meta: string;
   currentChapterId: string;
+}
+
+export interface SheetPageProps extends PageProps {
+  sheet: BaseInterviewSheetResponseProps;  
+  meta: string;                   
+  currentQuestionId: string;      
 }

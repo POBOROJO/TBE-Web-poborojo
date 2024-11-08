@@ -102,6 +102,19 @@ const isAdmin = (adminSecret: string): boolean => {
   return envConfig.ADMIN_SECRET == adminSecret;
 };
 
+const getSelectedSheetQuestionMeta = (
+  sheet: BaseInterviewSheetResponseProps,
+  questionId: string
+) => {
+  if (!sheet.questions) return null;
+
+  const selectedQuestion = sheet.questions.find(
+    (question) => question._id.toString() === questionId
+  );
+
+  return selectedQuestion?.question ?? '';
+};
+
 const isUserAuthenticated = async (req: any): Promise<User | null> => {
   const cookie = req.headers.cookie || req.headers.get('cookie');
 
@@ -213,7 +226,7 @@ const mapInterviewSheetResponseToCard = (
         title: name,
         imageAltText: name,
         content: description,
-        href: `/shiksha/${slug}/?sheetId=${_id}`,
+        href: `/interview-prep/${slug}/?sheetId=${_id}`,
         isEnrolled,
         active: isActive,
         ctaText,
@@ -236,5 +249,6 @@ export {
   mapCourseResponseToCard,
   isUserAuthenticated,
   getSelectedCourseChapterMeta,
+  getSelectedSheetQuestionMeta,
   mapInterviewSheetResponseToCard,
 };

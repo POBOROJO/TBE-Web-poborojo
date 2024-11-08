@@ -229,6 +229,10 @@ export interface ExtendedCourseChapterModel extends CourseChapterModel {
   isCompleted: boolean; // Add `isCompleted` flag
 }
 
+export interface ExtendedInterviewSheetQuestionModel extends InterviewSheetQuestionModel {
+  isCompleted: boolean; // Add `isCompleted` flag
+}
+
 export interface BaseShikshaCourseResponseProps extends Partial<CourseModel> {
   isEnrolled?: boolean;
   chapters?: ExtendedCourseChapterModel[];
@@ -237,7 +241,7 @@ export interface BaseShikshaCourseResponseProps extends Partial<CourseModel> {
 export interface BaseInterviewSheetResponseProps
   extends Partial<InterviewSheetModel> {
   isEnrolled?: boolean;
-  questions?: InterviewSheetQuestionModel[];
+  questions?: ExtendedInterviewSheetQuestionModel[];
 }
 
 export interface MarkQuestionCompletedRequestProps {

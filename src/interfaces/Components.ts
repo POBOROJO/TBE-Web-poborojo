@@ -283,6 +283,12 @@ export interface CourseHeroContainerProps {
   id: string;
 }
 
+export interface SheetHeroContainerProps {
+  name: string;
+  isEnrolled?: boolean;
+  id: string;
+}
+
 export interface AccordionProps {
   title: string;
   children: React.ReactNode;
@@ -312,6 +318,16 @@ export interface ChapterLinkProps {
   isCompleted: boolean;
   currentChapterId: string;
   handleChapterClick: (content: string) => void;
+}
+
+export interface QuestionLinkProps {
+  href: string;
+  questionId: string;
+  title: string;
+  question: string;
+  isCompleted: boolean;
+  currentQuestionId: string;
+  handleQuestionClick: (question: string) => void;
 }
 
 export interface MDXRendererProps {
