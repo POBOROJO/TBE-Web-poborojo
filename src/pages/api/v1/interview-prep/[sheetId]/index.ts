@@ -2,16 +2,23 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { apiStatusCodes } from '@/constant';
 import { sendAPIResponse } from '@/utils';
 import { connectDB } from '@/middlewares';
-import { getASheetForUserFromDB } from '@/database';
+import {
+  getASheetForUserFromDB,
+  getInterviewSheetByIDFromDB,
+  updateInterviewSheetInDB,
+} from '@/database';
+import { AddInterviewSheetRequestPayloadProps } from '@/interfaces';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await connectDB();
   const { method, query } = req;
-  const { sheetId, userId } = query as { sheetId: string; userId:string };
+  const { sheetId, userId } = query as { sheetId: string; userId: string };
 
   switch (method) {
     case 'GET':
       return handleGetSheetById(req, res, userId, sheetId);
+    case 'PATCH':
+      return handleUpdateSheet(req, res, sheetId);
     default:
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
@@ -52,6 +59,47 @@ const handleGetSheetById = async (
       sendAPIResponse({
         status: false,
         message: 'Failed while fetching questions from the interview sheet',
+      })
+    );
+  }
+};
+
+const handleUpdateSheet = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  sheetId: string
+) => {
+  const updatedData = req.body as Partial<AddInterviewSheetRequestPayloadProps>;
+
+  try {
+    const { data, error } = await updateInterviewSheetInDB({
+      updatedData,
+      sheetId,
+    });
+
+    if (error) {
+      return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
+        sendAPIResponse({
+          status: false,
+          message: 'Failed while updating sheet',
+          error,
+        })
+      );
+    }
+
+    return res.status(apiStatusCodes.OKAY).json(
+      sendAPIResponse({
+        status: true,
+        data,
+        message: 'Sheet updated successfully',
+      })
+    );
+  } catch (error) {
+    return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
+      sendAPIResponse({
+        status: false,
+        message: 'Failed while updating sheet',
+        error,
       })
     );
   }

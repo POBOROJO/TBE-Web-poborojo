@@ -223,6 +223,9 @@ const getSheetPageProps = async (context: any) => {
 
         if (selectedQuestionMeta) meta = selectedQuestionMeta;
       }
+      // console.log('HERE', {
+      //   meta,
+      // });
 
       return {
         props: {
@@ -252,4 +255,9 @@ const fetchAPIData = async (url: string) => {
   return await response.json();
 };
 
-export { getPreFetchProps, getProjectPageProps, getCoursePageProps, getSheetPageProps };
+export {
+  getPreFetchProps,
+  getProjectPageProps,
+  getCoursePageProps,
+  getSheetPageProps,
+};

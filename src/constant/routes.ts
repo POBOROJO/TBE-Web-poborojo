@@ -18,8 +18,11 @@ const routes = {
   },
   interviewPrep: '/interview-prep',
   interviewPrepExplore: '/interview-prep/explore',
-  allSheets: {
-    javaScriptInterviewSheet: '/interview-prep/javascript-interview-sheet',
+  allInterviewSheets: {
+    javascriptInterviewSheet: '/interview-prep/js-interview-questions',
+    reactInterviewSheet: '/interview-prep/react-interview-questions',
+    nodeInterviewSheet: '/interview-prep/node-interview-questions',
+    dbInterviewSheet: '/interview-prep/db-interview-questions',
   },
   workshops: '/workshops',
   os: '/os',

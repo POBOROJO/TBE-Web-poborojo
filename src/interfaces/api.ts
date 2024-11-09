@@ -4,7 +4,6 @@ import {
   InterviewSheetModel,
   InterviewSheetQuestionModel,
   ProjectChapter,
-  ProjectDocumentModel,
 } from '.';
 
 export type APIMethodTypes = 'GET' | 'POST' | 'PATCH';
@@ -129,6 +128,11 @@ export interface AddInterviewSheetRequestPayloadProps {
   roadmap: RoadmapsType;
 }
 
+export interface UpdateInterviewSheetRequestPayloadProps {
+  sheetId: string;
+  updatedData: Partial<AddInterviewSheetRequestPayloadProps>;
+}
+
 export interface AddInterviewQuestionRequestPayloadProps {
   title: string;
   question: string;
@@ -229,7 +233,8 @@ export interface ExtendedCourseChapterModel extends CourseChapterModel {
   isCompleted: boolean; // Add `isCompleted` flag
 }
 
-export interface ExtendedInterviewSheetQuestionModel extends InterviewSheetQuestionModel {
+export interface ExtendedInterviewSheetQuestionModel
+  extends InterviewSheetQuestionModel {
   isCompleted: boolean; // Add `isCompleted` flag
 }
 

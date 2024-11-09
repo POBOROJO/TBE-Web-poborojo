@@ -80,25 +80,25 @@ const handleAddASheet = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handleAllGetSheet = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    let allSheetsResponse: BaseInterviewSheetResponseProps[] = [];
+    let allInterviewSheetsResponse: BaseInterviewSheetResponseProps[] = [];
 
     // Fetch all sheets
-    const { data: allSheets, error: allSheetsError } =
+    const { data: allInterviewSheets, error: allInterviewSheetsError } =
       await getAllInterviewSheetsFromDB();
 
-    if (allSheetsError || !allSheets) {
+    if (allInterviewSheetsError || !allInterviewSheets) {
       return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
         sendAPIResponse({
           status: false,
           message: 'Failed while fetching sheets',
-          error: allSheetsError,
+          error: allInterviewSheetsError,
         })
       );
     }
 
     // Create a map of all sheets by their ID
     const sheetMap = new Map<string, BaseInterviewSheetResponseProps>(
-      allSheets.map((sheet: BaseInterviewSheetResponseProps) => {
+      allInterviewSheets.map((sheet: BaseInterviewSheetResponseProps) => {
         const sheetDoc = sheet as unknown as mongoose.Document &
           BaseInterviewSheetResponseProps;
         return [sheetDoc._id.toString(), { ...sheetDoc.toObject() }];
@@ -109,12 +109,12 @@ const handleAllGetSheet = async (req: NextApiRequest, res: NextApiResponse) => {
     // TODO: Implement this feature
 
     // Convert the map back to an array to prepare the final response
-    allSheetsResponse = Array.from(sheetMap.values());
+    allInterviewSheetsResponse = Array.from(sheetMap.values());
 
     return res.status(apiStatusCodes.OKAY).json(
       sendAPIResponse({
         status: true,
-        data: allSheetsResponse,
+        data: allInterviewSheetsResponse,
       })
     );
   } catch (error) {

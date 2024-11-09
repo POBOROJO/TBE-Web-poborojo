@@ -98,9 +98,9 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     href: products.os.slug,
     active: false,
   },
-   {
+  {
     id: 'interview Prep',
-    image: `${STATIC_FILE_PATH.svg}/shiksha.svg`, 
+    image: `${STATIC_FILE_PATH.svg}/shiksha.svg`,
     imageAltText: products.interviewPrep.label,
     title: products.interviewPrep.label,
     content: products.interviewPrep.description,
@@ -165,7 +165,7 @@ const INTERVIEW_PREP_SHEETS: PrimaryCardWithCTAProps[] = [
     imageAltText: 'Prepare for JavaScript interviews with essential questions.',
     title: 'JavaScript Interview Sheet',
     content: 'Prepare for JavaScript interviews with essential questions.',
-    href: routes.allSheets.javaScriptInterviewSheet,
+    href: routes.allInterviewSheets.javascriptInterviewSheet,
     active: true,
     ctaText: 'View Sheet',
   },

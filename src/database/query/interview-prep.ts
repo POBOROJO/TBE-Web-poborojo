@@ -4,6 +4,7 @@ import {
   DatabaseQueryResponseType,
   SheetEnrollmentRequestProps,
   BaseInterviewSheetResponseProps,
+  UpdateInterviewSheetRequestPayloadProps,
 } from '@/interfaces';
 import { InterviewSheet, UserSheet } from '@/database';
 import { modelSelectParams } from '@/constant';
@@ -23,15 +24,15 @@ const addAInterviewSheetToDB = async (
 const getAllInterviewSheetsFromDB =
   async (): Promise<DatabaseQueryResponseType> => {
     try {
-      const course = await InterviewSheet.find()
+      const sheet = await InterviewSheet.find()
         .select(modelSelectParams.coursePreview)
         .exec();
 
-      if (!course) {
+      if (!sheet) {
         return { error: 'InterviewSheet not found' };
       }
 
-      return { data: course };
+      return { data: sheet };
     } catch (error) {
       return { error };
     }
@@ -41,15 +42,50 @@ const getInterviewSheetBySlugFromDB = async (
   slug: string
 ): Promise<DatabaseQueryResponseType> => {
   try {
-    const course = await InterviewSheet.findOne({ slug });
+    const sheet = await InterviewSheet.findOne({ slug });
 
-    if (!course) {
-      return { error: 'Course not found' };
+    if (!sheet) {
+      return { error: 'Sheet not found' };
     }
 
-    return { data: course };
+    return { data: sheet };
   } catch (error) {
     return { error };
+  }
+};
+
+const getInterviewSheetByIDFromDB = async (
+  id: string
+): Promise<DatabaseQueryResponseType> => {
+  try {
+    const sheet = await InterviewSheet.findOne({ _id: id });
+
+    if (!sheet) {
+      return { error: 'Sheet not found' };
+    }
+
+    return { data: sheet };
+  } catch (error) {
+    return { error };
+  }
+};
+
+const updateInterviewSheetInDB = async ({
+  sheetId,
+  updatedData,
+}: UpdateInterviewSheetRequestPayloadProps): Promise<DatabaseQueryResponseType> => {
+  try {
+    const updatedCourse = await InterviewSheet.findByIdAndUpdate(
+      sheetId,
+      updatedData,
+      { new: true }
+    );
+
+    if (!updatedCourse) return { error: 'Sheet does not exists' };
+
+    return { data: updatedCourse };
+  } catch (error) {
+    return { error: 'Failed while updating sheet' };
   }
 };
 
@@ -97,7 +133,6 @@ const enrollInASheet = async ({
 
     return { data: userSheet };
   } catch (error) {
-    console.error('Error enrolling in sheet:', error);
     return { error: 'Failed while enrolling in a sheet' };
   }
 };
@@ -118,16 +153,12 @@ const getAllEnrolledSheetsFromDB = async (
   userId: string
 ): Promise<DatabaseQueryResponseType> => {
   try {
-    console.log('getting sheets');
-    console.log('userId ', userId);
     const enrolledSheets = await UserSheet.find({ userId })
       .populate({
         path: 'sheet',
         select: modelSelectParams.coursePreview,
       })
       .exec();
-
-    console.log('sheets: ', enrolledSheets);
 
     return {
       data: enrolledSheets.map((sheet) => sheet.sheet),
@@ -202,7 +233,7 @@ const getASheetFromDBById = async (
 
     return { data: sheet };
   } catch (error) {
-    return { error: `Failed while fetching a course ${error}` };
+    return { error: `Failed while fetching a sheet ${error}` };
   }
 };
 
@@ -257,4 +288,6 @@ export {
   getAllQuestionsByUser,
   getASheetForUserFromDB,
   getAllEnrolledSheetsFromDB,
+  getInterviewSheetByIDFromDB,
+  updateInterviewSheetInDB,
 };

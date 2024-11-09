@@ -185,7 +185,6 @@ const enrollInACourse = async ({
 
     return { data: userCourse };
   } catch (error) {
-    console.error('Error enrolling in course:', error);
     return { error: 'Failed while enrolling in a course' };
   }
 };
