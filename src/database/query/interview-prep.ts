@@ -89,6 +89,54 @@ const updateInterviewSheetInDB = async ({
   }
 };
 
+const updateInterviewQuestionInDB = async (
+  sheetId: string,
+  questionId: string,
+  {
+    title,
+    question,
+    answer,
+    frequency,
+  }: Partial<AddInterviewQuestionRequestPayloadProps>
+) => {
+  try {
+    const course = await InterviewSheet.findOneAndUpdate(
+      { _id: sheetId, 'questions._id': questionId },
+      {
+        $set: {
+          'questions.$.title': title,
+          'questions.$.question': question,
+          'questions.$.answer': answer,
+          'questions.$.frequency': frequency,
+        },
+      },
+      { new: true }
+    );
+
+    return { data: course };
+  } catch (error) {
+    return { error: 'Failed to update chapter to course' };
+  }
+};
+
+// Delete a question from a sheet
+const deleteQuestionFromSheetInDB = async (
+  sheetId: string,
+  questionId: string
+) => {
+  try {
+    const course = await InterviewSheet.findOneAndUpdate(
+      { _id: sheetId },
+      { $pull: { questions: { _id: questionId } } },
+      { new: true }
+    );
+
+    return { data: course };
+  } catch (error) {
+    return { error: 'Failed to delete question from sheet' };
+  }
+};
+
 const addQuestionToInterviewSheetInDB = async (
   sheetId: string,
   question: AddInterviewQuestionRequestPayloadProps
@@ -290,4 +338,6 @@ export {
   getAllEnrolledSheetsFromDB,
   getInterviewSheetByIDFromDB,
   updateInterviewSheetInDB,
+  updateInterviewQuestionInDB,
+  deleteQuestionFromSheetInDB,
 };

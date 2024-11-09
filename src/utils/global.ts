@@ -223,9 +223,6 @@ const getSheetPageProps = async (context: any) => {
 
         if (selectedQuestionMeta) meta = selectedQuestionMeta;
       }
-      // console.log('HERE', {
-      //   meta,
-      // });
 
       return {
         props: {
