@@ -97,6 +97,35 @@ const ProjectPage = ({
       );
 
       setIsChapterCompleted(newCompletionStatus);
+
+      if (newCompletionStatus) {
+        const allChapters = sections.flatMap((section) => section.chapters);
+
+        const currentIndex = allChapters.findIndex(
+          (chapter) => chapter.chapterId === currentChapterId
+        );
+
+        const nextUncompleted = allChapters
+          .slice(currentIndex + 1)
+          .find((chapter) => !chapter.isCompleted);
+
+        const previousUncompleted = allChapters
+          .slice(0, currentIndex)
+          .reverse()
+          .find((chapter) => !chapter.isCompleted);
+
+        const targetChapter = nextUncompleted || previousUncompleted;
+
+        if (targetChapter) {
+          const targetSectionId = sections.find((section) =>
+            section.chapters.some(
+              (chap) => chap.chapterId === targetChapter.chapterId
+            )
+          )?.sectionId;
+
+          window.location.href = `${slug}?projectId=${project._id}&sectionId=${targetSectionId}&chapterId=${targetChapter.chapterId}`;
+        }
+      }
     } catch (error) {
       console.error('Error toggling chapter completion:', error);
     } finally {
