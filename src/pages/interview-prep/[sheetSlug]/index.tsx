@@ -78,6 +78,27 @@ const SheetPage = ({
         )
       );
 
+      if (newCompletionStatus) {
+        const currentIndex = questions.findIndex(
+          (question) => question._id.toString() === currentQuestionId
+        );
+
+        let nextIncompleteQuestion = questions
+          .slice(currentIndex + 1)
+          .find((question) => !question.isCompleted);
+
+        if (!nextIncompleteQuestion) {
+          nextIncompleteQuestion = questions
+            .slice(0, currentIndex)
+            .find((question) => !question.isCompleted);
+        }
+
+        if (nextIncompleteQuestion) {
+          const questionId = nextIncompleteQuestion._id.toString();
+          window.location.href = `${slug}?sheetId=${sheet._id}&questionId=${questionId}`;
+        }
+      }
+
       setIsQuestionCompleted(newCompletionStatus);
     } catch (error) {
       console.error('Error toggling question completion:', error);
@@ -88,16 +109,16 @@ const SheetPage = ({
 
   const alertContainer = isSmallScreen && (
     <Alert
-      message="This Sheet may require you to answer questions. Better open it on a larger screen."
-      type="INFO"
-      className="my-2"
+      message='This Sheet may require you to answer questions. Better open it on a larger screen.'
+      type='INFO'
+      className='my-2'
     />
   );
 
   return (
     <React.Fragment>
       <SEO seoMeta={seoMeta} />
-      <Section className="md:p-2 p-2">
+      <Section className='md:p-2 p-2'>
         {alertContainer}
         <SheetHeroContainer
           id={sheet._id ?? ''}
@@ -105,14 +126,14 @@ const SheetPage = ({
           isEnrolled={sheet.isEnrolled}
         />
       </Section>
-      <Section className="md:p-2 p-2">
-        <FlexContainer className="w-full gap-4" itemCenter={false}>
+      <Section className='md:p-2 p-2'>
+        <FlexContainer className='w-full gap-4' itemCenter={false}>
           {/* Left Sidebar (Questions) */}
           <FlexContainer
-            className="border md:w-3/12 w-full p-2 gap-1 rounded self-baseline max-h-[80vh] overflow-y-auto md:sticky top-4 bg-white"
+            className='border md:w-3/12 w-full p-2 gap-1 rounded self-baseline max-h-[80vh] overflow-y-auto md:sticky top-4 bg-white'
             itemCenter={false}
           >
-            <Text level="h5" className="heading-5">
+            <Text level='h5' className='heading-5'>
               Questions
             </Text>
 
@@ -122,7 +143,7 @@ const SheetPage = ({
               completedChapters={completedQuestions}
             />
 
-            <FlexContainer justifyCenter={false} className="gap-px mt-4">
+            <FlexContainer justifyCenter={false} className='gap-px mt-4'>
               {questions?.map(({ _id, title, question, isCompleted }) => {
                 const questionId = _id?.toString();
 
@@ -144,7 +165,7 @@ const SheetPage = ({
 
           {/* Main Content Area */}
           <FlexContainer
-            className="border md:w-8/12 w-full p-2 rounded"
+            className='border md:w-8/12 w-full p-2 rounded'
             justifyCenter={false}
             itemCenter={false}
             disabled={!sheet.isEnrolled}
@@ -154,7 +175,7 @@ const SheetPage = ({
               actions={[
                 currentQuestionId && (
                   <Button
-                    key="complete"
+                    key='complete'
                     variant={
                       isQuestionCompleted
                         ? 'SUCCESS'
@@ -169,7 +190,7 @@ const SheetPage = ({
                         ? 'Completed'
                         : 'Mark As Completed'
                     }
-                    className="w-fit"
+                    className='w-fit'
                     onClick={toggleCompletion}
                     isLoading={isLoading}
                   />
