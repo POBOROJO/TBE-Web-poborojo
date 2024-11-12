@@ -19,7 +19,7 @@ const routes = {
   interviewPrep: '/interview-prep',
   interviewPrepExplore: '/interview-prep/explore',
   allInterviewSheets: {
-    javascriptInterviewSheet: '/interview-prep/js-interview-questions',
+    javascriptInterviewSheet: '/interview-prep/javascript-interview-questions',
     reactInterviewSheet: '/interview-prep/react-interview-questions',
     nodeInterviewSheet: '/interview-prep/node-interview-questions',
     dbInterviewSheet: '/interview-prep/db-interview-questions',

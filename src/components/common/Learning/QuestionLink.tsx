@@ -10,9 +10,10 @@ const QuestionLink = ({
   question,
   isCompleted,
   currentQuestionId,
+  frequency,
   handleQuestionClick,
 }: QuestionLinkProps) => {
-  const additionalClasses =
+  let additionalClasses =
     currentQuestionId === questionId
       ? isCompleted
         ? 'text-dark font-semibold bg-green-200'
@@ -20,6 +21,14 @@ const QuestionLink = ({
       : '';
 
   const iconColor = isCompleted ? 'text-green-500' : 'text-greyDark';
+
+  if (frequency === 'Most Asked') {
+    additionalClasses += ' border-l-4 border-primary';
+  } else if (frequency === 'Asked Frequently') {
+    additionalClasses += ' border-l-4 border-secondary';
+  } else if (frequency === 'Asked Sometimes') {
+    additionalClasses += ' border-l-4 border-greyDark';
+  }
 
   return (
     <Link

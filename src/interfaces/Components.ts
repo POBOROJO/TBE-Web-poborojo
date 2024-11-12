@@ -1,5 +1,9 @@
 import { HTMLInputTypeAttribute, MouseEventHandler, ReactNode } from 'react';
-import { GetSEOMetaResponseType, TopNavbarLinkProps } from '.';
+import {
+  GetSEOMetaResponseType,
+  QuestionFrequencyType,
+  TopNavbarLinkProps,
+} from '.';
 
 export interface SectionProps {
   children: React.ReactNode;
@@ -328,6 +332,7 @@ export interface QuestionLinkProps {
   isCompleted: boolean;
   currentQuestionId: string;
   handleQuestionClick: (question: string) => void;
+  frequency: QuestionFrequencyType;
 }
 
 export interface MDXRendererProps {
