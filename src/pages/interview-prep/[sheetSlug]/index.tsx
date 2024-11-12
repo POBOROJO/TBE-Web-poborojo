@@ -145,7 +145,7 @@ const SheetPage = ({
 
             <FlexContainer justifyCenter={false} className='gap-px mt-4'>
               {questions?.map(
-                ({ _id, title, question, isCompleted, frequency }) => {
+                ({ _id, title, question, answer, isCompleted, frequency }) => {
                   const questionId = _id?.toString();
 
                   return (
@@ -154,7 +154,7 @@ const SheetPage = ({
                       href={`${slug}?sheetId=${sheet._id}&questionId=${questionId}`}
                       questionId={questionId}
                       title={title}
-                      question={question}
+                      question={question + '\n\n' + answer}
                       isCompleted={isCompleted}
                       currentQuestionId={currentQuestionId}
                       handleQuestionClick={handleQuestionClick}
