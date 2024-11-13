@@ -78,6 +78,27 @@ const CoursePage = ({
         )
       );
 
+      if (newCompletionStatus) {
+        const currentIndex = chapters.findIndex(
+          (chapter) => chapter._id.toString() === currentChapterId
+        );
+
+        let nextIncompleteChapter = chapters
+          .slice(currentIndex + 1)
+          .find((chapter) => !chapter.isCompleted);
+
+        if (!nextIncompleteChapter) {
+          nextIncompleteChapter = chapters
+            .slice(0, currentIndex)
+            .find((chapter) => !chapter.isCompleted);
+        }
+
+        if (nextIncompleteChapter) {
+          const nextChapterId = nextIncompleteChapter._id.toString();
+          window.location.href = `${slug}?courseId=${course._id}&chapterId=${nextChapterId}`;
+        }
+      }
+
       setIsChapterCompleted(newCompletionStatus);
     } catch (error) {
       console.error('Error toggling chapter completion:', error);

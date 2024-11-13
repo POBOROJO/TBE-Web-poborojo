@@ -1,4 +1,4 @@
-import { BaseShikshaCourseResponseProps } from '.';
+import { BaseShikshaCourseResponseProps, BaseInterviewSheetResponseProps } from '.';
 import { ProjectDocumentModel } from './database';
 import { GetSEOMetaResponseType } from './global';
 
@@ -17,15 +17,24 @@ export type ProjectPickedPageProps = Pick<
   | 'difficultyLevel'
   | 'sections'
   | 'requiredSkills'
->;
+> & {
+  isEnrolled?: boolean;
+};
 
 export interface ProjectPageProps extends PageProps {
   project: ProjectPickedPageProps;
   meta: string;
+  currentChapterId: string;
 }
 
 export interface CoursePageProps extends PageProps {
   course: BaseShikshaCourseResponseProps;
   meta: string;
   currentChapterId: string;
+}
+
+export interface SheetPageProps extends PageProps {
+  sheet: BaseInterviewSheetResponseProps;  
+  meta: string;                   
+  currentQuestionId: string;      
 }

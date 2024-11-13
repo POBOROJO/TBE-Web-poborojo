@@ -167,7 +167,22 @@ const enrollInACourse = async ({
   courseId,
 }: EnrollCourseInDBRequestProps): Promise<DatabaseQueryResponseType> => {
   try {
-    const userCourse = await UserCourse.create({ userId, courseId });
+    const course = await Course.findById(courseId).lean();
+    if (!course) {
+      return { error: 'Course not found' };
+    }
+
+    const chapters = course.chapters.map((chapter: any) => ({
+      chapterId: chapter._id,
+      isCompleted: false,
+    }));
+
+    const userCourse = await UserCourse.create({
+      userId,
+      courseId,
+      chapters,
+    });
+
     return { data: userCourse };
   } catch (error) {
     return { error: 'Failed while enrolling in a course' };
@@ -258,7 +273,6 @@ const updateUserCourseChapterInDB = async ({
 
     return { data: userCourse };
   } catch (error) {
-    console.error('Failed to update chapter in user course:', error);
     return { error: 'Failed to update chapter in user course' };
   }
 };
@@ -303,7 +317,6 @@ const getACourseForUserFromDB = async (userId: string, courseId: string) => {
       } as BaseShikshaCourseResponseProps,
     };
   } catch (error) {
-    console.error('Failed to fetch courses with chapter status:', error);
     return { error: 'Failed to fetch courses with chapter status' };
   }
 };

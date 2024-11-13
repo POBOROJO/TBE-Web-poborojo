@@ -1,4 +1,5 @@
 import { ProductDataProps } from '@/interfaces';
+import { routes } from './routes';
 
 // Paths
 const STATIC_FILE_PATH = {
@@ -28,8 +29,14 @@ const products: ProductDataProps = {
   },
   shiksha: {
     label: 'Shiksha',
-    slug: '/shiksha',
+    slug: routes.shiksha,
     description: 'Learn Tech with Free Bite-sized Courses',
+  },
+  interviewPrep: {
+    label: 'Interview Prep',
+    slug: routes.interviewPrep,
+    description:
+      'Prepare for Upcoming Tech Interview with Most Asked Questions in Real Interviews.',
   },
   workshops: {
     label: 'The Boring Workshops',
@@ -38,7 +45,7 @@ const products: ProductDataProps = {
   },
   os: {
     label: 'The Boring Open Source',
-    slug: '/os',
+    slug: 'https://theboringeducation.notion.site/Contribute-The-Boring-Education-8171f19257fd4ef99b7287555eb5062b',
     description: 'Learn and Contribute with Open Source',
   },
 };
