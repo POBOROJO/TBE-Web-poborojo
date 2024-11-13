@@ -92,6 +92,27 @@ const getSEOMeta = (basePath: any): GetSEOMetaResponseType => {
       url: routes.allInterviewSheets.javascriptInterviewSheet,
       ...commonMeta,
     },
+    [`${routes.allInterviewSheets.reactInterviewSheet}`]: {
+      title: `${INTERVIEW_PREP_SHEETS[1].title} | The Boring Education`,
+      siteName: INTERVIEW_PREP_SHEETS[1].title,
+      description: INTERVIEW_PREP_SHEETS[1].content,
+      url: routes.allInterviewSheets.reactInterviewSheet,
+      ...commonMeta,
+    },
+    [`${routes.allInterviewSheets.nodeInterviewSheet}`]: {
+      title: `${INTERVIEW_PREP_SHEETS[2].title} | The Boring Education`,
+      siteName: INTERVIEW_PREP_SHEETS[2].title,
+      description: INTERVIEW_PREP_SHEETS[2].content,
+      url: routes.allInterviewSheets.nodeInterviewSheet,
+      ...commonMeta,
+    },
+    [`${routes.allInterviewSheets.dbInterviewSheet}`]: {
+      title: `${INTERVIEW_PREP_SHEETS[3].title} | The Boring Education`,
+      siteName: INTERVIEW_PREP_SHEETS[3].title,
+      description: INTERVIEW_PREP_SHEETS[3].content,
+      url: routes.allInterviewSheets.dbInterviewSheet,
+      ...commonMeta,
+    },
     [`${routes.contactUs}`]: {
       title: 'Contact | The Boring Education',
       siteName: 'The Boring Education',
