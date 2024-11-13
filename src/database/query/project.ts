@@ -10,7 +10,6 @@ import {
   UpdateUserChapterInProjectRequestProps,
   EnrollProjectInDBRequestProps,
   ProjectPickedPageProps,
-  BaseProjectResponseProps,
 } from '@/interfaces';
 
 import { Project, UserProject } from '@/database';

@@ -31,7 +31,10 @@ const handleAddQuestion = async (
   const questionData = req.body as AddInterviewQuestionRequestPayloadProps;
 
   try {
-    const { data, error } = await addQuestionToInterviewSheetInDB(sheetId,questionData);
+    const { data, error } = await addQuestionToInterviewSheetInDB(
+      sheetId,
+      questionData
+    );
 
     if (error) {
       return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
