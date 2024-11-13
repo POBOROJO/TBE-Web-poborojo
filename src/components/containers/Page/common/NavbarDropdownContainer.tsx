@@ -10,7 +10,7 @@ const NavbarDropdownContainer = ({ links }: NavbarDropdownContainerProps) => {
             key={name}
             direction='col'
             itemCenter={false}
-            className='relative rounded-lg p-2 hover:bg-gray-100'
+            className='relative rounded-lg p-2 hover:bg-gray-100 max-w-sm'
           >
             <FlexContainer direction='col' itemCenter={false}>
               <Link
@@ -24,7 +24,7 @@ const NavbarDropdownContainer = ({ links }: NavbarDropdownContainerProps) => {
                 )}
                 <span className='absolute inset-0' />
               </Link>
-              <p className='text-gray-600'>{description}</p>
+              <p className='text-gray-600 break-words'>{description}</p>
             </FlexContainer>
           </FlexContainer>
         );
