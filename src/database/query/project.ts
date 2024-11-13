@@ -459,8 +459,6 @@ const updateUserProjectChapterInDB = async ({
       // If chapter is found, update the isCompleted status and update timestamp
       userProject.sections[sectionIndex].chapters[chapterIndex].isCompleted =
         isCompleted;
-      userProject.sections[sectionIndex].chapters[chapterIndex].updatedAt =
-        new Date();
     }
 
     // Save the updated document

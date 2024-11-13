@@ -15,7 +15,7 @@ export interface UserModel {
 }
 
 export interface ProjectChapter {
-  isCompleted: boolean;
+  isCompleted?: boolean;
   chapterId: string;
   chapterName: string;
   content: string;

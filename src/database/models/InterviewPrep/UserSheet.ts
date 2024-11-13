@@ -1,4 +1,4 @@
-import { UserSheetModel , UserSheetQuestionModel} from '@/interfaces';
+import { UserSheetModel, UserSheetQuestionModel } from '@/interfaces';
 import { Model, Schema, model, models } from 'mongoose';
 import { databaseModels } from '@/constant';
 
@@ -12,18 +12,10 @@ const UserQuestionSchema = new Schema<UserSheetQuestionModel>(
       type: Boolean,
       default: false,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now,
-    },
   },
   {
     timestamps: true,
-    _id: true, // We need an _id field for each question 
+    _id: true, // We need an _id field for each question
   }
 );
 

@@ -4,6 +4,7 @@ import {
   InterviewSheetModel,
   InterviewSheetQuestionModel,
   ProjectChapter,
+  ProjectDocumentModel,
 } from '.';
 
 export type APIMethodTypes = 'GET' | 'POST' | 'PATCH';
@@ -239,6 +240,12 @@ export interface ExtendedInterviewSheetQuestionModel
 }
 
 export interface BaseShikshaCourseResponseProps extends Partial<CourseModel> {
+  isEnrolled?: boolean;
+  chapters?: ExtendedCourseChapterModel[];
+}
+
+export interface BaseProjectResponseProps
+  extends Partial<ProjectDocumentModel> {
   isEnrolled?: boolean;
   chapters?: ExtendedCourseChapterModel[];
 }
