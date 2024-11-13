@@ -43,6 +43,11 @@ const SheetPage = ({
       (question) => question._id.toString() === currentQuestionId
     );
     setIsQuestionCompleted(currentQuestion?.isCompleted);
+
+    if (currentQuestion) {
+      const updatedMeta = `${currentQuestion.question}\n\n${currentQuestion.answer}`;
+      setSheetMeta(updatedMeta);
+    }
   }, [currentQuestionId, questions]);
 
   const { makeRequest } = useApi(`interview-prep/${sheet}`);
