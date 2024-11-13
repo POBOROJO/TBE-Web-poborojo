@@ -20,12 +20,14 @@ export interface ProjectChapter {
   chapterName: string;
   content: string;
   isOptional?: boolean;
+  toObject: any;
 }
 
 export interface ProjectSection {
   sectionId: string;
   sectionName: string;
   chapters: ProjectChapter[];
+  toObject: any;
 }
 
 export interface ProjectDocumentModel extends Document {
