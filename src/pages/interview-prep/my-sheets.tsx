@@ -9,7 +9,7 @@ import {
   Text,
   LinkButton,
 } from '@/components';
-import { useAPIResponseMapper, useApi } from '@/hooks';
+import { useAPIResponseMapper, useApi, useUser } from '@/hooks';
 import { mapInterviewSheetResponseToCard } from '@/utils';
 import { routes } from '@/constant';
 
@@ -17,7 +17,9 @@ const MySheets = () => {
   const session = useSession();
   const router = useRouter();
 
-  const userId = session.data?.user?.id;
+  const { user } = useUser();
+
+  const userId = user?.id;
 
   const { response, loading } = useApi(
     'mySheets',
