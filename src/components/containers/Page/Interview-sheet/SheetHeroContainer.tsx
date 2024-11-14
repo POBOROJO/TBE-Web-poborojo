@@ -1,40 +1,38 @@
 import {
-  LinkButton,
   FlexContainer,
-  PageHeroMetaContainer,
   Text,
-  Button,
+  PageHeroMetaContainer,
   LoginWithGoogleButton,
+  Button,
 } from '@/components';
-import { projectGroupWhatsapp, routes } from '@/constant';
+import { routes } from '@/constant';
 import { useUser } from '@/hooks';
 import useApi from '@/hooks/useApi';
-import { ProjectHeroContainerProps } from '@/interfaces';
+import { SheetHeroContainerProps } from '@/interfaces';
 
-const ProjectHeroContainer = ({
+const SheetHeroContainer = ({
   id,
   name,
-  roadmap,
-  difficultyLevel,
   isEnrolled,
-}: ProjectHeroContainerProps) => {
+}: SheetHeroContainerProps) => {
   const { user, isAuth } = useUser();
-  const { makeRequest, loading } = useApi('projects/enrollProject');
 
-  const enrollProject = () => {
+  const { makeRequest, loading } = useApi('interview-prep/enrollSheet');
+
+  const enrollSheet = () => {
     makeRequest({
       method: 'POST',
-      url: routes.api.enrollProject,
+      url: routes.api.enrollSheet,
       body: {
         userId: user?.id,
-        projectId: id,
+        sheetId: id,
       },
     })
       .then(() => {
         window.location.reload();
       })
       .catch((error) => {
-        console.error('Failed to enroll in project', error);
+        console.error('Failed to enroll', error);
       });
   };
 
@@ -51,38 +49,16 @@ const ProjectHeroContainer = ({
       <FlexContainer>
         <Button
           variant='PRIMARY'
-          text='Enroll to Project'
-          onClick={enrollProject}
+          text='Enroll in Sheet'
+          onClick={enrollSheet}
         />
       </FlexContainer>
     );
-  } else if (loading) {
+  }
+
+  if (loading) {
     headerActionButton = (
       <Button variant='PRIMARY' text='Enrolling...' isLoading={true} />
-    );
-  } else {
-    headerActionButton = (
-      <FlexContainer
-        justifyCenter={false}
-        itemCenter={false}
-        className='justify-start items-start gap-2'
-      >
-        <LinkButton
-          href={projectGroupWhatsapp}
-          target='BLANK'
-          buttonProps={{
-            variant: 'OUTLINE',
-            text: 'Ask Question',
-          }}
-        />
-        <LinkButton
-          href={routes.projectsExplore}
-          buttonProps={{
-            variant: 'GHOST',
-            text: 'Back to Projects',
-          }}
-        />
-      </FlexContainer>
     );
   }
 
@@ -98,7 +74,7 @@ const ProjectHeroContainer = ({
             Hello {user?.name ?? 'there'}!
           </Text>
           <Text level='p' className='paragraph text-greyDark'>
-            Let's learn something today.
+            Ready to prepare for interviews?
           </Text>
         </FlexContainer>
         <FlexContainer
@@ -106,17 +82,13 @@ const ProjectHeroContainer = ({
           itemCenter={false}
           className='justify-start items-start gap-3'
         >
-          <PageHeroMetaContainer subtitle="YOU'RE BUILDING" title={name} />
-          <PageHeroMetaContainer subtitle='ROADMAP' title={roadmap} />
-          <PageHeroMetaContainer
-            subtitle='DIFFICULTY LEVEL'
-            title={difficultyLevel}
-          />
+          <PageHeroMetaContainer subtitle="YOU'RE PRACTICING" title={name} />
         </FlexContainer>
+
         {headerActionButton}
       </FlexContainer>
     </FlexContainer>
   );
 };
 
-export default ProjectHeroContainer;
+export default SheetHeroContainer;
