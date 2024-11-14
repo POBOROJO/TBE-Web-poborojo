@@ -55,7 +55,6 @@ const handleGetProjectById = async (
       sendAPIResponse({
         status: false,
         message: 'Error fetching project',
-        error: error.message,
       })
     );
   }
