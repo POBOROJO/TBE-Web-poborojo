@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Alert,
   Button,
   QuestionLink,
   SheetHeroContainer,
@@ -13,8 +12,8 @@ import {
 } from '@/components';
 import { SheetPageProps } from '@/interfaces';
 import { getSheetPageProps } from '@/utils';
-import { useApi, useMediaQuery, useUser } from '@/hooks';
-import { routes, SCREEN_BREAKPOINTS } from '@/constant';
+import { useApi, useUser } from '@/hooks';
+import { routes } from '@/constant';
 
 const SheetPage = ({
   sheet,
@@ -30,7 +29,6 @@ const SheetPage = ({
       ?.isCompleted
   );
   const [isLoading, setIsLoading] = useState(false);
-  const isSmallScreen = useMediaQuery(SCREEN_BREAKPOINTS.SM);
 
   // Calculate total and completed questions for the progress bar
   const totalQuestions = questions.length;
@@ -112,19 +110,10 @@ const SheetPage = ({
     }
   };
 
-  const alertContainer = isSmallScreen && (
-    <Alert
-      message='This Sheet may require you to answer questions. Better open it on a larger screen.'
-      type='INFO'
-      className='my-2'
-    />
-  );
-
   return (
     <React.Fragment>
       <SEO seoMeta={seoMeta} />
       <Section className='md:p-2 p-2'>
-        {alertContainer}
         <SheetHeroContainer
           id={sheet._id ?? ''}
           name={sheet.name ?? ''}
@@ -198,7 +187,7 @@ const SheetPage = ({
                         ? 'Completed'
                         : 'Mark As Completed'
                     }
-                    className='w-fit'
+                    className='w-fit mt-2'
                     onClick={toggleCompletion}
                     isLoading={isLoading}
                   />
