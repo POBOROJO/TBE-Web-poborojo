@@ -1,4 +1,10 @@
-import { CourseChapterModel, CourseModel, ProjectChapter } from '.';
+import {
+  CourseChapterModel,
+  CourseModel,
+  InterviewSheetModel,
+  InterviewSheetQuestionModel,
+  ProjectChapter,
+} from '.';
 
 export type APIMethodTypes = 'GET' | 'POST' | 'PATCH';
 
@@ -53,16 +59,19 @@ export interface AddProjectRequestPayloadProps {
 }
 
 export interface AddSectionRequestPayloadProps {
+  toObject: any;
   sectionId: string;
   sectionName: string;
   chapters: ProjectChapter[];
 }
 
 export interface AddChapterRequestPayloadProps {
+  toObject: any;
   chapterId: string;
   chapterName: string;
   content: string;
   isOptional?: boolean;
+  isCompleted: boolean;
 }
 
 export interface UpateSectionRequestPayloadProps {
@@ -110,7 +119,28 @@ export interface AddCourseRequestPayloadProps {
   slug: string;
   meta?: string;
   roadmap: RoadmapsType;
-  difficultyLevel: DifficultyType;
+}
+
+export interface AddInterviewSheetRequestPayloadProps {
+  title: string;
+  description: string;
+  coverImageURL: string;
+  liveOn: string;
+  slug: string;
+  meta?: string;
+  roadmap: RoadmapsType;
+}
+
+export interface UpdateInterviewSheetRequestPayloadProps {
+  sheetId: string;
+  updatedData: Partial<AddInterviewSheetRequestPayloadProps>;
+}
+
+export interface AddInterviewQuestionRequestPayloadProps {
+  title: string;
+  question: string;
+  answer: string;
+  frequency: QuestionFrequencyType;
 }
 
 export interface UpdateCourseRequestPayloadProps {
@@ -139,6 +169,11 @@ export interface EnrollCourseInDBRequestProps {
   courseId: string;
 }
 
+export interface EnrollProjectInDBRequestProps {
+  userId: string;
+  projectId: string;
+}
+
 export type SkillsType =
   | 'HTML'
   | 'CSS'
@@ -152,6 +187,10 @@ export type SkillsType =
   | 'NextJS';
 
 export type RoadmapsType = 'Frontend' | 'Backend' | 'Fullstack' | 'Tech';
+export type QuestionFrequencyType =
+  | 'Most Asked'
+  | 'Asked Frequently'
+  | 'Asked Sometimes';
 
 export type DifficultyType = 'Beginner' | 'Intermediate' | 'Advanced';
 
@@ -168,6 +207,11 @@ export interface CourseEnrollmentRequestProps {
   userId: string;
 }
 
+export interface ProjectEnrollmentRequestProps {
+  projectId: string;
+  userId: string;
+}
+
 export interface UpdateUserChapterInCourseRequestProps {
   userId: string;
   courseId: string;
@@ -175,11 +219,46 @@ export interface UpdateUserChapterInCourseRequestProps {
   isCompleted: boolean;
 }
 
+export interface UpdateUserChapterInProjectRequestProps {
+  userId: string;
+  projectId: string;
+  sectionId: string;
+  chapterId: string;
+  isCompleted: boolean;
+}
+
+export interface SheetEnrollmentRequestProps {
+  sheetId: string;
+  userId: string;
+}
+
 export interface ExtendedCourseChapterModel extends CourseChapterModel {
+  isCompleted: boolean; // Add `isCompleted` flag
+}
+
+export interface ExtendedInterviewSheetQuestionModel
+  extends InterviewSheetQuestionModel {
   isCompleted: boolean; // Add `isCompleted` flag
 }
 
 export interface BaseShikshaCourseResponseProps extends Partial<CourseModel> {
   isEnrolled?: boolean;
   chapters?: ExtendedCourseChapterModel[];
+}
+
+export interface BaseInterviewSheetResponseProps
+  extends Partial<InterviewSheetModel> {
+  isEnrolled?: boolean;
+  questions?: ExtendedInterviewSheetQuestionModel[];
+}
+
+export interface MarkQuestionCompletedRequestProps {
+  userId: string;
+  sheetId: string;
+  questionId: string;
+  isCompleted: boolean;
+}
+
+export interface GetAllQuestionsRequestProps {
+  userId: string;
 }

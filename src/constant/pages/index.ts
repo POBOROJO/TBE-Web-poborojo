@@ -22,6 +22,12 @@ const TOP_NAVIGATION: TopNavbarContainerProps = {
       description: products.shiksha.description,
       href: products.shiksha.slug,
     },
+    {
+      id: v4(),
+      name: products.interviewPrep.label,
+      description: products.interviewPrep.description,
+      href: products.interviewPrep.slug,
+    },
   ],
   links: [
     {
@@ -63,6 +69,26 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     ctaText: 'Explore Free Projects',
   },
   {
+    id: 'interview Prep',
+    image: `${STATIC_FILE_PATH.svg}/shiksha.svg`,
+    imageAltText: products.interviewPrep.label,
+    title: products.interviewPrep.label,
+    content: products.interviewPrep.description,
+    href: products.interviewPrep.slug,
+    active: true,
+    ctaText: 'Free Interview Prep',
+  },
+  {
+    id: 'os',
+    image: `${STATIC_FILE_PATH.svg}/open-source.svg`,
+    imageAltText: products.os.label,
+    title: products.os.label,
+    content: products.os.description,
+    href: products.os.slug,
+    ctaText: 'Start Contributing',
+    active: true,
+  },
+  {
     id: 'workshops',
     image: `${STATIC_FILE_PATH.svg}/workshops.svg`,
     imageAltText: products.workshops.label,
@@ -82,15 +108,6 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     href: products.roadmaps.slug,
     active: false,
     ctaText: 'Explore Roadmaps',
-  },
-  {
-    id: 'os',
-    image: `${STATIC_FILE_PATH.svg}/open-source.svg`,
-    imageAltText: products.os.label,
-    title: products.os.label,
-    content: products.os.description,
-    href: products.os.slug,
-    active: false,
   },
 ];
 
@@ -139,6 +156,49 @@ const SHIKSHA_COURSES: PrimaryCardWithCTAProps[] = [
     href: routes.allCourses.basicsOfProgrammingWithJS,
     active: false,
     ctaText: 'Start The Course',
+  },
+];
+
+const INTERVIEW_PREP_SHEETS: PrimaryCardWithCTAProps[] = [
+  {
+    id: 'javascript-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/javascript-interview-questions.svg`,
+    imageAltText: 'Prepare for JavaScript interviews with essential questions.',
+    title: 'JavaScript Interview Sheet',
+    content: 'Prepare for JavaScript interviews with essential questions.',
+    href: routes.allInterviewSheets.javascriptInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
+  },
+  {
+    id: 'react-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/react-interview-questions.svg`,
+    imageAltText: 'Prepare for React.js interviews with essential questions.',
+    title: 'React.js Interview Sheet',
+    content: 'Prepare for React.js interviews with essential questions.',
+    href: routes.allInterviewSheets.reactInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
+  },
+  {
+    id: 'node-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/node-interview-questions.svg`,
+    imageAltText: 'Prepare for Node.js interviews with essential questions.',
+    title: 'Node.js Interview Sheet',
+    content: 'Prepare for Node.js interviews with essential questions.',
+    href: routes.allInterviewSheets.nodeInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
+  },
+  {
+    id: 'database-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/database-interview-questions.svg`,
+    imageAltText: 'Prepare for Database interviews with essential questions.',
+    title: 'Database Interview Sheet',
+    content: 'Prepare for Database interviews with essential questions.',
+    href: routes.allInterviewSheets.dbInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
   },
 ];
 
@@ -192,6 +252,30 @@ const TBP_FEATURES: PrimaryCardProps[] = [
     id: v4(),
     title: `Book Tech Mentorship`,
     content: `Discuss Every issue you're facing in 1:1 Mentorship Sessions.`,
+    image: `${STATIC_FILE_PATH.svg}/workshops.svg`,
+    imageAltText: `doubt session`,
+  },
+];
+
+const TBIP_FEATURES: PrimaryCardProps[] = [
+  {
+    id: v4(),
+    title: `Crisp. No Bullshit Content`,
+    content: `Prep One Question at a Time. No Ads. No Course Selling. Only Prep.`,
+    image: `${STATIC_FILE_PATH.svg}/mentorship.svg`,
+    imageAltText: `mentorship`,
+  },
+  {
+    id: v4(),
+    title: `Prep. Apply. Prep More.`,
+    content: `Apply What You Learn, Right Away. One Question At A Time.`,
+    image: `${STATIC_FILE_PATH.svg}/peer-to-peer-learning.svg`,
+    imageAltText: `peer learning`,
+  },
+  {
+    id: v4(),
+    title: `Ask Questions`,
+    content: `Ask Interview Prep Questions in Community. We’re here to help.`,
     image: `${STATIC_FILE_PATH.svg}/workshops.svg`,
     imageAltText: `doubt session`,
   },
@@ -297,4 +381,6 @@ export {
   MY_PREV_EXPERIENCE,
   TBP_PROJECTS,
   SHIKSHA_COURSES,
+  INTERVIEW_PREP_SHEETS,
+  TBIP_FEATURES,
 };

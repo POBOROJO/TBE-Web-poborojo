@@ -1,5 +1,9 @@
 import { HTMLInputTypeAttribute, MouseEventHandler, ReactNode } from 'react';
-import { GetSEOMetaResponseType, TopNavbarLinkProps } from '.';
+import {
+  GetSEOMetaResponseType,
+  QuestionFrequencyType,
+  TopNavbarLinkProps,
+} from '.';
 
 export interface SectionProps {
   children: React.ReactNode;
@@ -270,12 +274,20 @@ export interface ProjectHeroMetaContainerProps {
 }
 
 export interface ProjectHeroContainerProps {
+  id: string;
   name: string;
   roadmap: string;
   difficultyLevel: string;
+  isEnrolled?: boolean;
 }
 
 export interface CourseHeroContainerProps {
+  name: string;
+  isEnrolled?: boolean;
+  id: string;
+}
+
+export interface SheetHeroContainerProps {
   name: string;
   isEnrolled?: boolean;
   id: string;
@@ -310,6 +322,17 @@ export interface ChapterLinkProps {
   isCompleted: boolean;
   currentChapterId: string;
   handleChapterClick: (content: string) => void;
+}
+
+export interface QuestionLinkProps {
+  href: string;
+  questionId: string;
+  title: string;
+  question: string;
+  isCompleted: boolean;
+  currentQuestionId: string;
+  handleQuestionClick: (question: string) => void;
+  frequency: QuestionFrequencyType;
 }
 
 export interface MDXRendererProps {
