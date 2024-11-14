@@ -2,11 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { apiStatusCodes } from '@/constant';
 import { sendAPIResponse } from '@/utils';
 import { connectDB } from '@/middlewares';
-import {
-  getASheetForUserFromDB,
-  getInterviewSheetByIDFromDB,
-  updateInterviewSheetInDB,
-} from '@/database';
+import { getASheetForUserFromDB, updateInterviewSheetInDB } from '@/database';
 import { AddInterviewSheetRequestPayloadProps } from '@/interfaces';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

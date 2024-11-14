@@ -4,7 +4,6 @@ import {
   InterviewSheetModel,
   InterviewSheetQuestionModel,
   ProjectChapter,
-  ProjectDocumentModel,
 } from '.';
 
 export type APIMethodTypes = 'GET' | 'POST' | 'PATCH';
@@ -60,16 +59,19 @@ export interface AddProjectRequestPayloadProps {
 }
 
 export interface AddSectionRequestPayloadProps {
+  toObject: any;
   sectionId: string;
   sectionName: string;
   chapters: ProjectChapter[];
 }
 
 export interface AddChapterRequestPayloadProps {
+  toObject: any;
   chapterId: string;
   chapterName: string;
   content: string;
   isOptional?: boolean;
+  isCompleted: boolean;
 }
 
 export interface UpateSectionRequestPayloadProps {
@@ -240,12 +242,6 @@ export interface ExtendedInterviewSheetQuestionModel
 }
 
 export interface BaseShikshaCourseResponseProps extends Partial<CourseModel> {
-  isEnrolled?: boolean;
-  chapters?: ExtendedCourseChapterModel[];
-}
-
-export interface BaseProjectResponseProps
-  extends Partial<ProjectDocumentModel> {
   isEnrolled?: boolean;
   chapters?: ExtendedCourseChapterModel[];
 }

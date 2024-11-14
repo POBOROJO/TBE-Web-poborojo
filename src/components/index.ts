@@ -4,7 +4,8 @@ const CourseHeroContainer = dynamic(
   () => import('@/components/containers/Page/Course/CourseHeroContainer')
 );
 const SheetHeroContainer = dynamic(
-  () => import('@/components/containers/Page/Interview-sheet/SheetHeroContainer')
+  () =>
+    import('@/components/containers/Page/Interview-sheet/SheetHeroContainer')
 );
 const Navbar = dynamic(() => import('@/components/layout/Navbar'));
 const LinkText = dynamic(() => import('@/components/common/Typography/Link'));

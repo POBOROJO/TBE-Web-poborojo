@@ -10,7 +10,6 @@ import {
   UpdateUserChapterInProjectRequestProps,
   EnrollProjectInDBRequestProps,
   ProjectPickedPageProps,
-  BaseProjectResponseProps,
 } from '@/interfaces';
 
 import { Project, UserProject } from '@/database';
@@ -148,7 +147,7 @@ const addSectionToProjectInDB = async (
       return { error: 'Project not found' };
     }
 
-    project.sections.push(sectionData);
+    project.sections.push(sectionData.toObject());
 
     await project.save();
 
@@ -257,7 +256,7 @@ const addChapterToSectionInDB = async (
       return { error: 'Section not found' };
     }
 
-    section.chapters.push(chapterData);
+    section.chapters.push(chapterData.toObject());
 
     await project.save();
 
@@ -513,10 +512,17 @@ const getAllEnrolledProjectsFromDB = async (
       })
       .exec();
 
+    const projectIds = enrolledProjects.map((project) => project.projectId);
+
+    const projectData = await Project.find({ _id: { $in: projectIds } })
+      .select(modelSelectParams.projectPreview)
+      .exec();
+
     return {
-      data: enrolledProjects.map((project) => project.project),
+      data: projectData,
     };
   } catch (error) {
+    console.error('Error while fetching enrolled projects:', error);
     return { error: 'Failed while fetching enrolled projects' };
   }
 };
@@ -535,17 +541,14 @@ const getEnrolledProjectFromDB = async ({
 
 const getAProjectForUserFromDB = async (userId: string, projectId: string) => {
   try {
-    const userProject = await UserProject.findOne({ userId, projectId })
-      .populate({
-        path: 'project',
-      })
-      .exec();
+    const userProject = await UserProject.findOne({ userId, projectId }).exec();
+
+    const project = await Project.findById(projectId).exec();
+    if (!project) {
+      return { error: 'Project not found' };
+    }
 
     if (!userProject) {
-      const project = await Project.findById(projectId).exec();
-      if (!project) {
-        return { error: 'Project not found' };
-      }
       return {
         data: {
           ...project.toObject(),
@@ -556,11 +559,11 @@ const getAProjectForUserFromDB = async (userId: string, projectId: string) => {
     }
 
     const mappedSections = userProject.sections.map((userSection) => {
-      const correspondingProjectSection = userProject.project.sections.find(
+      const correspondingProjectSection = project.sections.find(
         (section) => section.sectionId === userSection.sectionId
       );
 
-      const chapters = correspondingProjectSection.chapters.map((chapter) => {
+      const chapters = correspondingProjectSection?.chapters.map((chapter) => {
         const isCompleted = userSection.chapters.some(
           (userChapter) =>
             userChapter.chapterId === chapter.chapterId &&
@@ -574,18 +577,18 @@ const getAProjectForUserFromDB = async (userId: string, projectId: string) => {
       });
 
       return {
-        ...correspondingProjectSection.toObject(),
+        ...correspondingProjectSection?.toObject(),
         chapters,
       };
     });
 
-    const updatedProjectResponse = {
-      ...userProject.project.toObject(),
-      sections: mappedSections,
-      isEnrolled: true,
+    return {
+      data: {
+        ...project.toObject(),
+        sections: mappedSections,
+        isEnrolled: true,
+      },
     };
-
-    return { data: updatedProjectResponse };
   } catch (error) {
     console.error('Error fetching project for user:', error);
     return { error: 'Failed to fetch project with task status' };
