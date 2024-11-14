@@ -166,10 +166,11 @@ const ProjectPage = ({
             <FlexContainer justifyCenter={false} className='gap-px mt-4'>
               {sections.map(({ sectionId, sectionName, chapters }) => (
                 <Accordion title={sectionName} key={sectionId}>
-                  {chapters.map(({ chapterId, chapterName }) => (
+                  {chapters.map(({ chapterId, chapterName, isCompleted }) => (
                     <AccordionLinkItem
                       key={chapterId}
                       label={chapterName}
+                      isCompleted={isCompleted}
                       href={`${slug}?projectId=${project._id}&sectionId=${sectionId}&chapterId=${chapterId}`}
                       onClick={() =>
                         handleChapterClick({ sectionId, chapterId })
