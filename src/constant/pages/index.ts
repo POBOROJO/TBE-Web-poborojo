@@ -76,7 +76,7 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     content: products.interviewPrep.description,
     href: products.interviewPrep.slug,
     active: true,
-    ctaText: 'Explore Interview Prep',
+    ctaText: 'Free Interview Prep',
   },
   {
     id: 'os',
@@ -85,6 +85,7 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     title: products.os.label,
     content: products.os.description,
     href: products.os.slug,
+    ctaText: 'Start Contributing',
     active: true,
   },
   {
