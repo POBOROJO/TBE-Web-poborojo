@@ -130,20 +130,22 @@ const CoursePage = ({
         <FlexContainer className='w-full gap-4' itemCenter={false}>
           {/* Left Sidebar (Chapters) */}
           <FlexContainer
-            className='border md:w-3/12 w-full p-2 gap-1 rounded self-baseline max-h-[80vh] overflow-y-auto md:sticky top-4 bg-white'
+            className='border md:w-3/12 w-full px-2 gap-1 rounded self-baseline max-h-[80vh] overflow-y-auto bg-white'
             itemCenter={false}
           >
-            <Text level='h5' className='heading-5'>
-              Chapters
-            </Text>
+            <div className='w-full sticky top-0 bg-inherit py-2'>
+              <Text level='h5' className='heading-5'>
+                Chapters
+              </Text>
 
-            {/* ProgressBar */}
-            <ProgressBar
-              totalChapters={totalChapters}
-              completedChapters={completedChapters}
-            />
+              {/* ProgressBar */}
+              <ProgressBar
+                totalChapters={totalChapters}
+                completedChapters={completedChapters}
+              />
+            </div>
 
-            <FlexContainer justifyCenter={false} className='gap-px mt-4'>
+            <FlexContainer justifyCenter={false} className='gap-px'>
               {chapters?.map(({ _id, name, content, isCompleted }) => {
                 const chapterId = _id?.toString();
 

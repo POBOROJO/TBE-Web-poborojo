@@ -124,20 +124,22 @@ const SheetPage = ({
         <FlexContainer className='w-full gap-4' itemCenter={false}>
           {/* Left Sidebar (Questions) */}
           <FlexContainer
-            className='border md:w-3/12 w-full p-2 gap-1 rounded self-baseline max-h-[80vh] overflow-y-auto md:sticky top-4 bg-white'
+            className='border md:w-3/12 w-full px-2 gap-1 rounded self-baseline max-h-[80vh] overflow-y-auto bg-white'
             itemCenter={false}
           >
-            <Text level='h5' className='heading-5'>
-              Questions
-            </Text>
+            <div className='w-full sticky top-0 bg-inherit py-2'>
+              <Text level='h5' className='heading-5'>
+                Questions
+              </Text>
 
-            {/* ProgressBar */}
-            <ProgressBar
-              totalChapters={totalQuestions}
-              completedChapters={completedQuestions}
-            />
+              {/* ProgressBar */}
+              <ProgressBar
+                totalChapters={totalQuestions}
+                completedChapters={completedQuestions}
+              />
+            </div>
 
-            <FlexContainer justifyCenter={false} className='gap-px mt-4'>
+            <FlexContainer justifyCenter={false} className='gap-px'>
               {questions?.map(
                 ({ _id, title, question, answer, isCompleted, frequency }) => {
                   const questionId = _id?.toString();
