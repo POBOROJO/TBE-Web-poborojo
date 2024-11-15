@@ -303,6 +303,7 @@ export interface AccordionLinkItemProps {
   label: string;
   href: string;
   className?: string;
+  isCompleted?: boolean;
   onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
