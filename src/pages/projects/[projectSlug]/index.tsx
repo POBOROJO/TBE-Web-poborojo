@@ -136,7 +136,7 @@ const ProjectPage = ({
   return (
     <React.Fragment>
       <SEO seoMeta={seoMeta} />
-      <Section className='md:p-2 p-2'>
+      <Section className='p-2 lg:px-8'>
         <ProjectHeroContainer
           id={project._id}
           name={project.name}
@@ -145,7 +145,7 @@ const ProjectPage = ({
           isEnrolled={project.isEnrolled}
         />
       </Section>
-      <Section className='md:p-2 p-2'>
+      <Section className='p-2'>
         <FlexContainer className='w-full gap-4' itemCenter={false}>
           {/* Sidebar with Progress Bar and Chapters */}
           <FlexContainer
