@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaTrophy, FaLock } from 'react-icons/fa';
 import {
   Button,
   QuestionLink,
@@ -6,6 +7,7 @@ import {
   FlexContainer,
   MDXRenderer,
   ProgressBar,
+  CertificateBanner, 
   Section,
   SEO,
   Text,
@@ -139,7 +141,7 @@ const SheetPage = ({
               />
             </div>
 
-            <FlexContainer justifyCenter={false} className='gap-px'>
+            <FlexContainer justifyCenter={false} className='gap-px flex-grow'>
               {questions?.map(
                 ({ _id, title, question, answer, isCompleted, frequency }) => {
                   const questionId = _id?.toString();
@@ -160,6 +162,24 @@ const SheetPage = ({
                 }
               )}
             </FlexContainer>
+             {/* Certificate Banner */}
+             <div className='w-full sticky bottom-0 bg-inherit py-2'>
+             <CertificateBanner
+                backgroundColor={completedQuestions < totalQuestions ? 'bg-purple-400' : 'bg-purple-600'}
+                heading={
+                  completedQuestions < totalQuestions
+                  ? 'Download Certificate'
+                  : 'Congratulations! Certificate Unlocked'
+                }
+                 subtext={
+                  completedQuestions < totalQuestions
+                  ? 'Complete All to Get Your Certificate.'
+                  : 'Click below to download your certificate.'
+                }
+                  icon={completedQuestions < totalQuestions ? FaLock : FaTrophy} 
+                  isLocked={completedQuestions < totalQuestions}
+               />
+              </div>
           </FlexContainer>
 
           {/* Main Content Area */}
