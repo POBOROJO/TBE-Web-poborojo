@@ -353,6 +353,9 @@ export interface ProgressBarProps {
 }
 
 export interface CertificateBannerProps {
-  totalChapters: number;
-  completedChapters: number;
+  backgroundColor: string;
+  heading: string; 
+  subtext: string; 
+  icon: React.ElementType ; 
+  isLocked: boolean; 
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaTrophy, FaLock } from 'react-icons/fa';
 import {
   Button,
   QuestionLink,
@@ -163,11 +164,22 @@ const SheetPage = ({
             </FlexContainer>
              {/* Certificate Banner */}
              <div className='w-full sticky bottom-0 bg-inherit py-2'>
-    <CertificateBanner
-      completedChapters={completedQuestions}
-      totalChapters={totalQuestions}
-    />
-  </div>
+             <CertificateBanner
+                backgroundColor={completedQuestions < totalQuestions ? 'bg-purple-400' : 'bg-purple-600'}
+                heading={
+                  completedQuestions < totalQuestions
+                  ? 'Download Certificate'
+                  : 'Congratulations! Certificate Unlocked'
+                }
+                 subtext={
+                  completedQuestions < totalQuestions
+                  ? 'Complete All to Get Your Certificate.'
+                  : 'Click below to download your certificate.'
+                }
+                  icon={completedQuestions < totalQuestions ? FaLock : FaTrophy} 
+                  isLocked={completedQuestions < totalQuestions}
+               />
+              </div>
           </FlexContainer>
 
           {/* Main Content Area */}
