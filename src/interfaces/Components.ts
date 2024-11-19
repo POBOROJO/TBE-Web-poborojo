@@ -351,3 +351,8 @@ export interface ProgressBarProps {
   totalChapters: number;
   completedChapters: number;
 }
+
+export interface CertificateBannerProps {
+  totalChapters: number;
+  completedChapters: number;
+}

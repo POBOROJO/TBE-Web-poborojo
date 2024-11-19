@@ -6,6 +6,7 @@ import {
   FlexContainer,
   MDXRenderer,
   ProgressBar,
+  CertificateBanner, 
   Section,
   SEO,
   Text,
@@ -139,7 +140,7 @@ const SheetPage = ({
               />
             </div>
 
-            <FlexContainer justifyCenter={false} className='gap-px'>
+            <FlexContainer justifyCenter={false} className='gap-px flex-grow'>
               {questions?.map(
                 ({ _id, title, question, answer, isCompleted, frequency }) => {
                   const questionId = _id?.toString();
@@ -160,6 +161,13 @@ const SheetPage = ({
                 }
               )}
             </FlexContainer>
+             {/* Certificate Banner */}
+             <div className='w-full sticky bottom-0 bg-inherit py-2'>
+    <CertificateBanner
+      completedChapters={completedQuestions}
+      totalChapters={totalQuestions}
+    />
+  </div>
           </FlexContainer>
 
           {/* Main Content Area */}
