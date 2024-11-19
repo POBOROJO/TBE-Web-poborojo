@@ -354,8 +354,9 @@ export interface ProgressBarProps {
 
 export interface CertificateBannerProps {
   backgroundColor: string;
-  heading: string; 
-  subtext: string; 
-  icon: React.ElementType ; 
-  isLocked: boolean; 
+  heading: string;
+  subtext: string;
+  icon: React.ElementType;
+  isLocked: boolean;
+  onClick?: () => void;
 }
