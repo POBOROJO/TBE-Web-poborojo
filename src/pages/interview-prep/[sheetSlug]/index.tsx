@@ -7,7 +7,7 @@ import {
   FlexContainer,
   MDXRenderer,
   ProgressBar,
-  CertificateBanner, 
+  CertificateBanner,
   Section,
   SEO,
   Text,
@@ -16,6 +16,7 @@ import { SheetPageProps } from '@/interfaces';
 import { getSheetPageProps } from '@/utils';
 import { useApi, useUser } from '@/hooks';
 import { routes } from '@/constant';
+import { CertificateModal } from '@/components';
 
 const SheetPage = ({
   sheet,
@@ -31,6 +32,7 @@ const SheetPage = ({
       ?.isCompleted
   );
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Calculate total and completed questions for the progress bar
   const totalQuestions = questions.length;
@@ -112,6 +114,14 @@ const SheetPage = ({
     }
   };
 
+  //This part is removed after importing/getting the actual certificateContent component
+  const certificateContent = (
+    <div className='text-center'>
+      <h2 className='text-xl font-bold'>Certificate of Completion</h2>
+      <p className='my-2'>This certifies that you have completed the sheet!</p>
+    </div>
+  );
+
   return (
     <React.Fragment>
       <SEO seoMeta={seoMeta} />
@@ -162,24 +172,33 @@ const SheetPage = ({
                 }
               )}
             </FlexContainer>
-             {/* Certificate Banner */}
-             <div className='w-full sticky bottom-0 bg-inherit py-2'>
-             <CertificateBanner
-                backgroundColor={completedQuestions < totalQuestions ? 'bg-purple-400' : 'bg-purple-600'}
+            {/* Certificate Banner */}
+            <div className='w-full sticky bottom-0 bg-inherit py-2'>
+              <CertificateBanner
+                backgroundColor={
+                  completedQuestions < totalQuestions
+                    ? 'bg-purple-400'
+                    : 'bg-purple-600'
+                }
                 heading={
                   completedQuestions < totalQuestions
-                  ? 'Download Certificate'
-                  : 'Congratulations! Certificate Unlocked'
+                    ? 'Download Certificate'
+                    : 'Congratulations! Certificate Unlocked'
                 }
-                 subtext={
+                subtext={
                   completedQuestions < totalQuestions
-                  ? 'Complete All to Get Your Certificate.'
-                  : 'Click below to download your certificate.'
+                    ? 'Complete All to Get Your Certificate.'
+                    : 'Click below to download your certificate.'
                 }
-                  icon={completedQuestions < totalQuestions ? FaLock : FaTrophy} 
-                  isLocked={completedQuestions < totalQuestions}
-               />
-              </div>
+                icon={completedQuestions < totalQuestions ? FaLock : FaTrophy}
+                isLocked={completedQuestions < totalQuestions}
+                onClick={() => {
+                  if (completedQuestions === totalQuestions) {
+                    setIsModalOpen(true);
+                  }
+                }}
+              />
+            </div>
           </FlexContainer>
 
           {/* Main Content Area */}
@@ -219,6 +238,11 @@ const SheetPage = ({
           </FlexContainer>
         </FlexContainer>
       </Section>
+      <CertificateModal
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        certificateContent={certificateContent}
+      />
     </React.Fragment>
   );
 };
