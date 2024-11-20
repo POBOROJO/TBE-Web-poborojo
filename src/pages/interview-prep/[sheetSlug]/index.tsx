@@ -11,12 +11,12 @@ import {
   Section,
   SEO,
   Text,
+  CertificateModal,
 } from '@/components';
 import { SheetPageProps } from '@/interfaces';
 import { getSheetPageProps } from '@/utils';
 import { useApi, useUser } from '@/hooks';
 import { routes } from '@/constant';
-import { CertificateModal } from '@/components';
 
 const SheetPage = ({
   sheet,
@@ -113,14 +113,6 @@ const SheetPage = ({
       setIsLoading(false);
     }
   };
-
-  //This part is removed after importing/getting the actual certificateContent component
-  const certificateContent = (
-    <div className='text-center'>
-      <h2 className='text-xl font-bold'>Certificate of Completion</h2>
-      <p className='my-2'>This certifies that you have completed the sheet!</p>
-    </div>
-  );
 
   return (
     <React.Fragment>
@@ -239,10 +231,16 @@ const SheetPage = ({
         </FlexContainer>
       </Section>
       <CertificateModal
-        isOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
-        certificateContent={certificateContent}
-      />
+  isOpen={isModalOpen}
+  closeModal={() => setIsModalOpen(false)}
+  username={user?.name || 'Anonymous'} 
+  courseName={sheet.name || 'Course Name'}
+  date={new Date().toLocaleDateString('en-IN', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  })}
+/>
     </React.Fragment>
   );
 };

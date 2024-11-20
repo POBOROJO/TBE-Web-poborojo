@@ -1,15 +1,20 @@
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { useRef } from 'react';
-import { toPng } from 'html-to-image'; // Library for generating images from HTML
+import { toPng } from 'html-to-image';
+import CertificateContent from './CertificateContent';
 
 const CertificateModal = ({
   isOpen,
   closeModal,
-  certificateContent,
+  username,
+  courseName,
+  date,
 }: {
   isOpen: boolean;
   closeModal: () => void;
-  certificateContent: React.ReactNode;
+  username: string;
+  courseName: string;
+  date: string;
 }) => {
   const certificateRef = useRef<HTMLDivElement>(null);
 
@@ -35,26 +40,30 @@ const CertificateModal = ({
       onClose={closeModal}
     >
       <div className='fixed inset-0 bg-black bg-opacity-30' />
-      <div className='fixed inset-0 z-10 flex items-center justify-center p-4'>
-        <DialogPanel className='w-full max-w-lg rounded-lg bg-white shadow-lg p-4'>
-          <div className='flex justify-between items-center'>
-            <DialogTitle className='text-lg font-semibold'>
+      <div className='fixed inset-0 z-10 flex items-center justify-center p-2 overflow-auto'>
+        <DialogPanel className='w-full max-w-lg rounded-lg bg-white shadow-lg p-2'>
+          <div className='flex justify-between items-center mb-2'>
+            <DialogTitle className='text-md font-semibold'>
               Your Certificate
             </DialogTitle>
-            <button onClick={closeModal} className='text-sm'>
+            <button onClick={closeModal} className='text-md'>
               ✖
             </button>
           </div>
           <div
             ref={certificateRef}
-            className='mt-4 bg-gray-100 p-4 border rounded-md'
+            className='mt-2 bg-gray-100 p-2 border rounded-md overflow-auto'
           >
-            {certificateContent}
+            <CertificateContent
+              username={username}
+              courseName={courseName}
+              date={date}
+            />
           </div>
-          <div className='mt-6 text-center'>
+          <div className='mt-4 text-center'>
             <button
               onClick={handleDownload}
-              className='rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:outline-none'
+              className='rounded bg-blue-500 py-1 px-2 text-white hover:bg-blue-600 focus:outline-none'
             >
               Download Certificate
             </button>
