@@ -2,20 +2,18 @@ import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { useRef } from 'react';
 import { toPng } from 'html-to-image';
 import CertificateContent from './CertificateContent';
+import { CertificateDataPoints } from '@/interfaces';
 
 const CertificateModal = ({
   isOpen,
   closeModal,
-  username,
-  courseName,
-  date,
+  certificateDataPoints,
 }: {
   isOpen: boolean;
   closeModal: () => void;
-  username: string;
-  courseName: string;
-  date: string;
+  certificateDataPoints: CertificateDataPoints;
 }) => {
+  const { username, courseName, date } = certificateDataPoints;
   const certificateRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = async () => {

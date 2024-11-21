@@ -38,11 +38,12 @@ const CertificateContent = ({
       <div
         className='absolute'
         style={{
-          top: '333px', 
+          top: '332px', 
           left: '50%',
           transform: 'translateX(-50%)',
           fontSize: '18px',
           fontWeight: 500,
+          whiteSpace: 'nowrap',
         }}
       >
         {courseName}
@@ -50,7 +51,7 @@ const CertificateContent = ({
       <div
         className='absolute'
         style={{
-          top: '380px', 
+          top: '375px', 
           left: '50%',
           transform: 'translateX(-50%)',
           fontSize: '18px',

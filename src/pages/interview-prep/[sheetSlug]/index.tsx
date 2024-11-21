@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { FaTrophy, FaLock } from 'react-icons/fa';
 import {
   Button,
   QuestionLink,
@@ -7,11 +6,9 @@ import {
   FlexContainer,
   MDXRenderer,
   ProgressBar,
-  CertificateBanner,
   Section,
   SEO,
   Text,
-  CertificateModal,
 } from '@/components';
 import { SheetPageProps } from '@/interfaces';
 import { getSheetPageProps } from '@/utils';
@@ -32,7 +29,6 @@ const SheetPage = ({
       ?.isCompleted
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Calculate total and completed questions for the progress bar
   const totalQuestions = questions.length;
@@ -164,33 +160,6 @@ const SheetPage = ({
                 }
               )}
             </FlexContainer>
-            {/* Certificate Banner */}
-            <div className='w-full sticky bottom-0 bg-inherit py-2'>
-              <CertificateBanner
-                backgroundColor={
-                  completedQuestions < totalQuestions
-                    ? 'bg-purple-400'
-                    : 'bg-purple-600'
-                }
-                heading={
-                  completedQuestions < totalQuestions
-                    ? 'Download Certificate'
-                    : 'Congratulations! Certificate Unlocked'
-                }
-                subtext={
-                  completedQuestions < totalQuestions
-                    ? 'Complete All to Get Your Certificate.'
-                    : 'Click below to download your certificate.'
-                }
-                icon={completedQuestions < totalQuestions ? FaLock : FaTrophy}
-                isLocked={completedQuestions < totalQuestions}
-                onClick={() => {
-                  if (completedQuestions === totalQuestions) {
-                    setIsModalOpen(true);
-                  }
-                }}
-              />
-            </div>
           </FlexContainer>
 
           {/* Main Content Area */}
@@ -230,17 +199,6 @@ const SheetPage = ({
           </FlexContainer>
         </FlexContainer>
       </Section>
-      <CertificateModal
-  isOpen={isModalOpen}
-  closeModal={() => setIsModalOpen(false)}
-  username={user?.name || 'Anonymous'} 
-  courseName={sheet.name || 'Course Name'}
-  date={new Date().toLocaleDateString('en-IN', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })}
-/>
     </React.Fragment>
   );
 };
