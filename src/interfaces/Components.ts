@@ -360,3 +360,15 @@ export interface CertificateBannerProps {
   isLocked: boolean;
   onClick?: () => void;
 }
+
+export interface CertificateContentProps {
+  username: string;
+  courseName: string;
+  date: string;
+}
+
+export interface CertificateDataPoints {
+  username: string;
+  courseName: string;
+  date: string;
+}

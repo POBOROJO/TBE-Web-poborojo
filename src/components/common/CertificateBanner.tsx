@@ -18,7 +18,7 @@ const CertificateBanner = ({
         <h2 className='text-lg font-bold'>{heading}</h2>
         <p className='text-sm'>{subtext}</p>
       </div>
-      <div className='text-2xl'>{icon && <Icon />}</div>
+      <div className='text-2xl'>{icon && React.createElement(icon)} </div>
     </div>
   );
 };

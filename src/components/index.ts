@@ -6,6 +6,9 @@ const CertificateBanner = dynamic(
 const CertificateModal = dynamic(
   () => import('@/components/common/CertificateModal')
 );
+const  CertificateContent = dynamic(
+  () => import('@/components/common/CertificateContent')
+);
 const CourseHeroContainer = dynamic(
   () => import('@/components/containers/Page/Course/CourseHeroContainer')
 );
@@ -183,4 +186,5 @@ export {
   SheetHeroContainer,
   CertificateBanner,
   CertificateModal,
+  CertificateContent,
 };
