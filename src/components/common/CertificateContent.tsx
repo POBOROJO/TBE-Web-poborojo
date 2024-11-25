@@ -12,7 +12,7 @@ const CertificateContent = ({
       style={{
         width: '100%',
         maxWidth: '800px',
-        height: '565px', 
+        height: '565px',
         margin: 'auto',
         backgroundImage: 'url(/images/Certificate_tbe.png)',
         backgroundSize: 'cover',
@@ -22,15 +22,17 @@ const CertificateContent = ({
       <div
         className='absolute'
         style={{
-          top: '270px', 
+          top: '270px',
           left: '50%',
           transform: 'translateX(-50%)',
-          fontSize: '30px',
+          fontSize: '26px',
+          opacity: '0.75',
           fontWeight: 'bold',
-          maxWidth: '85%', 
-          overflow: 'hidden', 
-          whiteSpace: 'nowrap', 
-          textOverflow: 'ellipsis', 
+          maxWidth: '85%',
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+          textTransform: 'capitalize',
         }}
       >
         {username}
@@ -38,12 +40,13 @@ const CertificateContent = ({
       <div
         className='absolute'
         style={{
-          top: '332px', 
+          top: '334px',
           left: '50%',
           transform: 'translateX(-50%)',
           fontSize: '18px',
           fontWeight: 500,
           whiteSpace: 'nowrap',
+          opacity: '0.9',
         }}
       >
         {courseName}
@@ -51,10 +54,12 @@ const CertificateContent = ({
       <div
         className='absolute'
         style={{
-          top: '375px', 
+          top: '375px',
           left: '50%',
           transform: 'translateX(-50%)',
-          fontSize: '18px',
+          fontSize: '16px',
+          fontWeight: 500,
+          opacity: '0.85',
         }}
       >
         {date}
