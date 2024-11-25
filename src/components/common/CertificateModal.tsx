@@ -50,7 +50,7 @@ const CertificateModal = ({
           </div>
           <div
             ref={certificateRef}
-            className='bg-gray-100 p-2 border rounded-md overflow-auto'
+            className='bg-gray-100 p-2 border rounded-md overflow-auto max-h-[70vh]'
           >
             <CertificateContent
               username={username}
@@ -58,7 +58,7 @@ const CertificateModal = ({
               date={date}
             />
           </div>
-          <div className='mt-4 text-center'>
+          <div className='mt-2 text-center'>
             <button
               onClick={handleDownload}
               className='rounded bg-blue-500 py-1 px-2 text-white hover:bg-blue-600 focus:outline-none'
