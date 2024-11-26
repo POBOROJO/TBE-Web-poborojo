@@ -8,31 +8,31 @@ const CertificateContent = ({
 }: CertificateContentProps) => {
   return (
     <div
-      className='certificate-container relative text-center py-16 px-12 bg-white border rounded-md'
+      className='certificate-container relative text-center bg-white'
       style={{
         width: '100%',
         maxWidth: '800px',
-        height: '565px',
         margin: 'auto',
+        aspectRatio: '3/2',
         backgroundImage: 'url(/images/Certificate_tbe.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        position: 'relative',
       }}
     >
       <div
         className='absolute'
         style={{
-          top: '270px',
+          top: '51.5%',
           left: '50%',
-          transform: 'translateX(-50%)',
-          fontSize: '26px',
-          opacity: '0.75',
+          transform: 'translate(-50%, -50%)',
+          fontSize: '1.2em',
           fontWeight: 'bold',
-          maxWidth: '85%',
-          overflow: 'hidden',
           whiteSpace: 'nowrap',
+          overflow: 'hidden',
           textOverflow: 'ellipsis',
           textTransform: 'capitalize',
+          opacity: '0.8',
         }}
       >
         {username}
@@ -40,12 +40,14 @@ const CertificateContent = ({
       <div
         className='absolute'
         style={{
-          top: '334px',
+          top: '59%',
           left: '50%',
           transform: 'translateX(-50%)',
-          fontSize: '18px',
+          fontSize: '0.7em',
           fontWeight: 500,
           whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+          overflow: 'hidden',
           opacity: '0.9',
         }}
       >
@@ -54,10 +56,10 @@ const CertificateContent = ({
       <div
         className='absolute'
         style={{
-          top: '375px',
+          top: '67%',
           left: '50%',
           transform: 'translateX(-50%)',
-          fontSize: '16px',
+          fontSize: '0.7em',
           fontWeight: 500,
           opacity: '0.85',
         }}

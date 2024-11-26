@@ -11,7 +11,7 @@ const CertificateBanner = ({
 }: CertificateBannerProps) => {
   return (
     <div
-      className={`${backgroundColor} text-white rounded-lg py-2 px-4 mt-6 shadow-lg flex items-center justify-between ${
+      className={`${backgroundColor} text-white rounded-lg py-2 px-4 mt-2 shadow-lg flex items-center justify-between ${
         isLocked ? 'cursor-not-allowed' : 'cursor-pointer'
       }`}
       onClick={!isLocked ? onClick : undefined}

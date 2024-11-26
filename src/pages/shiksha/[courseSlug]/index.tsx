@@ -144,7 +144,7 @@ const CoursePage = ({
         <FlexContainer className='w-full gap-4' itemCenter={false}>
           {/* Left Sidebar (Chapters) */}
           <FlexContainer
-            className='border md:w-3/12 w-full px-2 gap-1 rounded self-baseline max-h-[80vh] overflow-y-auto bg-white'
+            className='border md:w-3/12 w-full px-2 gap-1 rounded self-baseline bg-white'
             itemCenter={false}
           >
             <div className='w-full sticky top-0 bg-inherit py-2'>
@@ -159,7 +159,10 @@ const CoursePage = ({
               />
             </div>
 
-            <FlexContainer justifyCenter={false} className='gap-px'>
+            <FlexContainer
+              justifyCenter={false}
+              className='gap-px overflow-y-auto max-h-[60vh]'
+            >
               {chapters?.map(({ _id, name, content, isCompleted }) => {
                 const chapterId = _id?.toString();
 
@@ -177,7 +180,7 @@ const CoursePage = ({
                 );
               })}
             </FlexContainer>
-          {/* Certificate Banner */}
+            {/* Certificate Banner */}
             <div className='w-full sticky bottom-0 bg-inherit py-2'>
               <CertificateBanner
                 backgroundColor={
@@ -246,7 +249,7 @@ const CoursePage = ({
       <CertificateModal
         isOpen={isModalOpen}
         closeModal={() => setIsModalOpen(false)}
-        certificateDataPoints={certificateDataPoints} 
+        certificateDataPoints={certificateDataPoints}
       />
     </React.Fragment>
   );

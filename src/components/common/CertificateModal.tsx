@@ -22,7 +22,7 @@ const CertificateModal = ({
         const dataUrl = await toPng(certificateRef.current, { quality: 1 });
         const link = document.createElement('a');
         link.href = dataUrl;
-        link.download = 'certificate.png';
+        link.download = `${username}-${courseName}.png`;
         link.click();
       } catch (error) {
         console.error('Error generating certificate image:', error);
@@ -38,7 +38,7 @@ const CertificateModal = ({
       onClose={closeModal}
     >
       <div className='fixed inset-0 bg-black bg-opacity-30' />
-      <div className='fixed inset-0 z-10 flex items-center justify-center p-2 overflow-auto'>
+      <div className='fixed inset-0 z-10 flex items-center justify-center p-2'>
         <DialogPanel className='w-full max-w-lg rounded-lg bg-white shadow-lg p-2'>
           <div className='flex justify-between items-center mb-2'>
             <DialogTitle className='text-md font-semibold'>
@@ -48,10 +48,7 @@ const CertificateModal = ({
               ✖
             </button>
           </div>
-          <div
-            ref={certificateRef}
-            className='bg-gray-100 p-2 border rounded-md overflow-auto max-h-[70vh]'
-          >
+          <div ref={certificateRef} className='bg-gray-100 border'>
             <CertificateContent
               username={username}
               courseName={courseName}
