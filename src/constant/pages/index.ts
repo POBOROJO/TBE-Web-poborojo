@@ -4,7 +4,7 @@ import {
   TopNavbarContainerProps,
   PrimaryCardWithCTAProps,
 } from '@/interfaces';
-import { LINKS, products, STATIC_FILE_PATH } from '../global';
+import { LINKS, products, STATIC_FILE_PATH, userSections } from '../global';
 import { v4 } from 'uuid';
 import { routes } from '..';
 
@@ -45,6 +45,26 @@ const TOP_NAVIGATION: TopNavbarContainerProps = {
       target: 'BLANK',
     },
   ],
+  user: [
+    {
+      id: v4(),
+      name: 'My Courses',
+      href: userSections.myCourses,
+      target: 'BLANK',
+    },
+    {
+      id: v4(),
+      name: 'My Projects',
+      href: userSections.myProjects,
+      target: 'BLANK',
+    },
+    {
+      id: v4(),
+      name: 'My Sheets',
+      href: userSections.mySheets,
+      target: 'BLANK',
+    },
+  ],
 };
 
 const PRODUCTS: PrimaryCardWithCTAProps[] = [
@@ -76,7 +96,7 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     content: products.interviewPrep.description,
     href: products.interviewPrep.slug,
     active: true,
-    ctaText: 'Explore Interview Prep',
+    ctaText: 'Free Interview Prep',
   },
   {
     id: 'os',
@@ -85,6 +105,7 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     title: products.os.label,
     content: products.os.description,
     href: products.os.slug,
+    ctaText: 'Start Contributing',
     active: true,
   },
   {
