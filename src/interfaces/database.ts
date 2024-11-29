@@ -122,3 +122,14 @@ export interface UserCourseChapterModel {
   chapterId: string;
   isCompleted?: boolean;
 }
+
+export interface WebinarModel {
+  _id: typeof Schema.Types.ObjectId;
+  host: {
+    name: string;
+    imageUrl: string;
+    role: string;
+  };
+  registrationUrl: string;
+  toObject: () => WebinarModel;
+}

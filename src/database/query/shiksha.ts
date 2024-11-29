@@ -8,7 +8,7 @@ import {
   UpdateCourseRequestPayloadProps,
   UpdateUserChapterInCourseRequestProps,
 } from '@/interfaces';
-import { Course, UserCourse } from '@/database';
+import { Course, UserCourse, Webinar } from '@/database';
 import { modelSelectParams } from '@/constant';
 
 const addACourseToDB = async (
@@ -321,6 +321,15 @@ const getACourseForUserFromDB = async (userId: string, courseId: string) => {
   }
 };
 
+const getAllWebinarsFromDB = async () => {
+  try {
+    const webinars = await Webinar.find();
+    return { data: webinars, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
 export {
   addACourseToDB,
   updateACourseInDB,
@@ -336,4 +345,5 @@ export {
   updateUserCourseChapterInDB,
   getACourseForUserFromDB,
   getAllCourseFromDB,
+  getAllWebinarsFromDB,
 };
