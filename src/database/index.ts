@@ -24,3 +24,4 @@ export * from './query/project';
 export * from './query/shiksha';
 export * from './query/user';
 export * from './query/interview-prep';
+export * from './query/webinar';
