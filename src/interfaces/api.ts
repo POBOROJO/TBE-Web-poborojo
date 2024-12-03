@@ -262,3 +262,11 @@ export interface MarkQuestionCompletedRequestProps {
 export interface GetAllQuestionsRequestProps {
   userId: string;
 }
+
+export interface UpdateEnrolledUsersRequestPayloadProps {
+  webinarId: string;
+  users: Array<{
+    name: string;
+    email: string;
+  }>;
+}

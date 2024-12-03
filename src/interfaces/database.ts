@@ -131,5 +131,10 @@ export interface WebinarModel {
     role: string;
   };
   registrationUrl: string;
+  dateAndTime: Date;
+  enrolledUsersList: {
+    name: string;
+    email: string;
+  };
   toObject: () => WebinarModel;
 }
