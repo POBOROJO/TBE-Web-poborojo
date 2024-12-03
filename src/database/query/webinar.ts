@@ -30,4 +30,29 @@ const updateEnrolledUsersInWebinarDB = async (
   }
 };
 
-export { getAllWebinarsFromDB, updateEnrolledUsersInWebinarDB };
+const checkUserRegistrationInWebinarDB = async (
+  webinarId: string,
+  email: string
+) => {
+  try {
+    const webinar = await Webinar.findById(webinarId);
+
+    if (!webinar) {
+      return { data: false, error: 'Webinar not found' };
+    }
+
+    const isRegistered = webinar.enrolledUsersList.some(
+      (user: { email: string }) => user.email === email
+    );
+
+    return { data: isRegistered, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export {
+  getAllWebinarsFromDB,
+  updateEnrolledUsersInWebinarDB,
+  checkUserRegistrationInWebinarDB,
+};
