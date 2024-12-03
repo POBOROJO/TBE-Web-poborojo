@@ -51,8 +51,34 @@ const checkUserRegistrationInWebinarDB = async (
   }
 };
 
+const getWebinarDetailsFromDB = async (webinarId: string) => {
+  try {
+    const webinarDetails = await Webinar.findById(webinarId).select(
+      '-enrolledUsersList'
+    );
+
+    if (!webinarDetails) {
+      return {
+        data: null,
+        error: 'Webinar not found',
+      };
+    }
+
+    return {
+      data: webinarDetails,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: 'Failed to fetch webinar details from the database',
+    };
+  }
+};
+
 export {
   getAllWebinarsFromDB,
   updateEnrolledUsersInWebinarDB,
   checkUserRegistrationInWebinarDB,
+  getWebinarDetailsFromDB,
 };

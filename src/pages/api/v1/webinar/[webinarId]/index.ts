@@ -5,6 +5,7 @@ import { connectDB } from '@/middlewares';
 import {
   updateEnrolledUsersInWebinarDB,
   checkUserRegistrationInWebinarDB,
+  getWebinarDetailsFromDB,
 } from '@/database';
 import { UpdateEnrolledUsersRequestPayloadProps } from '@/interfaces';
 
@@ -14,9 +15,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
-      return handleCheckUserRegistration(req, res);
+      if (req.query.userId) {
+        return handleCheckUserRegistration(req, res);
+      }
+
+      return handleGetWebinarDetails(req, res);
+
     case 'PATCH':
       return handleUpdateEnrolledUsers(req, res);
+
     default:
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
@@ -24,6 +31,50 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           message: `Method ${req.method} Not Allowed`,
         })
       );
+  }
+};
+const handleGetWebinarDetails = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
+  try {
+    const { webinarId } = req.query;
+
+    if (!webinarId) {
+      return res.status(apiStatusCodes.BAD_REQUEST).json(
+        sendAPIResponse({
+          status: false,
+          message: 'webinarId is required.',
+        })
+      );
+    }
+
+    const { data, error } = await getWebinarDetailsFromDB(webinarId as string);
+
+    if (error || !data) {
+      return res.status(apiStatusCodes.NOT_FOUND).json(
+        sendAPIResponse({
+          status: false,
+          message: 'Webinar not found',
+          error,
+        })
+      );
+    }
+
+    return res.status(apiStatusCodes.OKAY).json(
+      sendAPIResponse({
+        status: true,
+        data,
+      })
+    );
+  } catch (error) {
+    return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
+      sendAPIResponse({
+        status: false,
+        message: 'Failed to get webinar details',
+        error,
+      })
+    );
   }
 };
 
