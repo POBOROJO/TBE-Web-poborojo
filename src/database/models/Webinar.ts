@@ -22,6 +22,22 @@ const WebinarSchema = new Schema<WebinarModel>(
       type: String,
       required: [true, 'Registration URL is required'],
     },
+    dateAndTime: {
+      type: Date,
+      required: [true, 'Date and Time are required'],
+    },
+    enrolledUsersList: [
+      {
+        name: {
+          type: String,
+          required: [true, 'User name is required'],
+        },
+        email: {
+          type: String,
+          required: [true, 'User email is required'],
+        },
+      },
+    ],
   },
   {
     timestamps: true,
