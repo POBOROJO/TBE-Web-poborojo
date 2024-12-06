@@ -284,6 +284,12 @@ const getWebinarPageProps = async (context: any) => {
       hostImageUrl: host.imageUrl,
       hostRole: host.role,
       dateAndTime,
+      //update title, description, bannerImageUrl with API
+      title: 'Is Programming for you',
+      description:
+        'Understand why everybody wants to be in Tech and should learn Tech or not.',
+      bannerImageUrl:
+        'https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg',
     },
   };
 };

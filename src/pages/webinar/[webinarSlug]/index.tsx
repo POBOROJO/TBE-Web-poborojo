@@ -13,6 +13,7 @@ import { useApi, useUser } from '@/hooks';
 import { useState } from 'react';
 import { routes } from '@/constant';
 import { WebinarHeroContainer } from '@/components';
+import { isProgramActive } from '@/utils';
 
 const WebinarPage = ({
   webinarId,
@@ -20,6 +21,9 @@ const WebinarPage = ({
   hostImageUrl,
   hostRole,
   dateAndTime,
+  title,
+  description,
+  bannerImageUrl,
 }: WebinarPageProps) => {
   const { user, isAuth } = useUser();
   const [userName, setUserName] = useState('');
@@ -80,9 +84,7 @@ const WebinarPage = ({
     }
   };
 
-  const webinarDate = new Date(dateAndTime);
-  const currentDate = new Date();
-  const isWebinarOver = currentDate >= webinarDate;
+  const webinarStarted = isProgramActive(new Date(dateAndTime));
 
   let certificateSection;
   let generateCertificateCard;
@@ -93,22 +95,22 @@ const WebinarPage = ({
         <FlexContainer
           fullWidth={true}
           className={`max-w-lg bg-white rounded-1 border-2 border-gray-500 ${
-            isWebinarOver ? '' : 'opacity-80'
+            webinarStarted ? '' : 'opacity-80'
           }`}
         >
           <div ref={certificateRef} className='w-full'>
-            <CertificateContent // The certificate template has to be changed
+            <CertificateContent
               username={userName}
-              courseName='Basics of Programming Webinar' //we have to update this with the actual title
+              courseName={title}
               date={dateAndTime.slice(0, 10)}
             />
           </div>
         </FlexContainer>
         <button
           onClick={handleDownload}
-          disabled={!isWebinarOver}
+          disabled={!webinarStarted}
           className={`rounded py-1 px-2 text-white ${
-            isWebinarOver
+            webinarStarted
               ? 'bg-blue-500 hover:bg-blue-600'
               : 'bg-gray-400 cursor-not-allowed'
           }`}
@@ -174,18 +176,17 @@ const WebinarPage = ({
 
   return (
     <React.Fragment>
-      <Section className=' flex flex-col  gap-2 px-4 pb-4'>
+      <Section className='flex flex-col gap-2 px-4 pb-4'>
         <FlexContainer className='relative'>
           <div
             className='absolute inset-0 bg-cover bg-center opacity-20 rounded-2'
             style={{
-              backgroundImage:
-                "url('https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg')",
+              backgroundImage: `url(${bannerImageUrl})`,
             }}
           ></div>
 
           <FlexContainer
-            className=' bg-transparent p-3 py-10 md:py-8 lg:py-6 gap-3 md:gap-2'
+            className='bg-transparent p-3 py-10 md:py-8 lg:py-6 gap-3 md:gap-2'
             direction='col'
           >
             <Text
@@ -195,21 +196,20 @@ const WebinarPage = ({
               Free Webinar
             </Text>
 
-            <Text // This is going to be filled with the actual webinar title
+            <Text
               level='h1'
               textCenter
               className='text-3xl md:text-3xl lg:text-5xl font-bold'
             >
-              Is Programming for you?
+              {title}
             </Text>
 
-            <Text // This is going to be filled with the actual webinar description
+            <Text
               level='p'
               textCenter
               className='text-lg md:text-xl lg:text-2xl px-[2.5%] lg:pt-1'
             >
-              Understand why everybody wants to be in Tech and should you learn
-              Tech or not.
+              {description}
             </Text>
 
             <FlexContainer
@@ -225,7 +225,7 @@ const WebinarPage = ({
               <FlexContainer
                 direction='col'
                 itemCenter={false}
-                className='md:gap-1 '
+                className='md:gap-1'
               >
                 <Text
                   level='h2'

@@ -72,4 +72,7 @@ export interface WebinarPageProps {
   hostImageUrl: string;
   hostRole: string;
   dateAndTime: string;
+  title: string;
+  description: string;
+  bannerImageUrl: string;
 }
