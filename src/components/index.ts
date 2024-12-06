@@ -6,7 +6,7 @@ const CertificateBanner = dynamic(
 const CertificateModal = dynamic(
   () => import('@/components/common/CertificateModal')
 );
-const  CertificateContent = dynamic(
+const CertificateContent = dynamic(
   () => import('@/components/common/CertificateContent')
 );
 const CourseHeroContainer = dynamic(
@@ -129,6 +129,10 @@ const QuestionLink = dynamic(
   () => import('@/components/common/Learning/QuestionLink')
 );
 
+const WebinarHeroContainer = dynamic(
+  () => import('@/components/containers/Page/Webinar/WebinarHeroContainer')
+);
+
 export {
   Navbar,
   LinkText as Link,
@@ -187,4 +191,5 @@ export {
   CertificateBanner,
   CertificateModal,
   CertificateContent,
+  WebinarHeroContainer,
 };
