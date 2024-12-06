@@ -189,9 +189,6 @@ export interface InputFieldContainerProps {
   className?: string;
   value?: string;
   isOptional?: boolean;
-  inputClassName: string;
-  labelClassName: string;
-  disable: boolean;
 }
 
 export interface LoadingSpinnerProps {

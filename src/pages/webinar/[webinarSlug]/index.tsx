@@ -5,7 +5,6 @@ import {
   Section,
   Text,
   Image,
-  InputFieldContainer,
   CertificateContent,
 } from '@/components';
 import { WebinarPageProps } from '@/interfaces';
@@ -133,31 +132,35 @@ const WebinarPage = ({
         </Text>
 
         <FlexContainer fullWidth={true} direction='row' className='gap-2 '>
-          <InputFieldContainer
-            label='Your Name'
-            type='text'
-            value={userName}
-            onChange={(value) => setUserName(value)}
-            className='md:w-[45%] max-w-[400px]'
-            labelClassName='font-semibold text-black'
-            inputClassName='bg-pink-100 border-none'
-            disable={true}
-          />
-          <InputFieldContainer
-            label='Your Email'
-            type='text'
-            value={userEmail}
-            onChange={(value) => setUserEmail(value)}
-            className='md:w-[45%] max-w-[400px]'
-            labelClassName='font-semibold text-black'
-            inputClassName='bg-pink-100 border-none'
-            disable={true}
-          />
+          <FlexContainer
+            direction='col'
+            className='w-full md:w-[45%] max-w-[400px] '
+            itemCenter={false}
+          >
+            <Text level='label' className='pre-title  text-white font-semibold'>
+              Your Name
+            </Text>
+            <Text level='p' className='w-full font-semibold'>
+              {userName}
+            </Text>
+          </FlexContainer>
+          <FlexContainer
+            direction='col'
+            className='w-full md:w-[45%] max-w-[400px] '
+            itemCenter={false}
+          >
+            <Text level='label' className='pre-title  text-white font-semibold'>
+              Your Email
+            </Text>
+            <Text level='p' className='w-full font-semibold'>
+              {userEmail}
+            </Text>
+          </FlexContainer>
         </FlexContainer>
 
         <button
           onClick={onGenerateCertificate}
-          className='rounded bg-pink-500 py-1 px-2 text-white hover:bg-pink-600 focus:outline-none'
+          className='rounded bg-pink-500 py-1 px-2 mt-2 text-white hover:bg-pink-600 focus:outline-none'
         >
           Generate Certificate
         </button>
