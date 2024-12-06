@@ -65,3 +65,11 @@ export interface ServerSessionProp {
   };
   expires: Date;
 }
+
+export interface WebinarPageProps {
+  webinarId: string;
+  hostName: string;
+  hostImageUrl: string;
+  hostRole: string;
+  dateAndTime: string;
+}

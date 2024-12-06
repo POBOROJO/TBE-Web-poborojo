@@ -36,6 +36,7 @@ const routes = {
   api: {
     base: '/api/v1',
     projects: '/projects',
+    webinar: '/webinar',
     project: (project: string) => `/projects/${project}`,
     shiksha: '/shiksha',
     myCourses: '/user/shiksha',
@@ -71,6 +72,7 @@ const routes = {
       }
       return url;
     },
+    webinarById: (webinar: string) => `/webinar/${webinar}`,
   },
 };
 

@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
-      if (req.query.userId) {
+      if (req.query.email) {
         return handleCheckUserRegistration(req, res);
       }
 
