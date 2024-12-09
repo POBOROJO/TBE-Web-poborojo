@@ -365,6 +365,7 @@ export interface CertificateContentProps {
   username: string;
   courseName: string;
   date: string;
+  type: string;
 }
 
 export interface CertificateDataPoints {
