@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { toPng } from 'html-to-image';
 import {
   FlexContainer,
@@ -10,7 +10,6 @@ import {
 import { WebinarPageProps } from '@/interfaces';
 import { getWebinarPageProps } from '@/utils';
 import { useApi, useUser } from '@/hooks';
-import { useState } from 'react';
 import { routes } from '@/constant';
 import { WebinarHeroContainer } from '@/components';
 import { isProgramActive } from '@/utils';
