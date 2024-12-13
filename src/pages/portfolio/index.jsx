@@ -1,6 +1,10 @@
 import React from 'react';
 import { Section, FlexContainer, Image, Text, Button } from '@/components';
-import { STATIC_FILE_PATH } from '@/constant';
+import {
+  STATIC_FILE_PATH,
+  portfolioCards,
+  portfolioTemplates,
+} from '@/constant';
 import { PortfolioCard, PortfolioTemplate } from '@/components';
 
 const Portfolio = () => {
@@ -48,12 +52,15 @@ const Portfolio = () => {
           fullWidth={true}
           className='max-w-screen-xl gap-3 md:flex-row'
         >
-          <PortfolioCard //use this dynamically
-            index={1}
-            imageUrl={`${STATIC_FILE_PATH.svg}/hero-image.svg`}
-            title='Resume is not Enough. '
-            description='Resume is not Enough'
-          />
+          {portfolioCards.map((card) => (
+            <PortfolioCard
+              key={card.id}
+              index={card.id}
+              imageUrl={card.imageUrl}
+              title={card.title}
+              description={card.description}
+            />
+          ))}
         </FlexContainer>
       </Section>
       <Section className='flex flex-col items-center bg-black text-white p-2'>
@@ -78,12 +85,15 @@ const Portfolio = () => {
             Vercel and our community.
           </Text>
           <FlexContainer className='w-full max-w-screen-xl gap-2 md:flex-row mt-5'>
-            <PortfolioTemplate //use this dynamically
-              imageUrl={`${STATIC_FILE_PATH.svg}/hero-image.svg`}
-              title='Next.Js Template'
-              description='Get started with Next.js and React in seconds. '
-              developerName='Parijaat'
-            />
+            {portfolioTemplates.map((template) => (
+              <PortfolioTemplate
+                key={template.id}
+                imageUrl={template.imageUrl}
+                title={template.title}
+                description={template.description}
+                developerName={template.developerName}
+              />
+            ))}
           </FlexContainer>
         </FlexContainer>
       </Section>
