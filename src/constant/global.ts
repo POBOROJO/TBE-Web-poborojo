@@ -148,6 +148,38 @@ const SCREEN_BREAKPOINTS = {
   LG: '(min-width: 1025px)',
 };
 
+const portfolioCards = [
+  {
+    id: 1,
+    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    title: 'Resume is not Enough.',
+    description: 'Showcase your skills with a personalized portfolio.',
+  },
+  {
+    id: 2,
+    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    title: 'Stand Out.',
+    description: 'Highlight your unique capabilities effectively.',
+  },
+];
+
+const portfolioTemplates = [
+  {
+    id: 1,
+    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    title: 'Next.Js Template',
+    description: 'Get started with Next.js and React in seconds.',
+    developerName: 'Parijaat',
+  },
+  {
+    id: 2,
+    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    title: 'React Template',
+    description: 'Quickly build a responsive React portfolio.',
+    developerName: 'Parijaat',
+  },
+];
+
 export {
   imageMeta,
   products,
@@ -163,4 +195,6 @@ export {
   projectGroupWhatsapp,
   mentorshipPlans,
   SCREEN_BREAKPOINTS,
+  portfolioCards,
+  portfolioTemplates,
 };

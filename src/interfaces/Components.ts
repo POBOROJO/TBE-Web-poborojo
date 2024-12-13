@@ -94,6 +94,20 @@ export interface PrimaryCardProps {
   borderColour?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
+export interface PortfolioCardProps {
+  index: number;
+  imageUrl: string;
+  title: string;
+  description: string;
+}
+
+export interface PortfolioTemplateProps {
+  imageUrl: string;
+  title: string;
+  description: string;
+  developerName: string;
+}
+
 export interface FlexContainerProps {
   children?: React.ReactNode;
   itemCenter?: boolean;

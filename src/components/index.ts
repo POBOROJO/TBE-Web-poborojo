@@ -78,6 +78,15 @@ const WeTaughtAtCard = dynamic(
 const ContactCard = dynamic(
   () => import('./containers/Cards/Items/ContactCard')
 );
+
+const PortfolioCard = dynamic(
+  () => import('./containers/Cards/Items/PortfolioCard')
+);
+
+const PortfolioTemplate = dynamic(
+  () => import('./containers/Cards/Items/PortfolioTemplate')
+);
+
 const SEO = dynamic(() => import('./layout/SEO'));
 const Pill = dynamic(() => import('./common/Pill'));
 const IconPill = dynamic(() => import('./common/Pill/IconPill'));
@@ -161,6 +170,8 @@ export {
   WeTaughtAtCard,
   SEO,
   ContactCard,
+  PortfolioCard,
+  PortfolioTemplate,
   Pill,
   IconPill,
   ImageLink,
