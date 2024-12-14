@@ -1,5 +1,9 @@
 import { HTMLInputTypeAttribute, MouseEventHandler, ReactNode } from 'react';
-import { GetSEOMetaResponseType, TopNavbarLinkProps } from '.';
+import {
+  GetSEOMetaResponseType,
+  QuestionFrequencyType,
+  TopNavbarLinkProps,
+} from '.';
 
 export interface SectionProps {
   children: React.ReactNode;
@@ -88,6 +92,20 @@ export interface PrimaryCardProps {
   title: string;
   content: string;
   borderColour?: 1 | 2 | 3 | 4 | 5 | 6;
+}
+
+export interface PortfolioCardProps {
+  index: number;
+  imageUrl: string;
+  title: string;
+  description: string;
+}
+
+export interface PortfolioTemplateProps {
+  imageUrl: string;
+  title: string;
+  description: string;
+  developerName: string;
 }
 
 export interface FlexContainerProps {
@@ -270,12 +288,20 @@ export interface ProjectHeroMetaContainerProps {
 }
 
 export interface ProjectHeroContainerProps {
+  id: string;
   name: string;
   roadmap: string;
   difficultyLevel: string;
+  isEnrolled?: boolean;
 }
 
 export interface CourseHeroContainerProps {
+  name: string;
+  isEnrolled?: boolean;
+  id: string;
+}
+
+export interface SheetHeroContainerProps {
   name: string;
   isEnrolled?: boolean;
   id: string;
@@ -291,6 +317,7 @@ export interface AccordionLinkItemProps {
   label: string;
   href: string;
   className?: string;
+  isCompleted?: boolean;
   onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
@@ -312,6 +339,17 @@ export interface ChapterLinkProps {
   handleChapterClick: (content: string) => void;
 }
 
+export interface QuestionLinkProps {
+  href: string;
+  questionId: string;
+  title: string;
+  question: string;
+  isCompleted: boolean;
+  currentQuestionId: string;
+  handleQuestionClick: (question: string) => void;
+  frequency: QuestionFrequencyType;
+}
+
 export interface MDXRendererProps {
   mdxSource: string;
   actions?: React.ReactNode[];
@@ -326,4 +364,26 @@ export interface AlertProps {
 export interface ProgressBarProps {
   totalChapters: number;
   completedChapters: number;
+}
+
+export interface CertificateBannerProps {
+  backgroundColor: string;
+  heading: string;
+  subtext: string;
+  icon: React.ElementType;
+  isLocked: boolean;
+  onClick?: () => void;
+}
+
+export interface CertificateContentProps {
+  username: string;
+  courseName: string;
+  date: string;
+  type: string;
+}
+
+export interface CertificateDataPoints {
+  username: string;
+  courseName: string;
+  date: string;
 }

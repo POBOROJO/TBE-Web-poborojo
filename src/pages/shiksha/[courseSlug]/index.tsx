@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaTrophy, FaLock } from 'react-icons/fa';
 import {
   Alert,
   Button,
@@ -10,6 +11,8 @@ import {
   Section,
   SEO,
   Text,
+  CertificateBanner,
+  CertificateModal,
 } from '@/components';
 import { CoursePageProps } from '@/interfaces';
 import { getCoursePageProps } from '@/utils';
@@ -30,6 +33,7 @@ const CoursePage = ({
       ?.isCompleted
   );
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const isSmallScreen = useMediaQuery(SCREEN_BREAKPOINTS.SM);
 
   // Calculate the total chapters and completed chapters
@@ -78,6 +82,27 @@ const CoursePage = ({
         )
       );
 
+      if (newCompletionStatus) {
+        const currentIndex = chapters.findIndex(
+          (chapter) => chapter._id.toString() === currentChapterId
+        );
+
+        let nextIncompleteChapter = chapters
+          .slice(currentIndex + 1)
+          .find((chapter) => !chapter.isCompleted);
+
+        if (!nextIncompleteChapter) {
+          nextIncompleteChapter = chapters
+            .slice(0, currentIndex)
+            .find((chapter) => !chapter.isCompleted);
+        }
+
+        if (nextIncompleteChapter) {
+          const nextChapterId = nextIncompleteChapter._id.toString();
+          window.location.href = `${slug}?courseId=${course._id}&chapterId=${nextChapterId}`;
+        }
+      }
+
       setIsChapterCompleted(newCompletionStatus);
     } catch (error) {
       console.error('Error toggling chapter completion:', error);
@@ -94,6 +119,16 @@ const CoursePage = ({
     />
   );
 
+  const certificateDataPoints = {
+    username: user?.name || 'Anonymous',
+    courseName: course.name || 'Course Name',
+    date: new Date().toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    }),
+  };
+
   return (
     <React.Fragment>
       <SEO seoMeta={seoMeta} />
@@ -109,20 +144,25 @@ const CoursePage = ({
         <FlexContainer className='w-full gap-4' itemCenter={false}>
           {/* Left Sidebar (Chapters) */}
           <FlexContainer
-            className='border md:w-3/12 w-full p-2 gap-1 rounded self-baseline max-h-[80vh] overflow-y-auto md:sticky top-4 bg-white'
+            className='border md:w-3/12 w-full px-2 gap-1 rounded self-baseline bg-white'
             itemCenter={false}
           >
-            <Text level='h5' className='heading-5'>
-              Chapters
-            </Text>
+            <div className='w-full sticky top-0 bg-inherit py-2'>
+              <Text level='h5' className='heading-5'>
+                Chapters
+              </Text>
 
-            {/* ProgressBar */}
-            <ProgressBar
-              totalChapters={totalChapters}
-              completedChapters={completedChapters}
-            />
+              {/* ProgressBar */}
+              <ProgressBar
+                totalChapters={totalChapters}
+                completedChapters={completedChapters}
+              />
+            </div>
 
-            <FlexContainer justifyCenter={false} className='gap-px mt-4'>
+            <FlexContainer
+              justifyCenter={false}
+              className='gap-px overflow-y-auto max-h-[60vh]'
+            >
               {chapters?.map(({ _id, name, content, isCompleted }) => {
                 const chapterId = _id?.toString();
 
@@ -140,6 +180,33 @@ const CoursePage = ({
                 );
               })}
             </FlexContainer>
+            {/* Certificate Banner */}
+            <div className='w-full sticky bottom-0 bg-inherit py-2'>
+              <CertificateBanner
+                backgroundColor={
+                  completedChapters < totalChapters
+                    ? 'bg-purple-400'
+                    : 'bg-purple-600'
+                }
+                heading={
+                  completedChapters < totalChapters
+                    ? 'Download Certificate'
+                    : 'Congratulations! Certificate Unlocked'
+                }
+                subtext={
+                  completedChapters < totalChapters
+                    ? 'Complete All to Get Your Certificate.'
+                    : 'Click below to download your certificate.'
+                }
+                icon={completedChapters < totalChapters ? FaLock : FaTrophy}
+                isLocked={completedChapters < totalChapters}
+                onClick={() => {
+                  if (completedChapters === totalChapters) {
+                    setIsModalOpen(true);
+                  }
+                }}
+              />
+            </div>
           </FlexContainer>
 
           {/* Main Content Area */}
@@ -179,6 +246,11 @@ const CoursePage = ({
           </FlexContainer>
         </FlexContainer>
       </Section>
+      <CertificateModal
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        certificateDataPoints={certificateDataPoints}
+      />
     </React.Fragment>
   );
 };

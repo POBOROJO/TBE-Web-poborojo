@@ -59,16 +59,19 @@ export interface AddProjectRequestPayloadProps {
 }
 
 export interface AddSectionRequestPayloadProps {
+  toObject: any;
   sectionId: string;
   sectionName: string;
   chapters: ProjectChapter[];
 }
 
 export interface AddChapterRequestPayloadProps {
+  toObject: any;
   chapterId: string;
   chapterName: string;
   content: string;
   isOptional?: boolean;
+  isCompleted: boolean;
 }
 
 export interface UpateSectionRequestPayloadProps {
@@ -128,6 +131,18 @@ export interface AddInterviewSheetRequestPayloadProps {
   roadmap: RoadmapsType;
 }
 
+export interface UpdateInterviewSheetRequestPayloadProps {
+  sheetId: string;
+  updatedData: Partial<AddInterviewSheetRequestPayloadProps>;
+}
+
+export interface AddInterviewQuestionRequestPayloadProps {
+  title: string;
+  question: string;
+  answer: string;
+  frequency: QuestionFrequencyType;
+}
+
 export interface UpdateCourseRequestPayloadProps {
   updatedData: {
     title?: string;
@@ -152,6 +167,11 @@ export interface UpdateChapterInCourseRequestProps {
 export interface EnrollCourseInDBRequestProps {
   userId: string;
   courseId: string;
+}
+
+export interface EnrollProjectInDBRequestProps {
+  userId: string;
+  projectId: string;
 }
 
 export type SkillsType =
@@ -187,6 +207,11 @@ export interface CourseEnrollmentRequestProps {
   userId: string;
 }
 
+export interface ProjectEnrollmentRequestProps {
+  projectId: string;
+  userId: string;
+}
+
 export interface UpdateUserChapterInCourseRequestProps {
   userId: string;
   courseId: string;
@@ -194,7 +219,25 @@ export interface UpdateUserChapterInCourseRequestProps {
   isCompleted: boolean;
 }
 
+export interface UpdateUserChapterInProjectRequestProps {
+  userId: string;
+  projectId: string;
+  sectionId: string;
+  chapterId: string;
+  isCompleted: boolean;
+}
+
+export interface SheetEnrollmentRequestProps {
+  sheetId: string;
+  userId: string;
+}
+
 export interface ExtendedCourseChapterModel extends CourseChapterModel {
+  isCompleted: boolean; // Add `isCompleted` flag
+}
+
+export interface ExtendedInterviewSheetQuestionModel
+  extends InterviewSheetQuestionModel {
   isCompleted: boolean; // Add `isCompleted` flag
 }
 
@@ -206,5 +249,24 @@ export interface BaseShikshaCourseResponseProps extends Partial<CourseModel> {
 export interface BaseInterviewSheetResponseProps
   extends Partial<InterviewSheetModel> {
   isEnrolled?: boolean;
-  questions?: InterviewSheetQuestionModel[];
+  questions?: ExtendedInterviewSheetQuestionModel[];
+}
+
+export interface MarkQuestionCompletedRequestProps {
+  userId: string;
+  sheetId: string;
+  questionId: string;
+  isCompleted: boolean;
+}
+
+export interface GetAllQuestionsRequestProps {
+  userId: string;
+}
+
+export interface UpdateEnrolledUsersRequestPayloadProps {
+  webinarId: string;
+  users: Array<{
+    name: string;
+    email: string;
+  }>;
 }

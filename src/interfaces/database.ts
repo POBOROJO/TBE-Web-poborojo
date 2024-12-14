@@ -15,16 +15,19 @@ export interface UserModel {
 }
 
 export interface ProjectChapter {
+  isCompleted?: boolean;
   chapterId: string;
   chapterName: string;
   content: string;
   isOptional?: boolean;
+  toObject: any;
 }
 
 export interface ProjectSection {
   sectionId: string;
   sectionName: string;
   chapters: ProjectChapter[];
+  toObject: any;
 }
 
 export interface ProjectDocumentModel extends Document {
@@ -38,6 +41,22 @@ export interface ProjectDocumentModel extends Document {
   roadmap: RoadmapsType;
   difficultyLevel: DifficultyType;
   isActive: boolean;
+}
+
+export interface UserProjectModel extends Document {
+  userId: typeof Schema.Types.ObjectId;
+  projectId: typeof Schema.Types.ObjectId;
+  sections: UserProjectSectionModel[];
+}
+
+export interface UserProjectSectionModel {
+  sectionId: string;
+  chapters: UserProjectChapterModel[];
+}
+
+export interface UserProjectChapterModel {
+  chapterId: string;
+  isCompleted?: boolean;
 }
 
 export interface CourseModel extends Document {
@@ -72,6 +91,18 @@ export interface InterviewSheetQuestionModel {
   toObject: () => UserCourseModel;
 }
 
+export interface UserSheetModel extends Document {
+  userId: typeof Schema.Types.ObjectId;
+  sheetId: typeof Schema.Types.ObjectId;
+  sheet: InterviewSheetModel;
+  questions: UserSheetQuestionModel[];
+}
+
+export interface UserSheetQuestionModel {
+  questionId: typeof Schema.Types.ObjectId;
+  isCompleted?: boolean;
+}
+
 export interface CourseChapterModel {
   _id: typeof Schema.Types.ObjectId;
   name: string;
@@ -90,4 +121,20 @@ export interface UserCourseModel {
 export interface UserCourseChapterModel {
   chapterId: string;
   isCompleted?: boolean;
+}
+
+export interface WebinarModel {
+  _id: typeof Schema.Types.ObjectId;
+  host: {
+    name: string;
+    imageUrl: string;
+    role: string;
+  };
+  registrationUrl: string;
+  dateAndTime: Date;
+  enrolledUsersList: Array<{
+    name: string;
+    email: string;
+  }>;
+  toObject: () => WebinarModel;
 }

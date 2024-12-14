@@ -1,7 +1,20 @@
 import dynamic from 'next/dynamic';
 const ProgressBar = dynamic(() => import('@/components/common/ProgressBar'));
+const CertificateBanner = dynamic(
+  () => import('@/components/common/CertificateBanner')
+);
+const CertificateModal = dynamic(
+  () => import('@/components/common/CertificateModal')
+);
+const CertificateContent = dynamic(
+  () => import('@/components/common/CertificateContent')
+);
 const CourseHeroContainer = dynamic(
   () => import('@/components/containers/Page/Course/CourseHeroContainer')
+);
+const SheetHeroContainer = dynamic(
+  () =>
+    import('@/components/containers/Page/Interview-sheet/SheetHeroContainer')
 );
 const Navbar = dynamic(() => import('@/components/layout/Navbar'));
 const LinkText = dynamic(() => import('@/components/common/Typography/Link'));
@@ -65,6 +78,15 @@ const WeTaughtAtCard = dynamic(
 const ContactCard = dynamic(
   () => import('./containers/Cards/Items/ContactCard')
 );
+
+const PortfolioCard = dynamic(
+  () => import('./containers/Cards/Items/PortfolioCard')
+);
+
+const PortfolioTemplate = dynamic(
+  () => import('./containers/Cards/Items/PortfolioTemplate')
+);
+
 const SEO = dynamic(() => import('./layout/SEO'));
 const Pill = dynamic(() => import('./common/Pill'));
 const IconPill = dynamic(() => import('./common/Pill/IconPill'));
@@ -112,6 +134,13 @@ const Community = dynamic(() => import('./containers/Page/Landing/Community'));
 const ChapterLink = dynamic(
   () => import('@/components/common/Learning/ChapterLink')
 );
+const QuestionLink = dynamic(
+  () => import('@/components/common/Learning/QuestionLink')
+);
+
+const WebinarHeroContainer = dynamic(
+  () => import('@/components/containers/Page/Webinar/WebinarHeroContainer')
+);
 
 export {
   Navbar,
@@ -141,6 +170,8 @@ export {
   WeTaughtAtCard,
   SEO,
   ContactCard,
+  PortfolioCard,
+  PortfolioTemplate,
   Pill,
   IconPill,
   ImageLink,
@@ -166,4 +197,10 @@ export {
   CourseHeroContainer,
   ChapterLink,
   ProgressBar,
+  QuestionLink,
+  SheetHeroContainer,
+  CertificateBanner,
+  CertificateModal,
+  CertificateContent,
+  WebinarHeroContainer,
 };

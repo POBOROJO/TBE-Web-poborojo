@@ -52,6 +52,7 @@ export interface TopNavbarLinkProps {
 }
 
 export interface TopNavbarContainerProps {
+  user: TopNavbarLinkProps[];
   products: TopNavbarLinkProps[];
   links: TopNavbarLinkProps[];
 }
@@ -63,4 +64,15 @@ export interface ServerSessionProp {
     image: string;
   };
   expires: Date;
+}
+
+export interface WebinarPageProps {
+  webinarId: string;
+  hostName: string;
+  hostImageUrl: string;
+  hostRole: string;
+  dateAndTime: string;
+  title: string;
+  description: string;
+  bannerImageUrl: string;
 }

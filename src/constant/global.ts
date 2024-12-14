@@ -45,7 +45,7 @@ const products: ProductDataProps = {
   },
   os: {
     label: 'The Boring Open Source',
-    slug: '/os',
+    slug: 'https://theboringeducation.notion.site/Contribute-The-Boring-Education-8171f19257fd4ef99b7287555eb5062b',
     description: 'Learn and Contribute with Open Source',
   },
 };
@@ -56,6 +56,13 @@ const LINKS = {
   whatsappCommunity: 'https://chat.whatsapp.com/EeB7LrPRg2p3RyMOicyIAC',
   instagram: 'https://www.instagram.com/theboringeducation',
   youtube: 'https://www.youtube.com/@TheBoringEducation',
+};
+
+// User links
+const userSections = {
+  myCourses: 'https://www.theboringeducation.com/shiksha/my-courses',
+  myProjects: 'https://www.theboringeducation.com/projects/my-projects',
+  mySheets: 'https://www.theboringeducation.com/interview-prep/my-sheets',
 };
 
 // Google analytics
@@ -141,10 +148,43 @@ const SCREEN_BREAKPOINTS = {
   LG: '(min-width: 1025px)',
 };
 
+const portfolioCards = [
+  {
+    id: 1,
+    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    title: 'Resume is not Enough.',
+    description: 'Showcase your skills with a personalized portfolio.',
+  },
+  {
+    id: 2,
+    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    title: 'Stand Out.',
+    description: 'Highlight your unique capabilities effectively.',
+  },
+];
+
+const portfolioTemplates = [
+  {
+    id: 1,
+    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    title: 'Next.Js Template',
+    description: 'Get started with Next.js and React in seconds.',
+    developerName: 'Parijaat',
+  },
+  {
+    id: 2,
+    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    title: 'React Template',
+    description: 'Quickly build a responsive React portfolio.',
+    developerName: 'Parijaat',
+  },
+];
+
 export {
   imageMeta,
   products,
   LINKS,
+  userSections,
   gtag,
   googleAnalyticsScript,
   STATIC_FILE_PATH,
@@ -155,4 +195,6 @@ export {
   projectGroupWhatsapp,
   mentorshipPlans,
   SCREEN_BREAKPOINTS,
+  portfolioCards,
+  portfolioTemplates,
 };

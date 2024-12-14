@@ -4,7 +4,7 @@ import {
   TopNavbarContainerProps,
   PrimaryCardWithCTAProps,
 } from '@/interfaces';
-import { LINKS, products, STATIC_FILE_PATH } from '../global';
+import { LINKS, products, STATIC_FILE_PATH, userSections } from '../global';
 import { v4 } from 'uuid';
 import { routes } from '..';
 
@@ -45,6 +45,26 @@ const TOP_NAVIGATION: TopNavbarContainerProps = {
       target: 'BLANK',
     },
   ],
+  user: [
+    {
+      id: v4(),
+      name: 'My Courses',
+      href: userSections.myCourses,
+      target: 'BLANK',
+    },
+    {
+      id: v4(),
+      name: 'My Projects',
+      href: userSections.myProjects,
+      target: 'BLANK',
+    },
+    {
+      id: v4(),
+      name: 'My Sheets',
+      href: userSections.mySheets,
+      target: 'BLANK',
+    },
+  ],
 };
 
 const PRODUCTS: PrimaryCardWithCTAProps[] = [
@@ -69,6 +89,26 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     ctaText: 'Explore Free Projects',
   },
   {
+    id: 'interview Prep',
+    image: `${STATIC_FILE_PATH.svg}/shiksha.svg`,
+    imageAltText: products.interviewPrep.label,
+    title: products.interviewPrep.label,
+    content: products.interviewPrep.description,
+    href: products.interviewPrep.slug,
+    active: true,
+    ctaText: 'Free Interview Prep',
+  },
+  {
+    id: 'os',
+    image: `${STATIC_FILE_PATH.svg}/open-source.svg`,
+    imageAltText: products.os.label,
+    title: products.os.label,
+    content: products.os.description,
+    href: products.os.slug,
+    ctaText: 'Start Contributing',
+    active: true,
+  },
+  {
     id: 'workshops',
     image: `${STATIC_FILE_PATH.svg}/workshops.svg`,
     imageAltText: products.workshops.label,
@@ -88,25 +128,6 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     href: products.roadmaps.slug,
     active: false,
     ctaText: 'Explore Roadmaps',
-  },
-  {
-    id: 'os',
-    image: `${STATIC_FILE_PATH.svg}/open-source.svg`,
-    imageAltText: products.os.label,
-    title: products.os.label,
-    content: products.os.description,
-    href: products.os.slug,
-    active: false,
-  },
-   {
-    id: 'interview Prep',
-    image: `${STATIC_FILE_PATH.svg}/shiksha.svg`, 
-    imageAltText: products.interviewPrep.label,
-    title: products.interviewPrep.label,
-    content: products.interviewPrep.description,
-    href: products.interviewPrep.slug,
-    active: true,
-    ctaText: 'Explore Interview Prep',
   },
 ];
 
@@ -155,6 +176,49 @@ const SHIKSHA_COURSES: PrimaryCardWithCTAProps[] = [
     href: routes.allCourses.basicsOfProgrammingWithJS,
     active: false,
     ctaText: 'Start The Course',
+  },
+];
+
+const INTERVIEW_PREP_SHEETS: PrimaryCardWithCTAProps[] = [
+  {
+    id: 'javascript-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/javascript-interview-questions.svg`,
+    imageAltText: 'Prepare for JavaScript interviews with essential questions.',
+    title: 'JavaScript Interview Sheet',
+    content: 'Prepare for JavaScript interviews with essential questions.',
+    href: routes.allInterviewSheets.javascriptInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
+  },
+  {
+    id: 'react-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/react-interview-questions.svg`,
+    imageAltText: 'Prepare for React.js interviews with essential questions.',
+    title: 'React.js Interview Sheet',
+    content: 'Prepare for React.js interviews with essential questions.',
+    href: routes.allInterviewSheets.reactInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
+  },
+  {
+    id: 'node-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/node-interview-questions.svg`,
+    imageAltText: 'Prepare for Node.js interviews with essential questions.',
+    title: 'Node.js Interview Sheet',
+    content: 'Prepare for Node.js interviews with essential questions.',
+    href: routes.allInterviewSheets.nodeInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
+  },
+  {
+    id: 'database-interview-sheet',
+    image: `${STATIC_FILE_PATH.svg}/database-interview-questions.svg`,
+    imageAltText: 'Prepare for Database interviews with essential questions.',
+    title: 'Database Interview Sheet',
+    content: 'Prepare for Database interviews with essential questions.',
+    href: routes.allInterviewSheets.dbInterviewSheet,
+    active: true,
+    ctaText: 'View Sheet',
   },
 ];
 
@@ -337,5 +401,6 @@ export {
   MY_PREV_EXPERIENCE,
   TBP_PROJECTS,
   SHIKSHA_COURSES,
+  INTERVIEW_PREP_SHEETS,
   TBIP_FEATURES,
 };

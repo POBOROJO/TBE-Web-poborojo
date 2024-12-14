@@ -1,6 +1,11 @@
 import { GetSEOMetaResponseType } from '@/interfaces';
 import { routes } from '../routes';
-import { SHIKSHA_COURSES, TBP_PROJECTS, products } from '..';
+import {
+  SHIKSHA_COURSES,
+  TBP_PROJECTS,
+  products,
+  INTERVIEW_PREP_SHEETS,
+} from '..';
 
 const commonMeta = {
   type: 'website',
@@ -78,6 +83,34 @@ const getSEOMeta = (basePath: any): GetSEOMetaResponseType => {
       siteName: SHIKSHA_COURSES[1].title,
       description: SHIKSHA_COURSES[1].content,
       url: routes.allCourses.basicsOfProgrammingWithJS,
+      ...commonMeta,
+    },
+    [`${routes.allInterviewSheets.javascriptInterviewSheet}`]: {
+      title: `${INTERVIEW_PREP_SHEETS[0].title} | The Boring Education`,
+      siteName: INTERVIEW_PREP_SHEETS[0].title,
+      description: INTERVIEW_PREP_SHEETS[0].content,
+      url: routes.allInterviewSheets.javascriptInterviewSheet,
+      ...commonMeta,
+    },
+    [`${routes.allInterviewSheets.reactInterviewSheet}`]: {
+      title: `${INTERVIEW_PREP_SHEETS[1].title} | The Boring Education`,
+      siteName: INTERVIEW_PREP_SHEETS[1].title,
+      description: INTERVIEW_PREP_SHEETS[1].content,
+      url: routes.allInterviewSheets.reactInterviewSheet,
+      ...commonMeta,
+    },
+    [`${routes.allInterviewSheets.nodeInterviewSheet}`]: {
+      title: `${INTERVIEW_PREP_SHEETS[2].title} | The Boring Education`,
+      siteName: INTERVIEW_PREP_SHEETS[2].title,
+      description: INTERVIEW_PREP_SHEETS[2].content,
+      url: routes.allInterviewSheets.nodeInterviewSheet,
+      ...commonMeta,
+    },
+    [`${routes.allInterviewSheets.dbInterviewSheet}`]: {
+      title: `${INTERVIEW_PREP_SHEETS[3].title} | The Boring Education`,
+      siteName: INTERVIEW_PREP_SHEETS[3].title,
+      description: INTERVIEW_PREP_SHEETS[3].content,
+      url: routes.allInterviewSheets.dbInterviewSheet,
       ...commonMeta,
     },
     [`${routes.contactUs}`]: {

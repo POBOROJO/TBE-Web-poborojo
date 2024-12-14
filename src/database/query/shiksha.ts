@@ -167,7 +167,22 @@ const enrollInACourse = async ({
   courseId,
 }: EnrollCourseInDBRequestProps): Promise<DatabaseQueryResponseType> => {
   try {
-    const userCourse = await UserCourse.create({ userId, courseId });
+    const course = await Course.findById(courseId).lean();
+    if (!course) {
+      return { error: 'Course not found' };
+    }
+
+    const chapters = course.chapters.map((chapter: any) => ({
+      chapterId: chapter._id,
+      isCompleted: false,
+    }));
+
+    const userCourse = await UserCourse.create({
+      userId,
+      courseId,
+      chapters,
+    });
+
     return { data: userCourse };
   } catch (error) {
     return { error: 'Failed while enrolling in a course' };
