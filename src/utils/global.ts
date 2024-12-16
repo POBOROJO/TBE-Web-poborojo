@@ -253,35 +253,45 @@ const getWebinarPageProps = async (context: any) => {
   let slug = '/';
 
   if (webinarSlug) {
-    slug = '/webinar/' + webinarSlug;
+    slug = routes.api.webinarById(webinarSlug);
   }
 
-  const { status, data: responseObj } = await fetchAPIData(
-    routes.api.webinarById(webinarSlug)
-  );
+  const { status, data: webinar } = await fetchAPIData(slug);
 
   if (!status) {
     return {
       redirect: {
         destination: '/404',
       },
-      props: { slug },
     };
   }
 
-  const { _id, host, dateAndTime } = responseObj;
+  console.log('HERE', webinar);
+
+  const {
+    _id,
+    name,
+    description,
+    isFree,
+    about,
+    dateAndTime,
+    learnings,
+    registrationUrl,
+    host,
+  } = webinar;
 
   return {
     props: {
       webinarId: _id,
-      hostName: host.name,
-      hostImageUrl: host.imageUrl,
-      hostRole: host.role,
+      name,
+      slug,
+      description,
+      learnings,
+      isFree,
+      about,
+      host,
       dateAndTime,
-      //update title, description, bannerImageUrl with API
-      title: 'Is Programming for you',
-      description:
-        'Understand why everybody wants to be in Tech and should learn Tech or not.',
+      registrationUrl,
       bannerImageUrl:
         'https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg',
     },

@@ -1,4 +1,4 @@
-import { FooterLinksContainerProps } from '.';
+import { FooterLinksContainerProps, WebinarModel } from '.';
 
 export interface FooterNavigationDataProps extends FooterLinksContainerProps {
   id: string;
@@ -56,13 +56,6 @@ export interface ServerSessionProp {
   expires: Date;
 }
 
-export interface WebinarPageProps {
-  webinarId: string;
-  hostName: string;
-  hostImageUrl: string;
-  hostRole: string;
-  dateAndTime: string;
-  title: string;
-  description: string;
+export interface WebinarPageProps extends WebinarModel {
   bannerImageUrl: string;
 }

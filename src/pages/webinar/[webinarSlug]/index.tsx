@@ -15,13 +15,16 @@ import { WebinarHeroContainer } from '@/components';
 import { isProgramActive } from '@/utils';
 
 const WebinarPage = ({
-  webinarId,
-  hostName,
-  hostImageUrl,
-  hostRole,
-  dateAndTime,
-  title,
+  _id,
+  name,
   description,
+  slug,
+  learnings,
+  isFree,
+  about,
+  host,
+  dateAndTime,
+  registrationUrl,
   bannerImageUrl,
 }: WebinarPageProps) => {
   const { user, isAuth } = useUser();
@@ -56,7 +59,7 @@ const WebinarPage = ({
   const { makeRequest } = useApi(
     'webinar',
     {
-      url: `${routes.api.webinar}/${webinarId}`,
+      url: `${routes.api.webinar}/${slug}`,
     },
     { enabled: !!user?.email }
   );
@@ -64,7 +67,7 @@ const WebinarPage = ({
   const onGenerateCertificate = async () => {
     try {
       const response = await makeRequest({
-        url: `${routes.api.webinar}/${webinarId}?email=${user?.email}`,
+        url: `${routes.api.webinar}/${slug}?email=${user?.email}`,
       });
 
       if (!response?.status) {
@@ -101,7 +104,7 @@ const WebinarPage = ({
             <CertificateContent
               type='webinar'
               username={userName}
-              courseName={title}
+              courseName={name}
               date={dateAndTime.slice(0, 10)}
             />
           </div>
@@ -139,7 +142,7 @@ const WebinarPage = ({
             className='w-full md:w-[45%] max-w-[400px] '
             itemCenter={false}
           >
-            <Text level='label' className='pre-title  text-white font-semibold'>
+            <Text level='label' className='pre-name  text-white font-semibold'>
               Your Name
             </Text>
             <Text level='p' className='w-full font-semibold'>
@@ -151,7 +154,7 @@ const WebinarPage = ({
             className='w-full md:w-[45%] max-w-[400px] '
             itemCenter={false}
           >
-            <Text level='label' className='pre-title  text-white font-semibold'>
+            <Text level='label' className='pre-name  text-white font-semibold'>
               Your Email
             </Text>
             <Text level='p' className='w-full font-semibold'>
@@ -201,7 +204,7 @@ const WebinarPage = ({
               textCenter
               className='text-3xl md:text-3xl lg:text-5xl font-bold'
             >
-              {title}
+              {name}
             </Text>
 
             <Text
@@ -219,7 +222,7 @@ const WebinarPage = ({
             >
               <Image
                 alt='host-img'
-                src={hostImageUrl}
+                src={host.imageUrl}
                 className='rounded-full w-[70px] md:w-20 lg:w-24 border-2 border-gray-950'
               />
               <FlexContainer
@@ -231,10 +234,10 @@ const WebinarPage = ({
                   level='h2'
                   className='text-md md:text-2xl lg:text-3xl font-semibold'
                 >
-                  {hostName}
+                  {host.name}
                 </Text>
                 <Text level='p' className='text-sm md:text-lg lg:text-xl'>
-                  {hostRole}
+                  {host.role}
                 </Text>
               </FlexContainer>
             </FlexContainer>

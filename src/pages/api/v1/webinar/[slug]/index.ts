@@ -38,18 +38,18 @@ const handleGetWebinarDetails = async (
   res: NextApiResponse
 ) => {
   try {
-    const { webinarId } = req.query;
+    const { slug } = req.query;
 
-    if (!webinarId) {
+    if (!slug) {
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
           status: false,
-          message: 'webinarId is required.',
+          message: 'slug is required.',
         })
       );
     }
 
-    const { data, error } = await getWebinarDetailsFromDB(webinarId as string);
+    const { data, error } = await getWebinarDetailsFromDB(slug as string);
 
     if (error || !data) {
       return res.status(apiStatusCodes.NOT_FOUND).json(

@@ -66,9 +66,9 @@ const checkUserRegistrationInWebinarDB = async (
   }
 };
 
-const getWebinarDetailsFromDB = async (webinarId: string) => {
+const getWebinarDetailsFromDB = async (slug: string) => {
   try {
-    const webinarDetails = await Webinar.findById(webinarId).select(
+    const webinarDetails = await Webinar.findOne({ slug }).select(
       '-enrolledUsersList'
     );
 
@@ -93,7 +93,7 @@ const getWebinarDetailsFromDB = async (webinarId: string) => {
 
 const getWebinarBySlugFromDB = async (slug: string) => {
   try {
-    const webinar = await Webinar.findOne({}).where('slug').equals(slug);
+    const webinar = await Webinar.findOne({ slug });
     if (!webinar) {
       return { data: null, error: 'Webinar not found' };
     }
