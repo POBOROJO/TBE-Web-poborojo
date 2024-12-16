@@ -5,16 +5,6 @@ export interface FooterNavigationDataProps extends FooterLinksContainerProps {
   isShow: boolean;
 }
 
-export type PageSlug =
-  | '/'
-  | '/404'
-  | '/contact'
-  | '/roadmaps'
-  | '/projects'
-  | '/workshops'
-  | '/shiksha'
-  | '/os';
-
 export type GetSEOMetaResponseType = {
   title: string;
   siteName: string;

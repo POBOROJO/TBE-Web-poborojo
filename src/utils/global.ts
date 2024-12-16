@@ -2,7 +2,6 @@ import { envConfig, getSEOMeta, routes } from '@/constant';
 import {
   BaseShikshaCourseResponseProps,
   BaseInterviewSheetResponseProps,
-  PageSlug,
   ProjectPickedPageProps,
 } from '@/interfaces';
 import {
@@ -24,7 +23,7 @@ const getPreFetchProps = async ({ query, resolvedUrl }: any) => {
     slug = `/projects/${projectSlug}`;
   }
 
-  const seoMeta = getSEOMeta(slug as PageSlug);
+  const seoMeta = getSEOMeta(slug);
 
   const redirect = !seoMeta && {
     destination: '/404',
@@ -46,7 +45,7 @@ const getProjectPageProps = async (context: any) => {
     slug = `/projects/${projectSlug}`;
   }
 
-  const seoMeta = getSEOMeta(slug as PageSlug);
+  const seoMeta = getSEOMeta(slug);
 
   if (projectId && seoMeta) {
     try {
@@ -120,7 +119,7 @@ const getCoursePageProps = async (context: any) => {
     slug = '/shiksha/' + courseSlug;
   }
 
-  const seoMeta = getSEOMeta(slug as PageSlug);
+  const seoMeta = getSEOMeta(slug);
 
   if (courseId && seoMeta) {
     try {
@@ -187,7 +186,7 @@ const getSheetPageProps = async (context: any) => {
     slug = '/interview-prep/' + sheetSlug;
   }
 
-  const seoMeta = getSEOMeta(slug as PageSlug);
+  const seoMeta = getSEOMeta(slug);
 
   if (sheetId && seoMeta) {
     try {
