@@ -270,3 +270,27 @@ export interface UpdateEnrolledUsersRequestPayloadProps {
     email: string;
   }>;
 }
+
+export interface AddWebinarRequestPayloadProps {
+  slug: string;
+  name: string;
+  description: string;
+  isFree: boolean;
+  about: string[];
+  learnings: string[];
+  host: {
+    name: string;
+    imageUrl: string;
+    role: string;
+    about: string[];
+    linkedInUrl: string;
+  };
+  registrationUrl: string;
+  dateAndTime: string;
+  enrolledUsersList: WebinarEnrolledUsersProps[];
+}
+
+export interface WebinarEnrolledUsersProps {
+  name: string;
+  email: string;
+}

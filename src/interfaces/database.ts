@@ -4,6 +4,7 @@ import {
   QuestionFrequencyType,
   RoadmapsType,
   SkillsType,
+  WebinarEnrolledUsersProps,
 } from '.';
 
 export interface UserModel {
@@ -125,16 +126,21 @@ export interface UserCourseChapterModel {
 
 export interface WebinarModel {
   _id: typeof Schema.Types.ObjectId;
+  slug: string;
+  name: string;
+  description: string;
+  isFree: boolean;
+  about: string[];
+  learnings: string[];
   host: {
     name: string;
     imageUrl: string;
     role: string;
+    about: string[];
+    linkedInUrl: string;
   };
   registrationUrl: string;
-  dateAndTime: Date;
-  enrolledUsersList: Array<{
-    name: string;
-    email: string;
-  }>;
+  dateAndTime: string;
+  enrolledUsersList: WebinarEnrolledUsersProps[];
   toObject: () => WebinarModel;
 }

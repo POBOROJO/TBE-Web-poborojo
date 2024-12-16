@@ -4,6 +4,31 @@ import { WebinarModel } from '@/interfaces';
 
 const WebinarSchema = new Schema<WebinarModel>(
   {
+    slug: {
+      type: String,
+      required: [true, 'Webinar slug is required'],
+      unique: true,
+    },
+    name: {
+      type: String,
+      required: [true, 'Webinar name is required'],
+    },
+    description: {
+      type: String,
+      required: [true, 'Webinar description is required'],
+    },
+    isFree: {
+      type: Boolean,
+      required: [true, 'Webinar free status is required'],
+    },
+    about: {
+      type: [String],
+      required: [true, 'Webinar about information is required'],
+    },
+    learnings: {
+      type: [String],
+      required: [true, 'Webinar learnings are required'],
+    },
     host: {
       name: {
         type: String,
@@ -17,13 +42,21 @@ const WebinarSchema = new Schema<WebinarModel>(
         type: String,
         required: [true, 'Host role is required'],
       },
+      about: {
+        type: [String],
+        required: [true, 'Host about information is required'],
+      },
+      linkedInUrl: {
+        type: String,
+        required: [true, 'Host LinkedIn URL is required'],
+      },
     },
     registrationUrl: {
       type: String,
       required: [true, 'Registration URL is required'],
     },
     dateAndTime: {
-      type: Date,
+      type: String,
       required: [true, 'Date and Time are required'],
     },
     enrolledUsersList: [
