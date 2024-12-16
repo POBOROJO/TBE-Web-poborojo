@@ -4,7 +4,6 @@ import { sendAPIResponse } from '@/utils';
 import { connectDB } from '@/middlewares';
 import {
   addAWebinarToDB,
-  deleteAWebinarFromDB,
   getAllWebinarsFromDB,
   getWebinarBySlugFromDB,
 } from '@/database';
@@ -19,8 +18,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return handleAddAWebinar(req, res);
     case 'GET':
       return handleGetAllWebinars(req, res);
-    case 'DELETE':
-      return handleDeleteWebinar(req, res);
     default:
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
@@ -106,42 +103,6 @@ const handleGetAllWebinars = async (
       sendAPIResponse({
         status: false,
         message: 'Failed while fetching webinars',
-        error,
-      })
-    );
-  }
-};
-
-const handleDeleteWebinar = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
-  try {
-    const { slug } = req.query;
-
-    const { error: webinarError } = await deleteAWebinarFromDB(slug as string);
-
-    if (webinarError) {
-      return res.status(apiStatusCodes.NOT_FOUND).json(
-        sendAPIResponse({
-          status: false,
-          message: 'Failed while fetching webinar',
-          error: webinarError,
-        })
-      );
-    }
-
-    return res.status(apiStatusCodes.OKAY).json(
-      sendAPIResponse({
-        status: true,
-        message: 'Webinar deleted successfully',
-      })
-    );
-  } catch (error) {
-    return res.status(apiStatusCodes.NOT_FOUND).json(
-      sendAPIResponse({
-        status: false,
-        message: 'Failed while deleting webinar',
         error,
       })
     );

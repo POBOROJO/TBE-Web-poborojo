@@ -6,24 +6,23 @@ import {
   updateEnrolledUsersInWebinarDB,
   checkUserRegistrationInWebinarDB,
   getWebinarDetailsFromDB,
+  deleteAWebinarFromDB,
 } from '@/database';
 import { UpdateEnrolledUsersRequestPayloadProps } from '@/interfaces';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await connectDB();
   const { method } = req;
+  const { slug, email } = req.query;
 
   switch (method) {
     case 'GET':
-      if (req.query.email) {
-        return handleCheckUserRegistration(req, res);
-      }
-
+      if (email) return handleCheckUserRegistration(req, res);
       return handleGetWebinarDetails(req, res);
-
     case 'PATCH':
       return handleUpdateEnrolledUsers(req, res);
-
+    case 'DELETE':
+      return handleDeleteWebinar(req, res, slug as string);
     default:
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
@@ -33,6 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       );
   }
 };
+
 const handleGetWebinarDetails = async (
   req: NextApiRequest,
   res: NextApiResponse
@@ -175,6 +175,41 @@ const handleUpdateEnrolledUsers = async (
       sendAPIResponse({
         status: false,
         message: 'Failed while updating enrolled users',
+        error,
+      })
+    );
+  }
+};
+
+const handleDeleteWebinar = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  slug: string
+) => {
+  try {
+    const { error: webinarError } = await deleteAWebinarFromDB(slug as string);
+
+    if (webinarError) {
+      return res.status(apiStatusCodes.NOT_FOUND).json(
+        sendAPIResponse({
+          status: false,
+          message: 'Failed while fetching webinar',
+          error: webinarError,
+        })
+      );
+    }
+
+    return res.status(apiStatusCodes.OKAY).json(
+      sendAPIResponse({
+        status: true,
+        message: 'Webinar deleted successfully',
+      })
+    );
+  } catch (error) {
+    return res.status(apiStatusCodes.NOT_FOUND).json(
+      sendAPIResponse({
+        status: false,
+        message: 'Failed while deleting webinar',
         error,
       })
     );
