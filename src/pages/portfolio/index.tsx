@@ -1,15 +1,18 @@
 import React from 'react';
-import { Section, FlexContainer, Image, Text, Button } from '@/components';
+import { Section, FlexContainer, Image, Text, Button, SEO } from '@/components';
 import {
   STATIC_FILE_PATH,
   portfolioCards,
   portfolioTemplates,
 } from '@/constant';
 import { PortfolioCard, PortfolioTemplate } from '@/components';
+import { getPreFetchProps } from '@/utils';
+import { PageProps } from '@/interfaces';
 
-const Portfolio = () => {
+const Portfolio = ({ seoMeta }: PageProps) => {
   return (
     <React.Fragment>
+      <SEO seoMeta={seoMeta} />
       <Section className='flex flex-col items-center gap-2 p-4'>
         <FlexContainer
           wrap={false}
@@ -100,5 +103,7 @@ const Portfolio = () => {
     </React.Fragment>
   );
 };
+
+export const getServerSideProps = getPreFetchProps;
 
 export default Portfolio;

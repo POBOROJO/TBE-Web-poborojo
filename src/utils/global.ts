@@ -11,16 +11,11 @@ import {
   isUserAuthenticated,
 } from '.';
 
-const getPreFetchProps = async ({ query, resolvedUrl }: any) => {
-  const { projectSlug } = query;
+const getPreFetchProps = async ({ resolvedUrl }: any) => {
   let slug = '/';
 
   if (resolvedUrl) {
     slug = resolvedUrl;
-  }
-
-  if (projectSlug) {
-    slug = `/projects/${projectSlug}`;
   }
 
   const seoMeta = getSEOMeta(slug);
