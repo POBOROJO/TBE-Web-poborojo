@@ -266,8 +266,6 @@ const getWebinarPageProps = async (context: any) => {
     };
   }
 
-  console.log('HERE', webinar);
-
   const {
     _id,
     name,
