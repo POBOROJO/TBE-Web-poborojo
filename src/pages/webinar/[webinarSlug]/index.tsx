@@ -13,7 +13,6 @@ import { useApi, useUser } from '@/hooks';
 import { routes } from '@/constant';
 import { WebinarHeroContainer } from '@/components';
 import { isProgramActive } from '@/utils';
-// import { Logo } from '@/components';
 import { imageMeta } from '@/constant/global';
 import LinkButton from '@/components/common/Buttons/LinkButton';
 
