@@ -1,4 +1,19 @@
 import { Webinar } from '@/database';
+import { AddWebinarRequestPayloadProps } from '@/interfaces';
+
+// Add A Webinar
+const addAWebinarToDB = async (
+  webinarPayload: AddWebinarRequestPayloadProps
+) => {
+  try {
+    const newWebinar = new Webinar(webinarPayload);
+    const savedWebinar = await newWebinar.save();
+
+    return { data: savedWebinar, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
 
 const getAllWebinarsFromDB = async () => {
   try {
@@ -51,9 +66,9 @@ const checkUserRegistrationInWebinarDB = async (
   }
 };
 
-const getWebinarDetailsFromDB = async (webinarId: string) => {
+const getWebinarDetailsFromDB = async (slug: string) => {
   try {
-    const webinarDetails = await Webinar.findById(webinarId).select(
+    const webinarDetails = await Webinar.findOne({ slug }).select(
       '-enrolledUsersList'
     );
 
@@ -76,9 +91,40 @@ const getWebinarDetailsFromDB = async (webinarId: string) => {
   }
 };
 
+const getWebinarBySlugFromDB = async (slug: string) => {
+  try {
+    const webinar = await Webinar.findOne({ slug });
+    if (!webinar) {
+      return { data: null, error: 'Webinar not found' };
+    }
+
+    return { data: webinar, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+const deleteAWebinarFromDB = async (slug: string) => {
+  try {
+    const webinar = await Webinar.findOne({}).where('slug').equals(slug);
+    if (!webinar) {
+      return { data: null, error: 'Webinar not found' };
+    }
+
+    await webinar.deleteOne();
+
+    return { error: null };
+  } catch (error) {
+    return { error };
+  }
+};
+
 export {
   getAllWebinarsFromDB,
   updateEnrolledUsersInWebinarDB,
   checkUserRegistrationInWebinarDB,
   getWebinarDetailsFromDB,
+  getWebinarBySlugFromDB,
+  addAWebinarToDB,
+  deleteAWebinarFromDB,
 };

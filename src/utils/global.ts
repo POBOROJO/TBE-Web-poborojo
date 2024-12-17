@@ -2,7 +2,6 @@ import { envConfig, getSEOMeta, routes } from '@/constant';
 import {
   BaseShikshaCourseResponseProps,
   BaseInterviewSheetResponseProps,
-  PageSlug,
   ProjectPickedPageProps,
 } from '@/interfaces';
 import {
@@ -12,19 +11,14 @@ import {
   isUserAuthenticated,
 } from '.';
 
-const getPreFetchProps = async ({ query, resolvedUrl }: any) => {
-  const { projectSlug } = query;
+const getPreFetchProps = async ({ resolvedUrl }: any) => {
   let slug = '/';
 
   if (resolvedUrl) {
     slug = resolvedUrl;
   }
 
-  if (projectSlug) {
-    slug = `/projects/${projectSlug}`;
-  }
-
-  const seoMeta = getSEOMeta(slug as PageSlug);
+  const seoMeta = getSEOMeta(slug);
 
   const redirect = !seoMeta && {
     destination: '/404',
@@ -46,7 +40,7 @@ const getProjectPageProps = async (context: any) => {
     slug = `/projects/${projectSlug}`;
   }
 
-  const seoMeta = getSEOMeta(slug as PageSlug);
+  const seoMeta = getSEOMeta(slug);
 
   if (projectId && seoMeta) {
     try {
@@ -120,7 +114,7 @@ const getCoursePageProps = async (context: any) => {
     slug = '/shiksha/' + courseSlug;
   }
 
-  const seoMeta = getSEOMeta(slug as PageSlug);
+  const seoMeta = getSEOMeta(slug);
 
   if (courseId && seoMeta) {
     try {
@@ -187,7 +181,7 @@ const getSheetPageProps = async (context: any) => {
     slug = '/interview-prep/' + sheetSlug;
   }
 
-  const seoMeta = getSEOMeta(slug as PageSlug);
+  const seoMeta = getSEOMeta(slug);
 
   if (sheetId && seoMeta) {
     try {
@@ -259,35 +253,43 @@ const getWebinarPageProps = async (context: any) => {
   let slug = '/';
 
   if (webinarSlug) {
-    slug = '/webinar/' + webinarSlug;
+    slug = routes.api.webinarById(webinarSlug);
   }
 
-  const { status, data: responseObj } = await fetchAPIData(
-    routes.api.webinarById(webinarSlug)
-  );
+  const { status, data: webinar } = await fetchAPIData(slug);
 
   if (!status) {
     return {
       redirect: {
         destination: '/404',
       },
-      props: { slug },
     };
   }
 
-  const { _id, host, dateAndTime } = responseObj;
+  const {
+    _id,
+    name,
+    description,
+    isFree,
+    about,
+    dateAndTime,
+    learnings,
+    registrationUrl,
+    host,
+  } = webinar;
 
   return {
     props: {
       webinarId: _id,
-      hostName: host.name,
-      hostImageUrl: host.imageUrl,
-      hostRole: host.role,
+      name,
+      slug,
+      description,
+      learnings,
+      isFree,
+      about,
+      host,
       dateAndTime,
-      //update title, description, bannerImageUrl with API
-      title: 'Is Programming for you',
-      description:
-        'Understand why everybody wants to be in Tech and should learn Tech or not.',
+      registrationUrl,
       bannerImageUrl:
         'https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg',
     },

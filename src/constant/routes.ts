@@ -25,6 +25,7 @@ const routes = {
     dbInterviewSheet: '/interview-prep/db-interview-questions',
   },
   workshops: '/workshops',
+  portfolio: '/portfolio',
   os: '/os',
   contactUs: '/contact',
   internals: {
