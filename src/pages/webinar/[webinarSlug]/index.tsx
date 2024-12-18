@@ -13,8 +13,8 @@ import { useApi, useUser } from '@/hooks';
 import { routes } from '@/constant';
 import { WebinarHeroContainer } from '@/components';
 import { isProgramActive } from '@/utils';
-import { imageMeta } from '@/constant/global';
-import LinkButton from '@/components/common/Buttons/LinkButton';
+import { imageMeta } from '@/constant';
+import { LinkButton } from '@/components';
 
 const WebinarPage = ({
   _id,
