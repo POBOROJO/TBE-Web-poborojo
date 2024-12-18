@@ -42,3 +42,6 @@ next-env.d.ts
 sitemap-*.xml
 package-lock.json
 .gitignore
+
+code_context.sh
+code_context.txt

@@ -7,7 +7,7 @@ import {
   Image,
   CertificateContent,
   WebinarHeroContainer,
-  LinkButton
+  LinkButton,
 } from '@/components';
 import { WebinarPageProps } from '@/interfaces';
 import { getWebinarPageProps } from '@/utils';
@@ -67,13 +67,28 @@ const WebinarPage = ({
 
   const onGenerateCertificate = async () => {
     try {
+      // Add more detailed logging
+      console.log('Generating Certificate for:', user?.email);
+
       const response = await makeRequest({
         url: `${routes.api.webinar}/${slug}?email=${user?.email}`,
       });
 
-      if (!response?.status) {
-        throw new Error(`Error occured`);
+      // Log the full response for debugging
+      console.log('Certificate generation response:', response);
+
+      if (!response) {
+        throw new Error('No response received from server');
       }
+
+      // More flexible status checking
+      if (response.status === false || response.error) {
+        throw new Error(response.message || 'Certificate generation failed');
+      }
+
+      // if (!response?.status) {
+      //   throw new Error(`Error occured`);
+      // }
 
       if (response?.data?.isRegistered) {
         toggleCertificate(true);
@@ -83,7 +98,10 @@ const WebinarPage = ({
         toggleRegistrationErrMsg(true);
       }
     } catch (error) {
-      console.log('Error while generating certificate: ', error);
+      console.log('Detailed error while generating certificate: ', error);
+
+      // Set a more specific error message
+      toggleRegistrationErrMsg(true);
     }
   };
 
@@ -171,7 +189,7 @@ const WebinarPage = ({
           Generate Certificate
         </button>
         {showRegistrationErrMsg && (
-          <Text level='p'>you are not registered to the webinar*</Text>
+          <Text level='p'>You are not registered to the webinar</Text>
         )}
         {generateCertificateCard}
       </FlexContainer>
