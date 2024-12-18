@@ -256,15 +256,18 @@ const WebinarPage = ({
             About the Boring Education
           </Text>
 
-          <FlexContainer direction='row' className='w-full flex items-center '>
-            <div className='flex items-center justify-start'>
-              <Image
-                src={imageMeta.logo.light}
-                className='w-full'
-                fullWidth={false}
-                alt={imageMeta.logo.alt}
-              />
-            </div>
+          <FlexContainer
+            direction='row'
+            className='w-full'
+            itemCenter={false}
+            justifyCenter={false}
+          >
+            <Image
+              src={imageMeta.logo.light}
+              className='w-auto max-w-[200px] mb-1'
+              fullWidth={false}
+              alt={imageMeta.logo.alt}
+            />
           </FlexContainer>
 
           <Text
