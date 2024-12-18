@@ -6,15 +6,14 @@ import {
   Text,
   Image,
   CertificateContent,
+  WebinarHeroContainer,
+  LinkButton
 } from '@/components';
 import { WebinarPageProps } from '@/interfaces';
 import { getWebinarPageProps } from '@/utils';
 import { useApi, useUser } from '@/hooks';
-import { routes } from '@/constant';
-import { WebinarHeroContainer } from '@/components';
+import { routes, imageMeta } from '@/constant';
 import { isProgramActive } from '@/utils';
-import { imageMeta } from '@/constant';
-import { LinkButton } from '@/components';
 
 const WebinarPage = ({
   _id,
