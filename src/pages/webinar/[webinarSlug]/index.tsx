@@ -13,6 +13,8 @@ import { useApi, useUser } from '@/hooks';
 import { routes } from '@/constant';
 import { WebinarHeroContainer } from '@/components';
 import { isProgramActive } from '@/utils';
+import { imageMeta } from '@/constant/global';
+import LinkButton from '@/components/common/Buttons/LinkButton';
 
 const WebinarPage = ({
   _id,
@@ -245,6 +247,44 @@ const WebinarPage = ({
         </FlexContainer>
 
         {certificateSection}
+
+        <FlexContainer
+          direction='col'
+          className='w-full max-w-screen-lg bg-gradient-to-b from-white to-pink-300 p-2 py-4 m-auto mt-2 rounded-1 gap-3'
+        >
+          <Text level='h1' textCenter className='text-2xl font-semibold mb-4'>
+            About the Boring Education
+          </Text>
+
+          <FlexContainer direction='row' className='w-full flex items-center '>
+            <div className='flex items-center justify-start'>
+              <Image
+                src={imageMeta.logo.light}
+                className='w-full'
+                fullWidth={false}
+                alt={imageMeta.logo.alt}
+              />
+            </div>
+          </FlexContainer>
+
+          <Text
+            level='p'
+            className='text-sm md:text-lg lg:text-xl font-semibold'
+          >
+            We at TBE, building An Open Source Tech Education platform to make
+            learning faster with Hands-on Experience.
+          </Text>
+
+          <LinkButton
+            href={routes.projects}
+            className='w-full sm:w-fit'
+            buttonProps={{
+              variant: 'PRIMARY',
+              text: 'Explore Free Projects',
+              className: 'w-full',
+            }}
+          />
+        </FlexContainer>
       </Section>
     </React.Fragment>
   );
