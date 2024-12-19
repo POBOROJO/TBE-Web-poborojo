@@ -48,7 +48,7 @@ const PortfolioTemplate = ({
         direction='col'
         itemCenter={false}
         fullWidth={true}
-        className='p-3'
+        className='p-3 gap-1'
       >
         <Text level='h2' className='heading-4 text-white'>
           {title}
