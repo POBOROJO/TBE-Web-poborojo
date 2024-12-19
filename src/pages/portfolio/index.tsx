@@ -86,7 +86,7 @@ const Portfolio = ({ seoMeta }: PageProps) => {
       >
         <FlexContainer
           fullWidth={true}
-          className='p-2 py-4 gap-1 md:py-6'
+          className='py-4 gap-1 md:py-6'
           direction='col'
         >
           <Text level='h3' textCenter={true} className='heading-4 text-white'>
@@ -96,28 +96,9 @@ const Portfolio = ({ seoMeta }: PageProps) => {
             Start quickly with templates and customize it as per your needs.
           </Text>
           <FlexContainer className='w-full max-w-screen-xl gap-2 md:flex-row mt-5'>
-            {PORTFOLIO_TEMPLATES.map(
-              ({
-                id,
-                repo,
-                imageUrl,
-                title,
-                description,
-                developer,
-                previewLink,
-              }) => (
-                <PortfolioTemplate
-                  key={id}
-                  id={id}
-                  repo={repo}
-                  imageUrl={imageUrl}
-                  title={title}
-                  description={description}
-                  developer={developer}
-                  previewLink={previewLink}
-                />
-              )
-            )}
+            {PORTFOLIO_TEMPLATES.map((portfolio) => (
+              <PortfolioTemplate key={portfolio.id} {...portfolio} />
+            ))}
           </FlexContainer>
         </FlexContainer>
       </Section>
