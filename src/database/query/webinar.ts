@@ -1,5 +1,5 @@
 import { Webinar } from '@/database';
-import { AddWebinarRequestPayloadProps } from '@/interfaces';
+import { AddWebinarRequestPayloadProps, WebinarEnrolledUsersProps } from '@/interfaces';
 
 // Add A Webinar
 const addAWebinarToDB = async (
@@ -25,12 +25,12 @@ const getAllWebinarsFromDB = async () => {
 };
 
 const updateEnrolledUsersInWebinarDB = async (
-  webinarId: string,
-  users: Array<{ name: string; email: string }>
+  slug: string,
+  users: WebinarEnrolledUsersProps[]
 ) => {
   try {
     const updatedWebinar = await Webinar.findByIdAndUpdate(
-      webinarId,
+      slug,
       { $push: { enrolledUsersList: { $each: users } } },
       { new: true }
     );
@@ -46,11 +46,11 @@ const updateEnrolledUsersInWebinarDB = async (
 };
 
 const checkUserRegistrationInWebinarDB = async (
-  webinarId: string,
+  slug: string,
   email: string
 ) => {
   try {
-    const webinar = await Webinar.findById(webinarId);
+    const webinar = await Webinar.findOne({ slug });
 
     if (!webinar) {
       return { data: false, error: 'Webinar not found' };

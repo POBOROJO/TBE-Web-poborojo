@@ -6,15 +6,14 @@ import {
   Text,
   Image,
   CertificateContent,
+  WebinarHeroContainer,
+  LinkButton,
 } from '@/components';
 import { WebinarPageProps } from '@/interfaces';
 import { getWebinarPageProps } from '@/utils';
 import { useApi, useUser } from '@/hooks';
-import { routes } from '@/constant';
-import { WebinarHeroContainer } from '@/components';
+import { routes, imageMeta } from '@/constant';
 import { isProgramActive } from '@/utils';
-import { imageMeta } from '@/constant/global';
-import LinkButton from '@/components/common/Buttons/LinkButton';
 
 const WebinarPage = ({
   _id,
@@ -72,8 +71,12 @@ const WebinarPage = ({
         url: `${routes.api.webinar}/${slug}?email=${user?.email}`,
       });
 
-      if (!response?.status) {
-        throw new Error(`Error occured`);
+      if (!response) {
+        throw new Error('No response received from server');
+      }
+
+      if (response.status === false || response.error) {
+        throw new Error(response.message || 'Certificate generation failed');
       }
 
       if (response?.data?.isRegistered) {
@@ -84,7 +87,8 @@ const WebinarPage = ({
         toggleRegistrationErrMsg(true);
       }
     } catch (error) {
-      console.log('Error while generating certificate: ', error);
+      console.error('Detailed error while generating certificate: ', error);
+      toggleRegistrationErrMsg(true); // Show error message
     }
   };
 
@@ -172,7 +176,7 @@ const WebinarPage = ({
           Generate Certificate
         </button>
         {showRegistrationErrMsg && (
-          <Text level='p'>you are not registered to the webinar*</Text>
+          <Text level='p'>You are not registered to the webinar</Text>
         )}
         {generateCertificateCard}
       </FlexContainer>
@@ -256,15 +260,18 @@ const WebinarPage = ({
             About the Boring Education
           </Text>
 
-          <FlexContainer direction='row' className='w-full flex items-center '>
-            <div className='flex items-center justify-start'>
-              <Image
-                src={imageMeta.logo.light}
-                className='w-full'
-                fullWidth={false}
-                alt={imageMeta.logo.alt}
-              />
-            </div>
+          <FlexContainer
+            direction='row'
+            className='w-full'
+            itemCenter={false}
+            justifyCenter={false}
+          >
+            <Image
+              src={imageMeta.logo.light}
+              className='w-auto max-w-[200px] mb-1'
+              fullWidth={false}
+              alt={imageMeta.logo.alt}
+            />
           </FlexContainer>
 
           <Text

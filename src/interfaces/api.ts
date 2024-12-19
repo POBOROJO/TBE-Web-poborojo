@@ -264,7 +264,7 @@ export interface GetAllQuestionsRequestProps {
 }
 
 export interface UpdateEnrolledUsersRequestPayloadProps {
-  webinarId: string;
+  slug: string;
   users: Array<{
     name: string;
     email: string;
