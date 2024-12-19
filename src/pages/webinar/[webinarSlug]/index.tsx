@@ -31,8 +31,10 @@ const WebinarPage = ({
   const { user, isAuth } = useUser();
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [showCertificate, toggleCertificate] = useState(false);
-  const [showRegistrationErrMsg, toggleRegistrationErrMsg] = useState(false);
+  const [showCertificate, setShowCertificate] = useState(false);
+  const [registrationErrorMessage, setRegistrationErrorMessage] = useState<
+    null | string
+  >();
 
   const certificateRef = useRef<HTMLDivElement>(null);
 
@@ -57,38 +59,33 @@ const WebinarPage = ({
     }
   };
 
-  const { makeRequest } = useApi(
-    'webinar',
-    {
-      url: `${routes.api.webinar}/${slug}`,
-    },
-    { enabled: !!user?.email }
-  );
+  const { makeRequest } = useApi('webinar', {
+    url: `${routes.api.webinar}/${slug}`,
+  });
 
   const onGenerateCertificate = async () => {
     try {
-      const response = await makeRequest({
+      const {
+        status,
+        error,
+        data: { isRegistered },
+        message,
+      } = await makeRequest({
         url: `${routes.api.webinar}/${slug}?email=${user?.email}`,
       });
 
-      if (!response) {
-        throw new Error('No response received from server');
+      if (!status || error) {
+        setRegistrationErrorMessage('Certificate generation failed');
       }
 
-      if (response.status === false || response.error) {
-        throw new Error(response.message || 'Certificate generation failed');
-      }
-
-      if (response?.data?.isRegistered) {
-        toggleCertificate(true);
-        toggleRegistrationErrMsg(false);
+      if (isRegistered) {
+        setShowCertificate(true);
       } else {
-        toggleCertificate(false);
-        toggleRegistrationErrMsg(true);
+        setShowCertificate(false);
+        setRegistrationErrorMessage(message);
       }
     } catch (error) {
       console.error('Detailed error while generating certificate: ', error);
-      toggleRegistrationErrMsg(true); // Show error message
     }
   };
 
@@ -175,8 +172,8 @@ const WebinarPage = ({
         >
           Generate Certificate
         </button>
-        {showRegistrationErrMsg && (
-          <Text level='p'>You are not registered to the webinar</Text>
+        {registrationErrorMessage && (
+          <Text level='p'>{registrationErrorMessage}</Text>
         )}
         {generateCertificateCard}
       </FlexContainer>

@@ -248,15 +248,11 @@ const fetchAPIData = async (url: string) => {
 
 const getWebinarPageProps = async (context: any) => {
   const { query } = context;
-  const { webinarSlug } = query;
+  const { webinarSlug: slug } = query;
 
-  let slug = '/';
-
-  if (webinarSlug) {
-    slug = routes.api.webinarById(webinarSlug);
-  }
-
-  const { status, data: webinar } = await fetchAPIData(slug);
+  const { status, data: webinar } = await fetchAPIData(
+    routes.api.webinarBySlug(slug)
+  );
 
   if (!status) {
     return {

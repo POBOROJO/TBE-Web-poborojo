@@ -74,7 +74,7 @@ const routes = {
       }
       return url;
     },
-    webinarById: (webinar: string) => `/webinar/${webinar}`,
+    webinarBySlug: (webinar: string) => `/webinar/${webinar}`,
   },
 };
 
