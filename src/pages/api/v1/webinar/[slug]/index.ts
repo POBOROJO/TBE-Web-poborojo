@@ -17,10 +17,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
-      if (email) return handleCheckUserRegistration(req, res);
+      if (email) return handleCheckUserRegistration(req, res,slug as string, email as string);
       return handleGetWebinarDetails(req, res);
     case 'PATCH':
-      return handleUpdateEnrolledUsers(req, res);
+      return handleUpdateEnrolledUsers(req, res,slug as string);
     case 'DELETE':
       return handleDeleteWebinar(req, res, slug as string);
     default:
@@ -80,23 +80,23 @@ const handleGetWebinarDetails = async (
 
 const handleCheckUserRegistration = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
+  slug: string,
+  email: string
 ) => {
   try {
-    const { webinarId, email } = req.query;
-
-    if (!webinarId || !email) {
+    if (!slug || !email) {
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
           status: false,
-          message: 'webinarId and email are required.',
+          message: 'slug and email are required.',
         })
       );
     }
 
     const { data: isRegistered, error } =
       await checkUserRegistrationInWebinarDB(
-        webinarId as string,
+        slug as string,
         email as string
       );
 
@@ -132,24 +132,24 @@ const handleCheckUserRegistration = async (
 
 const handleUpdateEnrolledUsers = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
+  slug:string
 ) => {
   try {
-    const { webinarId } = req.query;
     const { users } = req.body as UpdateEnrolledUsersRequestPayloadProps;
 
-    if (!webinarId || !Array.isArray(users)) {
+    if (!slug || !Array.isArray(users)) {
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
           status: false,
           message:
-            'Invalid input data. webinarId and users array are required.',
+            'Invalid input data. slug and users array are required.',
         })
       );
     }
 
     const { data, error } = await updateEnrolledUsersInWebinarDB(
-      webinarId as string,
+      slug,
       users
     );
 

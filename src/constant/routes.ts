@@ -37,7 +37,7 @@ const routes = {
   api: {
     base: '/api/v1',
     projects: '/projects',
-    webinar: '/webinar',
+    webinar: '', // adding /webinar here will result in /api/v1/webinar/webinar => 404(not found)
     project: (project: string) => `/projects/${project}`,
     shiksha: '/shiksha',
     myCourses: '/user/shiksha',
