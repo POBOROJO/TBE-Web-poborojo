@@ -11,7 +11,7 @@ const PortfolioTemplate = ({
   const { isAuth } = useUser();
 
   return (
-    <FlexContainer className='w-full md:w-[48%] lg:w-[31%] border-2 border-gray-300 rounded-xl'>
+    <FlexContainer className='w-full md:w-[48%] lg:w-[31%] border-2 border-gray-300 rounded-xl gap-2'>
       <Image
         alt={title}
         src={imageUrl}
@@ -23,10 +23,10 @@ const PortfolioTemplate = ({
         fullWidth={true}
         className='p-2'
       >
-        <Text level='h2' className='text-2xl font-bold'>
+        <Text level='h2' className='heading-4 text-white'>
           {title}
         </Text>
-        <Text level='p' className='text-base font-medium'>
+        <Text level='p' className='paragraph text-white'>
           {description}
         </Text>
         <FlexContainer justifyCenter={false} className='gap-1 my-2'>
@@ -42,7 +42,7 @@ const PortfolioTemplate = ({
             Preview
           </button>
         </FlexContainer>
-        <Text level='p' className='text-base'>
+        <Text level='p' className='pre-text text-white'>
           Template by {developerName}
         </Text>
       </FlexContainer>

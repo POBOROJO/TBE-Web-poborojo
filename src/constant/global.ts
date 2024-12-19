@@ -148,22 +148,49 @@ const SCREEN_BREAKPOINTS = {
   LG: '(min-width: 1025px)',
 };
 
-const portfolioCards = [
+const PORTFOLIO_CARDS = [
   {
     id: 1,
-    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    imageUrl: `${STATIC_FILE_PATH.svg}/the-boring-portfolio-card-resume.svg`,
     title: 'Resume is not Enough.',
-    description: 'Showcase your skills with a personalized portfolio.',
+    description: 'Showcase your skills with a personalized portfolio website.',
   },
   {
     id: 2,
-    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
+    imageUrl: `${STATIC_FILE_PATH.svg}/the-boring-portfolio-card-standout.svg`,
     title: 'Stand Out.',
-    description: 'Highlight your unique capabilities effectively.',
+    description: 'Highlight your unique capabilities effectively and clearly.',
+  },
+  {
+    id: 3,
+    imageUrl: `${STATIC_FILE_PATH.svg}/the-boring-portfolio-card-brand.svg`,
+    title: 'Control Your Brand.',
+    description: 'Manage your personal brand and online presence efficiently.',
+  },
+  {
+    id: 4,
+    imageUrl: `${STATIC_FILE_PATH.svg}/the-boring-portfolio-card-professional.svg`,
+    title: 'Professionalism.',
+    description:
+      'Show potential employers you are serious about your career growth.',
+  },
+  {
+    id: 5,
+    imageUrl: `${STATIC_FILE_PATH.svg}/the-boring-portfolio-card-networking.svg`,
+    title: 'Networking.',
+    description:
+      'Easily share your work and connect with others in your field.',
+  },
+  {
+    id: 6,
+    imageUrl: `${STATIC_FILE_PATH.svg}/the-boring-portfolio-card-seo.svg`,
+    title: 'SEO Benefits.',
+    description:
+      'Improve your visibility on search engines and attract opportunities.',
   },
 ];
 
-const portfolioTemplates = [
+const PORTFOLIO_TEMPLATES = [
   {
     id: 1,
     imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
@@ -195,6 +222,6 @@ export {
   projectGroupWhatsapp,
   mentorshipPlans,
   SCREEN_BREAKPOINTS,
-  portfolioCards,
-  portfolioTemplates,
+  PORTFOLIO_CARDS,
+  PORTFOLIO_TEMPLATES,
 };
