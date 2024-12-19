@@ -4,20 +4,24 @@ import {
   FlexContainer,
   Image,
   Text,
-  Button,
   SEO,
   PortfolioCard,
   PortfolioTemplate,
+  LinkButton,
 } from '@/components';
 import {
   STATIC_FILE_PATH,
   PORTFOLIO_CARDS,
   PORTFOLIO_TEMPLATES,
+  routes,
 } from '@/constant';
 import { getPreFetchProps } from '@/utils';
 import { PageProps } from '@/interfaces';
+import { useRouter } from 'next/router';
 
 const Portfolio = ({ seoMeta }: PageProps) => {
+  const router = useRouter();
+
   return (
     <React.Fragment>
       <SEO seoMeta={seoMeta} />
@@ -42,10 +46,14 @@ const Portfolio = ({ seoMeta }: PageProps) => {
                 and projects to the world.
               </Text>
             </FlexContainer>
-            <Button
-              variant='PRIMARY'
-              text='Get Started'
-              className='px-5 mt-2 lg:mt-3'
+            <LinkButton
+              href={`${router.asPath}#${routes.internals.landing.portfolio}`}
+              className=''
+              buttonProps={{
+                variant: 'PRIMARY',
+                text: 'Get Started',
+                className: 'px-5 mt-2 lg:mt-3',
+              }}
             />
           </FlexContainer>
         </FlexContainer>
@@ -72,7 +80,10 @@ const Portfolio = ({ seoMeta }: PageProps) => {
           ))}
         </FlexContainer>
       </Section>
-      <Section className='flex flex-col items-center bg-black p-2'>
+      <Section
+        className='flex flex-col items-center bg-black p-2'
+        id={routes.internals.landing.portfolio}
+      >
         <FlexContainer
           fullWidth={true}
           className='p-2 py-4 gap-1 md:py-6'
@@ -86,13 +97,24 @@ const Portfolio = ({ seoMeta }: PageProps) => {
           </Text>
           <FlexContainer className='w-full max-w-screen-xl gap-2 md:flex-row mt-5'>
             {PORTFOLIO_TEMPLATES.map(
-              ({ id, imageUrl, title, description, developerName }) => (
+              ({
+                id,
+                repo,
+                imageUrl,
+                title,
+                description,
+                developer,
+                previewLink,
+              }) => (
                 <PortfolioTemplate
                   key={id}
+                  id={id}
+                  repo={repo}
                   imageUrl={imageUrl}
                   title={title}
                   description={description}
-                  developerName={developerName}
+                  developer={developer}
+                  previewLink={previewLink}
                 />
               )
             )}

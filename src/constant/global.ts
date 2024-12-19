@@ -1,4 +1,4 @@
-import { ProductDataProps } from '@/interfaces';
+import { PortfolioTemplateProps, ProductDataProps } from '@/interfaces';
 import { routes } from './routes';
 
 // Paths
@@ -190,20 +190,30 @@ const PORTFOLIO_CARDS = [
   },
 ];
 
-const PORTFOLIO_TEMPLATES = [
+const PORTFOLIO_TEMPLATES: PortfolioTemplateProps[] = [
   {
     id: 1,
     imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
     title: 'Next.Js Template',
     description: 'Get started with Next.js and React in seconds.',
-    developerName: 'Parijaat',
+    previewLink: 'https://theboringeducation.com',
+    repo: 'https://github.com/The-Boring-Education/TBE-Web',
+    developer: {
+      name: 'Parijaat',
+      link: 'https://github.com/The-Boring-Education/TBE-Web',
+    },
   },
   {
     id: 2,
     imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
     title: 'React Template',
     description: 'Quickly build a responsive React portfolio.',
-    developerName: 'Parijaat',
+    repo: 'https://github.com/The-Boring-Education/TBE-Web',
+    developer: {
+      name: 'Parijaat',
+      link: 'https://github.com/The-Boring-Education/TBE-Web',
+    },
+    previewLink: 'https://theboringeducation.com',
   },
 ];
 

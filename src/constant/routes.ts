@@ -31,6 +31,7 @@ const routes = {
   internals: {
     landing: {
       products: 'products',
+      portfolio: 'portfolio',
     },
   },
   404: '/404',
