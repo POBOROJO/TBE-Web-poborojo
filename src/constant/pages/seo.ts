@@ -198,7 +198,7 @@ const getSEOMeta = (basePath: any): GetSEOMetaResponseType => {
       ...commonMeta,
     },
     [`${routes.portfolio}`]: {
-      title: 'Portfolio Templates | The Boring Education',
+      title: 'The Boring Portfolio | The Boring Education',
       siteName: 'Explore Portfolio Templates at The Boring Education',
       description:
         'Find and use portfolio templates to showcase your projects and skills at The Boring Education.',

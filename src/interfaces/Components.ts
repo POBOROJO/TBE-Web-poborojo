@@ -102,10 +102,16 @@ export interface PortfolioCardProps {
 }
 
 export interface PortfolioTemplateProps {
+  id: number;
   imageUrl: string;
   title: string;
   description: string;
-  developerName: string;
+  repo: string;
+  developer: {
+    name: string;
+    link: string;
+  };
+  previewLink: string;
 }
 
 export interface FlexContainerProps {

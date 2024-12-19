@@ -11,7 +11,7 @@ const PortfolioCard = ({
     <FlexContainer
       direction='col'
       itemCenter={false}
-      className='w-full md:w-[48%] lg:w-[31%] border-2 border-gray-300 p-3 gap-1 rounded-1'
+      className='w-full md:w-[48%] lg:w-[31%] border border-gray-300 p-3 gap-1 rounded-1'
     >
       <Text level='h1' className='text-5xl font-extrabold'>
         {index}.
@@ -25,12 +25,14 @@ const PortfolioCard = ({
         />
       </div>
 
-      <Text level='h2' className='text-3xl font-bold'>
-        {title}
-      </Text>
-      <Text level='p' className='text-xl '>
-        {description}
-      </Text>
+      <FlexContainer direction='col' itemCenter={false}>
+        <Text level='h3' className='heading-4'>
+          {title}
+        </Text>
+        <Text level='p' className='paragraph'>
+          {description}
+        </Text>
+      </FlexContainer>
     </FlexContainer>
   );
 };
