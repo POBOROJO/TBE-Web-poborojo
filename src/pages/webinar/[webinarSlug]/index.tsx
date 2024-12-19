@@ -67,28 +67,17 @@ const WebinarPage = ({
 
   const onGenerateCertificate = async () => {
     try {
-      // Add more detailed logging
-      console.log('Generating Certificate for:', user?.email);
-
       const response = await makeRequest({
         url: `${routes.api.webinar}/${slug}?email=${user?.email}`,
       });
-
-      // Log the full response for debugging
-      console.log('Certificate generation response:', response);
 
       if (!response) {
         throw new Error('No response received from server');
       }
 
-      // More flexible status checking
       if (response.status === false || response.error) {
         throw new Error(response.message || 'Certificate generation failed');
       }
-
-      // if (!response?.status) {
-      //   throw new Error(`Error occured`);
-      // }
 
       if (response?.data?.isRegistered) {
         toggleCertificate(true);
@@ -98,10 +87,8 @@ const WebinarPage = ({
         toggleRegistrationErrMsg(true);
       }
     } catch (error) {
-      console.log('Detailed error while generating certificate: ', error);
-
-      // Set a more specific error message
-      toggleRegistrationErrMsg(true);
+      console.error('Detailed error while generating certificate: ', error);
+      toggleRegistrationErrMsg(true); // Show error message
     }
   };
 
