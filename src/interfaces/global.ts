@@ -58,4 +58,5 @@ export interface ServerSessionProp {
 
 export interface WebinarPageProps extends WebinarModel {
   bannerImageUrl: string;
+  seoMeta: GetSEOMetaResponseType;
 }

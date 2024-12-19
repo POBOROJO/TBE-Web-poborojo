@@ -1,4 +1,4 @@
-import { envConfig, getSEOMeta, routes } from '@/constant';
+import { envConfig, getSEOMeta, routes, seoCommonMeta } from '@/constant';
 import {
   BaseShikshaCourseResponseProps,
   BaseInterviewSheetResponseProps,
@@ -274,8 +274,19 @@ const getWebinarPageProps = async (context: any) => {
     host,
   } = webinar;
 
+  const seoMeta = {
+    title: `${name} | The Boring Webinars`,
+    siteName: 'The Boring Education',
+    description,
+    url: `${routes.webinar}/${slug}`,
+    keywords:
+      'Tech Education, Online Learning, Programming, Free Courses, Open Source, Webinars, The Boring Education, College Students, Working Professionals, Career Development, Skill Enhancement, GitHub, Instagram, Twitter, LinkedIn',
+    ...seoCommonMeta,
+  };
+
   return {
     props: {
+      seoMeta,
       webinarId: _id,
       name,
       slug,

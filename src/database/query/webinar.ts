@@ -1,5 +1,8 @@
 import { Webinar } from '@/database';
-import { AddWebinarRequestPayloadProps, WebinarEnrolledUsersProps } from '@/interfaces';
+import {
+  AddWebinarRequestPayloadProps,
+  WebinarEnrolledUsersProps,
+} from '@/interfaces';
 
 // Add A Webinar
 const addAWebinarToDB = async (

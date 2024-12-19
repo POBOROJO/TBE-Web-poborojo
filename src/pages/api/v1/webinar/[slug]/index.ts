@@ -17,10 +17,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'GET':
-      if (email) return handleCheckUserRegistration(req, res,slug as string, email as string);
+      if (email)
+        return handleCheckUserRegistration(
+          req,
+          res,
+          slug as string,
+          email as string
+        );
       return handleGetWebinarDetails(req, res);
     case 'PATCH':
-      return handleUpdateEnrolledUsers(req, res,slug as string);
+      return handleUpdateEnrolledUsers(req, res, slug as string);
     case 'DELETE':
       return handleDeleteWebinar(req, res, slug as string);
     default:
@@ -95,10 +101,7 @@ const handleCheckUserRegistration = async (
     }
 
     const { data: isRegistered, error } =
-      await checkUserRegistrationInWebinarDB(
-        slug as string,
-        email as string
-      );
+      await checkUserRegistrationInWebinarDB(slug as string, email as string);
 
     if (error) {
       return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
@@ -133,7 +136,7 @@ const handleCheckUserRegistration = async (
 const handleUpdateEnrolledUsers = async (
   req: NextApiRequest,
   res: NextApiResponse,
-  slug:string
+  slug: string
 ) => {
   try {
     const { users } = req.body as UpdateEnrolledUsersRequestPayloadProps;
@@ -142,16 +145,12 @@ const handleUpdateEnrolledUsers = async (
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
           status: false,
-          message:
-            'Invalid input data. slug and users array are required.',
+          message: 'Invalid input data. slug and users array are required.',
         })
       );
     }
 
-    const { data, error } = await updateEnrolledUsersInWebinarDB(
-      slug,
-      users
-    );
+    const { data, error } = await updateEnrolledUsersInWebinarDB(slug, users);
 
     if (error) {
       return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(

@@ -8,6 +8,7 @@ import {
   CertificateContent,
   WebinarHeroContainer,
   LinkButton,
+  SEO,
 } from '@/components';
 import { WebinarPageProps } from '@/interfaces';
 import { getWebinarPageProps } from '@/utils';
@@ -16,16 +17,12 @@ import { routes, imageMeta } from '@/constant';
 import { isProgramActive } from '@/utils';
 
 const WebinarPage = ({
-  _id,
+  seoMeta,
   name,
   description,
   slug,
-  learnings,
-  isFree,
-  about,
   host,
   dateAndTime,
-  registrationUrl,
   bannerImageUrl,
 }: WebinarPageProps) => {
   const { user, isAuth } = useUser();
@@ -182,6 +179,7 @@ const WebinarPage = ({
 
   return (
     <React.Fragment>
+      <SEO seoMeta={seoMeta} />
       <Section className='flex flex-col gap-2 px-4 pb-4'>
         <FlexContainer className='relative'>
           <div
