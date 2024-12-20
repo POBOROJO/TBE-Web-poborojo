@@ -32,8 +32,8 @@ const updateEnrolledUsersInWebinarDB = async (
   users: WebinarEnrolledUsersProps[]
 ) => {
   try {
-    const updatedWebinar = await Webinar.findByIdAndUpdate(
-      slug,
+    const updatedWebinar = await Webinar.findOneAndUpdate(
+      {slug},
       { $push: { enrolledUsersList: { $each: users } } },
       { new: true }
     );
