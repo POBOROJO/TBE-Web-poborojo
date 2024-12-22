@@ -33,7 +33,7 @@ const updateEnrolledUsersInWebinarDB = async (
 ) => {
   try {
     const updatedWebinar = await Webinar.findOneAndUpdate(
-      {slug},
+      { slug },
       { $push: { enrolledUsersList: { $each: users } } },
       { new: true }
     );

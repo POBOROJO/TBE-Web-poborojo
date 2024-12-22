@@ -198,7 +198,7 @@ const WebinarPage = ({
               level='span'
               className='bg-yellow-500 text-sm md:text-md lg:text-lg font-semibold p-1 px-3 mb-2 rounded-1'
             >
-              {isFree ? "Free" : "Paid"} Webinar
+              {isFree ? 'Free' : 'Paid'} Webinar
             </Text>
 
             <Text
