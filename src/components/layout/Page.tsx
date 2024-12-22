@@ -22,7 +22,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
   return (
     <main className='bg-lightBG flex flex-col min-h-screen'>
       <Navbar />
-      <div className="flex-1">{children}</div>
+      <div className='flex-1'>{children}</div>
       <Footer />
     </main>
   );
