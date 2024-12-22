@@ -19,6 +19,7 @@ import { isProgramActive } from '@/utils';
 const WebinarPage = ({
   seoMeta,
   name,
+  isFree,
   description,
   slug,
   host,
@@ -197,7 +198,7 @@ const WebinarPage = ({
               level='span'
               className='bg-yellow-500 text-sm md:text-md lg:text-lg font-semibold p-1 px-3 mb-2 rounded-1'
             >
-              Free Webinar
+              {isFree ? "Free" : "Paid"} Webinar
             </Text>
 
             <Text
