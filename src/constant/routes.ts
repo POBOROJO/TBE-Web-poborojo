@@ -2,20 +2,27 @@ import { GenerateSectionPathProps } from '@/interfaces';
 
 const routes = {
   home: '/',
-  roadmaps: '/roadmaps',
-  projects: '/projects',
-  register: '/register',
-  projectsExplore: '/projects/explore',
-  allProjects: {
-    pharmashiftI: '/projects/pharmasift-i',
-    pharmashiftII: '/projects/pharmasift-ii',
-  },
+  // Shiksha
   shiksha: '/shiksha',
   shikshaExplore: '/shiksha/explore',
   allCourses: {
     logicBuildingForEveryone: '/shiksha/logic-building-for-everyone',
     basicsOfProgrammingWithJS: '/shiksha/basics-of-programming-with-js',
   },
+  roadmaps: '/roadmaps',
+  register: '/register',
+  workshops: '/workshops',
+  webinar: '/webinar',
+  portfolio: '/portfolio',
+  os: '/os',
+  // Projects
+  projects: '/projects',
+  projectsExplore: '/projects/explore',
+  allProjects: {
+    pharmashiftI: '/projects/pharmasift-i',
+    pharmashiftII: '/projects/pharmasift-ii',
+  },
+  // Interview Prep
   interviewPrep: '/interview-prep',
   interviewPrepExplore: '/interview-prep/explore',
   allInterviewSheets: {
@@ -24,11 +31,12 @@ const routes = {
     nodeInterviewSheet: '/interview-prep/node-interview-questions',
     dbInterviewSheet: '/interview-prep/db-interview-questions',
   },
-  workshops: '/workshops',
-  webinar: '/webinar',
-  portfolio: '/portfolio',
-  os: '/os',
   contactUs: '/contact',
+  user: {
+    courses: '/shiksha/my-courses',
+    projects: '/projects/my-projects',
+    sheets: '/interview-prep/my-sheets',
+  },
   internals: {
     landing: {
       products: 'products',

@@ -60,13 +60,8 @@ const LINKS = {
   whatsappCommunity: 'https://chat.whatsapp.com/EeB7LrPRg2p3RyMOicyIAC',
   instagram: 'https://www.instagram.com/theboringeducation',
   youtube: 'https://www.youtube.com/@TheBoringEducation',
-};
-
-// User links
-const userSections = {
-  myCourses: 'https://www.theboringeducation.com/shiksha/my-courses',
-  myProjects: 'https://www.theboringeducation.com/projects/my-projects',
-  mySheets: 'https://www.theboringeducation.com/interview-prep/my-sheets',
+  submitPortfolio:
+    'https://docs.google.com/forms/d/e/1FAIpQLSd6_B3RPRCC1clar-Kq9QdDNp_shebXj6jSyW90JPNuaRn4AA/viewform?usp=dialog',
 };
 
 // Google analytics
@@ -197,27 +192,63 @@ const PORTFOLIO_CARDS = [
 const PORTFOLIO_TEMPLATES: PortfolioTemplateProps[] = [
   {
     id: 1,
-    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
-    title: 'Next.Js Template',
-    description: 'Get started with Next.js and React in seconds.',
-    previewLink: 'https://theboringeducation.com',
-    repo: 'https://github.com/The-Boring-Education/TBE-Web',
+    imageUrl: `${STATIC_FILE_PATH.svg}/portfolio-template-1.svg`,
+    title: 'DevCanvas by Shaik',
+    description: 'HTML, CSS, JavaScript, and GSAP.',
+    previewLink: 'https://shaik-sharzil.netlify.app/',
+    repo: 'https://github.com/shaiksharzil/portfolio',
     developer: {
-      name: 'Parijaat',
-      link: 'https://github.com/The-Boring-Education/TBE-Web',
+      name: 'Shaik Sharzil',
+      link: 'https://github.com/shaiksharzil',
     },
   },
   {
     id: 2,
-    imageUrl: `${STATIC_FILE_PATH.svg}/hero-image.svg`,
-    title: 'React Template',
-    description: 'Quickly build a responsive React portfolio.',
-    repo: 'https://github.com/The-Boring-Education/TBE-Web',
+    imageUrl: `${STATIC_FILE_PATH.svg}/portfolio-template-2.svg`,
+    title: 'Build with Rahul',
+    description: 'Responsive React portfolio.',
+    previewLink: 'https://rahul-personal-portfolio-01.netlify.app/',
+    repo: 'https://github.com/KumarRahul-01/my_Portfolio/tree/main',
     developer: {
-      name: 'Parijaat',
-      link: 'https://github.com/The-Boring-Education/TBE-Web',
+      name: 'Rahul Kumar Baitha',
+      link: 'https://github.com/KumarRahul-01',
     },
-    previewLink: 'https://theboringeducation.com',
+  },
+  {
+    id: 3,
+    imageUrl: `${STATIC_FILE_PATH.svg}/portfolio-template-3.svg`,
+    title: 'Making You Visible',
+    description: 'Next.js, Tailwind CSS, and NextUI.',
+    previewLink: '4n5hu.vercel.app',
+    repo: 'https://github.com/anshu189/4n5hu',
+    developer: {
+      name: 'Anshu Saini',
+      link: 'https://github.com/anshu189',
+    },
+  },
+  {
+    id: 4,
+    imageUrl: `${STATIC_FILE_PATH.svg}/portfolio-template-4.svg`,
+    title: 'Build with Aayush',
+    description: 'React.js and Tailwind.',
+    previewLink: 'https://aayushkakkar.netlify.app',
+    repo: 'https://github.com/aayushkakkar26/AayushPortfolio',
+    developer: {
+      name: 'Aayush Kakkar',
+      link: 'https://github.com/aayushkakkar26',
+    },
+  },
+  {
+    id: 5,
+    imageUrl: `${STATIC_FILE_PATH.svg}/portfolio-template-5.svg`,
+    title: 'Design to Deploy by Harsh',
+    description: 'React.js and Tailwind.',
+    previewLink: 'https://portfolio-harshrj1501.netlify.app',
+    repo: 'https://github.com/Harshrj1502/Portfoliio-modern',
+    developer: {
+      name: 'Harsh Raj',
+      link: 'https://github.com/Harshrj1502',
+    },
   },
 ];
 
@@ -225,7 +256,6 @@ export {
   imageMeta,
   products,
   LINKS,
-  userSections,
   gtag,
   googleAnalyticsScript,
   STATIC_FILE_PATH,

@@ -39,16 +39,12 @@ const PortfolioTemplate = ({
 
   return (
     <FlexContainer className='w-full md:w-[48%] lg:w-[31%] border-2 border-gray-300 rounded-xl gap-2'>
-      <Image
-        alt={title}
-        src={imageUrl}
-        className='w-full aspect-[5/2] rounded-t-xl'
-      />
+      <Image alt={title} src={imageUrl} className='w-full rounded' />
       <FlexContainer
         direction='col'
         itemCenter={false}
         fullWidth={true}
-        className='p-3 gap-1'
+        className='px-3 pb-3 gap-1'
       >
         <Text level='h2' className='heading-4 text-white'>
           {title}

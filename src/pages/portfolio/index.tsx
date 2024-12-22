@@ -14,6 +14,7 @@ import {
   PORTFOLIO_CARDS,
   PORTFOLIO_TEMPLATES,
   routes,
+  LINKS,
 } from '@/constant';
 import { getPreFetchProps } from '@/utils';
 import { PageProps } from '@/interfaces';
@@ -100,6 +101,32 @@ const Portfolio = ({ seoMeta }: PageProps) => {
               <PortfolioTemplate key={portfolio.id} {...portfolio} />
             ))}
           </FlexContainer>
+          <Section className='gradient-5 p-4 rounded-2 mt-6'>
+            <FlexContainer direction='col' className='items-center'>
+              <FlexContainer direction='col' className='items-center gap-1'>
+                <Text
+                  level='h3'
+                  textCenter={true}
+                  className='heading-4 text-white'
+                >
+                  Want to Showcase Your Portfolio?
+                </Text>
+                <Text level='p' textCenter={true} className='text-white'>
+                  Submit your portfolio and get featured on our website.
+                </Text>
+              </FlexContainer>
+              <LinkButton
+                href={LINKS.submitPortfolio}
+                target='BLANK'
+                className=''
+                buttonProps={{
+                  variant: 'PRIMARY',
+                  text: 'Submit Now',
+                  className: 'px-5 mt-2 lg:mt-3',
+                }}
+              />
+            </FlexContainer>
+          </Section>
         </FlexContainer>
       </Section>
     </React.Fragment>

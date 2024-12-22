@@ -207,6 +207,39 @@ const getSEOMeta = (basePath: any): GetSEOMetaResponseType => {
         'Portfolio Templates, Online Learning, The Boring Education, Developer Portfolio, Portfolio Examples, The Boring Education, College Students, Working Professionals, Career Development, Skill Enhancement, GitHub, Instagram, Twitter, LinkedIn',
       ...seoCommonMeta,
     },
+    // Implement User Shiksha Route
+    [`${routes.user.courses}`]: {
+      title: 'My Courses | The Boring Education',
+      siteName: 'My Courses at The Boring Education',
+      description:
+        'Access your enrolled courses and start learning at The Boring Education.',
+      url: routes.user.courses,
+      keywords:
+        'My Courses, Online Learning, The Boring Education, Enrolled Courses, Learning Platform, The Boring Education, College Students, Working Professionals, Career Development, Skill Enhancement, GitHub, Instagram, Twitter, LinkedIn',
+      ...seoCommonMeta,
+    },
+    // Implement User Projects Route
+    [`${routes.user.projects}`]: {
+      title: 'My Projects | The Boring Education',
+      siteName: 'My Projects at The Boring Education',
+      description:
+        'Access your projects and continue learning at The Boring Education.',
+      url: routes.user.projects,
+      keywords:
+        'My Projects, Hands-on Learning, The Boring Education, Personal Projects, Learning Platform, The Boring Education, College Students, Working Professionals, Career Development, Skill Enhancement, GitHub, Instagram, Twitter, LinkedIn',
+      ...seoCommonMeta,
+    },
+    // Implement User Interview Prep Route
+    [`${routes.user.sheets}`]: {
+      title: 'My Sheets | The Boring Education',
+      siteName: 'My Sheets at The Boring Education',
+      description:
+        'Access your interview preparation sheets and prepare for tech interviews at The Boring Education.',
+      url: routes.user.sheets,
+      keywords:
+        'My Sheets, Interview Preparation, The Boring Education, Personal Sheets, Job Preparation, The Boring Education, College Students, Working Professionals, Career Development, Skill Enhancement, GitHub, Instagram, Twitter, LinkedIn',
+      ...seoCommonMeta,
+    },
   };
 
   return meta[basePath];
