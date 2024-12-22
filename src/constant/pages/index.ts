@@ -12,12 +12,6 @@ const TOP_NAVIGATION: TopNavbarContainerProps = {
   products: [
     {
       id: v4(),
-      name: products.projects.label,
-      description: products.projects.description,
-      href: products.projects.slug,
-    },
-    {
-      id: v4(),
       name: products.shiksha.label,
       description: products.shiksha.description,
       href: products.shiksha.slug,
@@ -27,6 +21,18 @@ const TOP_NAVIGATION: TopNavbarContainerProps = {
       name: products.interviewPrep.label,
       description: products.interviewPrep.description,
       href: products.interviewPrep.slug,
+    },
+    {
+      id: v4(),
+      name: products.portfolio.label,
+      description: products.portfolio.description,
+      href: products.portfolio.slug,
+    },
+    {
+      id: v4(),
+      name: products.projects.label,
+      description: products.projects.description,
+      href: products.projects.slug,
     },
   ],
   links: [
@@ -79,16 +85,6 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     ctaText: 'Explore Free Courses',
   },
   {
-    id: 'projects',
-    image: `${STATIC_FILE_PATH.svg}/projects.svg`,
-    imageAltText: products.projects.label,
-    title: products.projects.label,
-    content: products.projects.description,
-    href: products.projects.slug,
-    active: true,
-    ctaText: 'Explore Free Projects',
-  },
-  {
     id: 'interview Prep',
     image: `${STATIC_FILE_PATH.svg}/shiksha.svg`,
     imageAltText: products.interviewPrep.label,
@@ -97,6 +93,26 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     href: products.interviewPrep.slug,
     active: true,
     ctaText: 'Free Interview Prep',
+  },
+  {
+    id: 'portfolio',
+    image: `${STATIC_FILE_PATH.svg}/the-boring-portfolio-hero.svg`,
+    imageAltText: products.portfolio.label,
+    title: products.portfolio.label,
+    content: products.portfolio.description,
+    href: products.portfolio.slug,
+    active: true,
+    ctaText: 'Explore Portfolios',
+  },
+  {
+    id: 'projects',
+    image: `${STATIC_FILE_PATH.svg}/projects.svg`,
+    imageAltText: products.projects.label,
+    title: products.projects.label,
+    content: products.projects.description,
+    href: products.projects.slug,
+    active: true,
+    ctaText: 'Explore Free Projects',
   },
   {
     id: 'os',

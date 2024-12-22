@@ -25,7 +25,7 @@ const Portfolio = ({ seoMeta }: PageProps) => {
   return (
     <React.Fragment>
       <SEO seoMeta={seoMeta} />
-      <Section className='flex flex-col items-center gap-2 p-2'>
+      <Section>
         <FlexContainer
           wrap={false}
           fullWidth={true}

@@ -17,12 +17,13 @@ export type GetSEOMetaResponseType = {
 
 export type ProductLabelType =
   | 'Roadmaps'
-  | 'The Boring Projects'
+  | 'Projects'
   | 'Shiksha'
   | 'Interview Prep'
-  | 'The Boring Workshops'
-  | 'The Boring Open Source'
-  | 'Interview Prep';
+  | 'Workshops'
+  | 'Open Source'
+  | 'Interview Prep'
+  | 'Portfolio';
 
 export interface ProductDataProps {
   [key: string]: {

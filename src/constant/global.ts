@@ -23,7 +23,7 @@ const products: ProductDataProps = {
     description: 'Create Your Personalized Roadmap',
   },
   projects: {
-    label: 'The Boring Projects',
+    label: 'Projects',
     slug: '/projects',
     description: 'Build Real Life Projects with Peers',
   },
@@ -35,18 +35,22 @@ const products: ProductDataProps = {
   interviewPrep: {
     label: 'Interview Prep',
     slug: routes.interviewPrep,
-    description:
-      'Prepare for Upcoming Tech Interview with Most Asked Questions in Real Interviews.',
+    description: 'Prepare for Tech Interviews with Real Questions',
   },
   workshops: {
-    label: 'The Boring Workshops',
-    slug: `https://www.youtube.com/playlist?list=PLOPyGCrLiI_5JPAbIsv1T129b5LqdurTc`,
+    label: 'Workshops',
+    slug: 'https://www.youtube.com/playlist?list=PLOPyGCrLiI_5JPAbIsv1T129b5LqdurTc',
     description: 'Learn Skills with Hands-on Workshops',
   },
   os: {
-    label: 'The Boring Open Source',
+    label: 'Open Source',
     slug: 'https://theboringeducation.notion.site/Contribute-The-Boring-Education-8171f19257fd4ef99b7287555eb5062b',
     description: 'Learn and Contribute with Open Source',
+  },
+  portfolio: {
+    label: 'Portfolio',
+    slug: routes.portfolio,
+    description: 'Create Your Personal Portfolio Website',
   },
 };
 
