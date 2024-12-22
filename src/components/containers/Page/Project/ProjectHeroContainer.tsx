@@ -68,7 +68,7 @@ const ProjectHeroContainer = ({
       >
         <LinkButton
           href={projectGroupWhatsapp}
-          target='BLANK'
+          target='_blank'
           buttonProps={{
             variant: 'OUTLINE',
             text: 'Ask Question',

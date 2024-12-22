@@ -22,7 +22,7 @@ const PortfolioTemplate = ({
   const codeButtonContainer = isAuth && (
     <LinkButton
       href={repo}
-      target='BLANK'
+      target='_blank'
       className=''
       buttonProps={{
         variant: 'OUTLINE',
@@ -57,7 +57,7 @@ const PortfolioTemplate = ({
           {loginButton}
           <LinkButton
             href={previewLink}
-            target='BLANK'
+            target='_blank'
             className=''
             buttonProps={{
               variant: 'OUTLINE',
@@ -70,7 +70,7 @@ const PortfolioTemplate = ({
           Template by{' '}
           <LinkText
             href={developerProfileLink}
-            target='BLANK'
+            target='_blank'
             className='text-white underline'
           >
             {developerName}

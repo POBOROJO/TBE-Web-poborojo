@@ -38,7 +38,7 @@ export interface TopNavbarLinkProps {
   name: string;
   href: string;
   description?: string;
-  target?: 'BLANK';
+  target?: '_blank';
   isDevelopment?: boolean;
 }
 

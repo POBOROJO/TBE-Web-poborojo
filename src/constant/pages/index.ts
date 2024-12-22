@@ -41,14 +41,21 @@ const TOP_NAVIGATION: TopNavbarContainerProps = {
       name: 'Tech Mentorship',
       description: 'Get Book Tech Consultation',
       href: LINKS.bookTechConsultation,
-      target: 'BLANK',
+      target: '_blank',
     },
     {
       id: v4(),
       name: 'Join Community',
       description: 'Join our WhatsApp Community',
       href: LINKS.whatsappCommunity,
-      target: 'BLANK',
+      target: '_blank',
+    },
+    {
+      id: v4(),
+      name: 'Join Campus Ambassador',
+      description: 'Join our Campus Ambassador Program',
+      href: LINKS.joinCampusAmbassador,
+      target: '_blank',
     },
   ],
   user: [
@@ -130,7 +137,7 @@ const PRODUCTS: PrimaryCardWithCTAProps[] = [
     href: products.workshops.slug,
     active: true,
     ctaText: 'Explore Workshops',
-    target: 'BLANK',
+    target: '_blank',
   },
   {
     id: 'roadmaps',

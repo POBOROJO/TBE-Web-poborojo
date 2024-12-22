@@ -117,7 +117,7 @@ const Portfolio = ({ seoMeta }: PageProps) => {
               </FlexContainer>
               <LinkButton
                 href={LINKS.submitPortfolio}
-                target='BLANK'
+                target='_blank'
                 className=''
                 buttonProps={{
                   variant: 'PRIMARY',

@@ -62,6 +62,8 @@ const LINKS = {
   youtube: 'https://www.youtube.com/@TheBoringEducation',
   submitPortfolio:
     'https://docs.google.com/forms/d/e/1FAIpQLSd6_B3RPRCC1clar-Kq9QdDNp_shebXj6jSyW90JPNuaRn4AA/viewform?usp=dialog',
+  joinCampusAmbassador:
+    'https://docs.google.com/forms/d/e/1FAIpQLSfYHF6BlVfzcela42McNzHZo3WFfjgEV_e0EBrlsxNUdmK_KA/viewform?usp=dialog',
 };
 
 // Google analytics

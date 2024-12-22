@@ -15,7 +15,7 @@ export interface LinkProps {
   children?: React.ReactNode;
   className?: string;
   href: string;
-  target?: 'BLANK';
+  target?: '_blank';
   active?: boolean;
   scroll?: boolean;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
@@ -139,7 +139,7 @@ export interface FooterLinkProps {
   id?: string;
   label: string;
   href: string;
-  target?: 'BLANK';
+  target?: '_blank';
 }
 
 export interface FooterLinksContainerProps {
@@ -239,7 +239,7 @@ export interface PrimaryCardWithCTAProps {
   active?: boolean;
   ctaText?: string;
   borderColour?: 1 | 2 | 3 | 4 | 5 | 6;
-  target?: 'BLANK';
+  target?: '_blank';
   luanchingOn?: string;
 }
 
