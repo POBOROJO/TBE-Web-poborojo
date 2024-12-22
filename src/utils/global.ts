@@ -12,7 +12,7 @@ import {
 } from '.';
 
 const getPreFetchProps = async ({ resolvedUrl }: any) => {
-  let slug = '/';
+  let slug = routes.home;
 
   if (resolvedUrl) {
     slug = resolvedUrl;
@@ -21,7 +21,7 @@ const getPreFetchProps = async ({ resolvedUrl }: any) => {
   const seoMeta = getSEOMeta(slug);
 
   const redirect = !seoMeta && {
-    destination: '/404',
+    destination: routes.home,
   };
 
   return {
@@ -34,7 +34,7 @@ const getProjectPageProps = async (context: any) => {
   const { req, query } = context;
   const { projectSlug, projectId, sectionId, chapterId } = query;
 
-  let slug = '/';
+  let slug = routes.home;
 
   if (projectSlug) {
     slug = `/projects/${projectSlug}`;
@@ -52,11 +52,11 @@ const getProjectPageProps = async (context: any) => {
         routes.api.projectByIdWithUser(projectId, user?.id)
       );
 
-      // If the project data is not found, redirect to 404
+      // If the project data is not found, redirect to
       if (!status) {
         return {
           redirect: {
-            destination: routes[404],
+            destination: routes.home,
           },
           props: { slug },
         };
@@ -95,10 +95,10 @@ const getProjectPageProps = async (context: any) => {
     }
   }
 
-  // Redirect to 404 if projectId is missing or seoMeta is not set
+  // Redirect to  if projectId is missing or seoMeta is not set
   return {
     redirect: {
-      destination: routes[404],
+      destination: routes.home,
     },
     props: { slug },
   };
@@ -108,7 +108,7 @@ const getCoursePageProps = async (context: any) => {
   const { req, query } = context;
   const { courseSlug, courseId, chapterId } = query;
 
-  let slug = '/';
+  let slug = routes.home;
 
   if (courseSlug) {
     slug = '/shiksha/' + courseSlug;
@@ -128,7 +128,7 @@ const getCoursePageProps = async (context: any) => {
       if (!status) {
         return {
           redirect: {
-            destination: '/404',
+            destination: routes.home,
           },
           props: { slug },
         };
@@ -165,7 +165,7 @@ const getCoursePageProps = async (context: any) => {
 
   return {
     redirect: {
-      destination: '/404',
+      destination: routes.home,
     },
     props: { slug },
   };
@@ -175,7 +175,7 @@ const getSheetPageProps = async (context: any) => {
   const { req, query } = context;
   const { sheetSlug, sheetId, questionId } = query;
 
-  let slug = '/';
+  let slug = routes.home;
 
   if (sheetSlug) {
     slug = '/interview-prep/' + sheetSlug;
@@ -196,7 +196,7 @@ const getSheetPageProps = async (context: any) => {
       if (!status) {
         return {
           redirect: {
-            destination: '/404',
+            destination: routes.home,
           },
           props: { slug },
         };
@@ -234,7 +234,7 @@ const getSheetPageProps = async (context: any) => {
 
   return {
     redirect: {
-      destination: '/404',
+      destination: routes.home,
     },
     props: { slug },
   };
@@ -257,7 +257,7 @@ const getWebinarPageProps = async (context: any) => {
   if (!status) {
     return {
       redirect: {
-        destination: '/404',
+        destination: routes.home,
       },
     };
   }
