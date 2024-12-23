@@ -1,24 +1,49 @@
-import { Schema, model, models, Model } from 'mongoose';
-import { CertificateModel, CertificateType } from '@/interfaces';
+import { Model, Schema, model, models } from 'mongoose';
+import { CertificateModel } from '@/interfaces';
+import { CERTIFICATE_TYPE, databaseModels } from '@/constant';
 
-const CertificateSchema = new Schema<CertificateModel>({
+const CertificateSchema = new Schema<CertificateModel>(
+  {
     type: {
       type: String,
-      enum: Object.values(CertificateType),
-      required: true
+      enum: CERTIFICATE_TYPE,
+      required: true,
+    },
+    userId: {
+      type: String,
+      required: true,
     },
     userName: {
       type: String,
-      required: true
+      required: true,
     },
-    date: {
-      type: Date,
-      default: Date.now
-    },
-    programName: {
+    program: {
       type: String,
-      required: true
-    }
-  });
-  
-  export const Certificate = model<CertificateModel>('Certificate', CertificateSchema);
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+    _id: true,
+    toObject: {
+      virtuals: true,
+      transform: (doc, ret) => {
+        delete ret.id;
+        return ret;
+      },
+    },
+    toJSON: {
+      virtuals: true,
+      transform: (doc, ret) => {
+        delete ret.id;
+        return ret;
+      },
+    },
+  }
+);
+
+const Certificate: Model<CertificateModel> =
+  models?.Certificate ||
+  model<CertificateModel>(databaseModels.CERTIFICATE, CertificateSchema);
+
+export default Certificate;

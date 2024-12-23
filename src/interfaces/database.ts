@@ -152,6 +152,7 @@ export interface CertificateModel extends Document {
   _id: typeof Schema.Types.ObjectId;
   type: CertificateType;
   userName: string;
+  userId: string;
   date: Date;
-  programName: string;
+  program: string;
 }
