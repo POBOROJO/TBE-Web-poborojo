@@ -1,4 +1,5 @@
 import {
+  CertificateType,
   CourseChapterModel,
   CourseModel,
   InterviewSheetModel,
@@ -293,4 +294,11 @@ export interface AddWebinarRequestPayloadProps {
 export interface WebinarEnrolledUsersProps {
   name: string;
   email: string;
+}
+
+export interface AddCertificateRequestPayloadProps {
+  type: CertificateType;
+  userId: string;
+  userName: string;
+  program: string;
 }

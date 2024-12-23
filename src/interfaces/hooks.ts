@@ -11,7 +11,4 @@ export interface UseUserReturnType {
   loading: boolean;
 }
 
-export enum CertificateType{
-  Webinar = 'Webinar',
-  Shiksha = 'Shiksha'
-}
+export type CertificateType = 'WEBINAR' | 'SHIKSHA';
