@@ -2,7 +2,7 @@ import { apiStatusCodes } from '@/constant';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { sendAPIResponse } from '@/utils';
 import { connectDB } from '@/middlewares';
-import { addACertificateToDB, checkCertificateExist } from '@/database';
+import { addACertificateToDB, checkCertificateExist, getUserCertificates } from '@/database';
 import { AddCertificateRequestPayloadProps } from '@/interfaces';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,8 +13,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'POST':
       return handleAddACertificate(req, res);
-    // case 'GET':
-    //   return handleGetACertificate(req, res, userId);
+    case 'GET':
+      return handleGetACertificate(req, res, userId);
     default:
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
@@ -77,84 +77,47 @@ const handleAddACertificate = async (
   }
 };
 
-// const handleGetACertificate = async (
-//   req: NextApiRequest,
-//   res: NextApiResponse,
-//   userId: string
-// ) => {
-//   try {
-//     let allCoursesResponse: BaseShikshaCourseResponseProps[] = [];
+const handleGetACertificate = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  userId: string
+) => {
+  try {
+    if (!userId) {
+      return res.status(apiStatusCodes.BAD_REQUEST).json(
+        sendAPIResponse({
+          status: false,
+          message: 'User ID is required',
+        })
+      );
+    }
 
-//     // Fetch all courses
-//     const { data: allCourses, error: allCoursesError } =
-//       await getAllCourseFromDB();
+    const { data:certificates, error:certificateError } = await getUserCertificates(userId);
 
-//     if (allCoursesError || !allCourses) {
-//       return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
-//         sendAPIResponse({
-//           status: false,
-//           message: 'Failed while fetching courses',
-//           error: allCoursesError,
-//         })
-//       );
-//     }
+    if (certificateError) {
+      return res.status(apiStatusCodes.BAD_REQUEST).json(
+        sendAPIResponse({
+          status: false,
+          message: certificateError,
+        })
+      );
+    }
 
-//     // Create a map of all courses by their ID
-//     const courseMap = new Map<string, BaseShikshaCourseResponseProps>(
-//       allCourses.map((course: BaseShikshaCourseResponseProps) => {
-//         const courseDoc = course as unknown as mongoose.Document &
-//           BaseShikshaCourseResponseProps;
-//         return [courseDoc._id.toString(), { ...courseDoc.toObject() }];
-//       })
-//     );
-
-//     // If the user is logged in, fetch enrolled courses and mark them in the map
-//     if (userId) {
-//       const { data: enrolledCourses, error: enrolledCoursesError } =
-//         await getAllEnrolledCoursesFromDB(userId);
-
-//       if (enrolledCoursesError) {
-//         return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
-//           sendAPIResponse({
-//             status: false,
-//             message: 'Failed while fetching enrolled courses',
-//             error: enrolledCoursesError,
-//           })
-//         );
-//       }
-
-//       // Update the map to mark enrolled courses
-//       enrolledCourses.forEach(
-//         (enrolledCourse: BaseShikshaCourseResponseProps) => {
-//           const courseId = enrolledCourse._id.toString();
-//           if (courseMap.has(courseId)) {
-//             courseMap.set(courseId, {
-//               ...courseMap.get(courseId),
-//               isEnrolled: true,
-//             });
-//           }
-//         }
-//       );
-//     }
-
-//     // Convert the map back to an array to prepare the final response
-//     allCoursesResponse = Array.from(courseMap.values());
-
-//     return res.status(apiStatusCodes.OKAY).json(
-//       sendAPIResponse({
-//         status: true,
-//         data: allCoursesResponse,
-//       })
-//     );
-//   } catch (error) {
-//     return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
-//       sendAPIResponse({
-//         status: false,
-//         message: 'Failed while fetching courses',
-//         error,
-//       })
-//     );
-//   }
-// };
+    return res.status(apiStatusCodes.OKAY).json(
+      sendAPIResponse({
+        status: true,
+        data: certificates,
+      })
+    );
+  } catch (error) {
+    return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
+      sendAPIResponse({
+        status: false,
+        message: 'Failed while fetching Certificate',
+        error,
+      })
+    );
+  }
+};
 
 export default handler;
