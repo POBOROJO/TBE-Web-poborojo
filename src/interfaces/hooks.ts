@@ -10,3 +10,8 @@ export interface UseUserReturnType {
   isAuth: boolean;
   loading: boolean;
 }
+
+export enum CertificateType{
+  Webinar = 'Webinar',
+  Shiksha = 'Shiksha'
+}

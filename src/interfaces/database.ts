@@ -1,5 +1,6 @@
 import { Document, Schema } from 'mongoose';
 import {
+  CertificateType,
   DifficultyType,
   QuestionFrequencyType,
   RoadmapsType,
@@ -142,5 +143,15 @@ export interface WebinarModel {
   registrationUrl: string;
   dateAndTime: string;
   enrolledUsersList: WebinarEnrolledUsersProps[];
+  aboutWebinar: string[];
+  whatYoullLearn: string[];
   toObject: () => WebinarModel;
+}
+
+export interface CertificateModel extends Document {
+  _id: typeof Schema.Types.ObjectId;
+  type: CertificateType;
+  userName: string;
+  date: Date;
+  programName: string;
 }

@@ -71,6 +71,14 @@ const WebinarSchema = new Schema<WebinarModel>(
         },
       },
     ],
+    aboutWebinar: {
+      type: [String],
+      required: [true, 'About webinar is required'],
+    },
+    whatYoullLearn: {
+      type: [String],
+      required: [true, 'What you will learn is required'],
+    }
   },
   {
     timestamps: true,
