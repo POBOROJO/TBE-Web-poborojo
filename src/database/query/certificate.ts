@@ -30,4 +30,18 @@ const checkCertificateExist = async (type: string, userId: string) => {
   }
 };
 
-export { addACertificateToDB, checkCertificateExist };
+const getUserCertificates = async (userId: string) => {
+  try {
+    const certificates = await Certificate.find({userId});
+
+    if (certificates.length > 0) {
+      return { data: certificates };
+    } else {
+      return { error: 'No certificates found' };
+    }
+  } catch (error) {
+    return { error: 'Failed while fetching certificates' };
+  }
+};
+
+export { addACertificateToDB, checkCertificateExist, getUserCertificates };
