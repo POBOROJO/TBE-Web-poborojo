@@ -30,9 +30,10 @@ const checkCertificateExist = async (type: string, userId: string) => {
   }
 };
 
+// Get All User Certificates
 const getUserCertificates = async (userId: string) => {
   try {
-    const certificates = await Certificate.find({userId});
+    const certificates = await Certificate.find({ userId });
 
     if (certificates.length > 0) {
       return { data: certificates };

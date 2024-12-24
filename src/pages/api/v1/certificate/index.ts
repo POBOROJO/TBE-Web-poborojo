@@ -2,19 +2,28 @@ import { apiStatusCodes } from '@/constant';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { sendAPIResponse } from '@/utils';
 import { connectDB } from '@/middlewares';
-import { addACertificateToDB, checkCertificateExist, getUserCertificates } from '@/database';
-import { AddCertificateRequestPayloadProps } from '@/interfaces';
+import {
+  addACertificateToDB,
+  checkCertificateExist,
+  getUserCertificates,
+} from '@/database';
+import {
+  AddCertificateRequestPayloadProps,
+  CertificateType,
+} from '@/interfaces';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await connectDB();
   const { method, query } = req;
-  const { userId } = query as { userId: string };
-
+  const { type, userId } = query as {
+    type: CertificateType;
+    userId: string;
+  };
   switch (method) {
     case 'POST':
       return handleAddACertificate(req, res);
     case 'GET':
-      return handleGetACertificate(req, res, userId);
+      return handleGetACertificate(req, res, type, userId);
     default:
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
@@ -40,7 +49,7 @@ const handleAddACertificate = async (
     if (existingCertificate) {
       return res.status(apiStatusCodes.OKAY).json(
         sendAPIResponse({
-          status: false,
+          status: true,
           message: 'Certificate already exists',
           data: existingCertificate,
         })
@@ -80,6 +89,7 @@ const handleAddACertificate = async (
 const handleGetACertificate = async (
   req: NextApiRequest,
   res: NextApiResponse,
+  type: CertificateType,
   userId: string
 ) => {
   try {
@@ -87,28 +97,31 @@ const handleGetACertificate = async (
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
           status: false,
-          message: 'User ID is required',
+          message: 'You are not logged in. Please login to view certificates',
         })
       );
-    }
-
-    const { data:certificates, error:certificateError } = await getUserCertificates(userId);
-
-    if (certificateError) {
+    } else if (!type) {
       return res.status(apiStatusCodes.BAD_REQUEST).json(
         sendAPIResponse({
           status: false,
-          message: certificateError,
+          message: 'Certificate type is required',
         })
       );
     }
 
-    return res.status(apiStatusCodes.OKAY).json(
-      sendAPIResponse({
-        status: true,
-        data: certificates,
-      })
+    const { data: existingCertificate } = await checkCertificateExist(
+      type,
+      userId
     );
+
+    if (existingCertificate) {
+      return res.status(apiStatusCodes.OKAY).json(
+        sendAPIResponse({
+          status: true,
+          data: existingCertificate,
+        })
+      );
+    }
   } catch (error) {
     return res.status(apiStatusCodes.INTERNAL_SERVER_ERROR).json(
       sendAPIResponse({
