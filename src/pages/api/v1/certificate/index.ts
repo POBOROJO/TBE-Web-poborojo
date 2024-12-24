@@ -2,11 +2,7 @@ import { apiStatusCodes } from '@/constant';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { sendAPIResponse } from '@/utils';
 import { connectDB } from '@/middlewares';
-import {
-  addACertificateToDB,
-  checkCertificateExist,
-  getUserCertificates,
-} from '@/database';
+import { addACertificateToDB, checkCertificateExist } from '@/database';
 import {
   AddCertificateRequestPayloadProps,
   CertificateType,
