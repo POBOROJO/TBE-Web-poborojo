@@ -14,13 +14,12 @@ import {
 } from '@/components';
 import { WebinarPageProps } from '@/interfaces';
 import { getWebinarPageProps } from '@/utils';
-import { useApi, useUser } from '@/hooks';
+import { useApi, useUser, useCertificate } from '@/hooks';
 import { routes, imageMeta, TESTIMONIALS } from '@/constant';
 import { isProgramActive } from '@/utils';
 import { FiCalendar } from 'react-icons/fi';
 import { LuClock3 } from 'react-icons/lu';
 import { SiLinkedin } from 'react-icons/si';
-import Testimonials from '@/components/containers/Cards/Testimonials';
 
 const WebinarPage = ({
   seoMeta,
@@ -234,7 +233,7 @@ const WebinarPage = ({
               <Image
                 alt='host-img'
                 src={host.imageUrl}
-                className='w-20 h-20 rounded-full border-2 border-zinc-900'
+                className='rounded-full w-[70px] md:w-20 lg:w-24 border-2 border-gray-950'
               />
               <FlexContainer
                 direction='col'
@@ -264,10 +263,7 @@ const WebinarPage = ({
                   className='justify-start items-center gap-2.5'
                 >
                   <FiCalendar className='w-4 h-4' />
-                  <Text
-                    level='p'
-                    className="text-center text-zinc-900 text-base font-semibold font-['Inter']"
-                  >
+                  <Text level='p' className='strong-text'>
                     29 Apr, Saturday
                   </Text>
                 </FlexContainer>
@@ -276,10 +272,7 @@ const WebinarPage = ({
                   className='justify-start items-center gap-2.5'
                 >
                   <LuClock3 className='w-4 h-4' />
-                  <Text
-                    level='p'
-                    className="text-center text-zinc-900 text-base font-semibold font-['Inter']"
-                  >
+                  <Text level='p' className='strong-text'>
                     11 AM
                   </Text>
                 </FlexContainer>
@@ -287,28 +280,24 @@ const WebinarPage = ({
 
               <FlexContainer
                 direction='col'
-                className='justify-start items-center'
+                className='justify-start items-center gap-4'
               >
-                <Text
-                  level='p'
-                  className="text-center text-zinc-900 text-lg font-semibold font-['Inter'] mb-4"
-                >
+                <Text level='p' className='strong-text'>
                   Starts in
                 </Text>
 
                 <FlexContainer
                   direction='row'
-                  className='justify-center items-center gap-2.5'
+                  className='gap-2.5'
+                  justifyCenter={true}
+                  itemCenter={true}
                 >
                   {/* Days */}
                   <FlexContainer
                     direction='col'
-                    className='p-2 rounded border border-rose-500 justify-center items-center overflow-hidden'
+                    className='h-9 p-2 border border-rose-500 rounded-1'
                   >
-                    <Text
-                      level='p'
-                      className="text-center text-rose-500 text-base font-semibold font-['Inter']"
-                    >
+                    <Text level='p' className='strong-text text-rose-500'>
                       03 d
                     </Text>
                   </FlexContainer>
@@ -316,12 +305,9 @@ const WebinarPage = ({
                   {/* Hours */}
                   <FlexContainer
                     direction='col'
-                    className='p-2 rounded border border-rose-500 justify-center items-center overflow-hidden'
+                    className='h-9 p-2 border border-rose-500 rounded-1'
                   >
-                    <Text
-                      level='p'
-                      className="text-center text-rose-500 text-base font-semibold font-['Inter']"
-                    >
+                    <Text level='p' className='strong-text text-rose-500'>
                       02 h
                     </Text>
                   </FlexContainer>
@@ -329,12 +315,9 @@ const WebinarPage = ({
                   {/* Minutes */}
                   <FlexContainer
                     direction='col'
-                    className='p-2 rounded border border-rose-500 justify-center items-center overflow-hidden'
+                    className='h-9 p-2 border border-rose-500 rounded-1'
                   >
-                    <Text
-                      level='p'
-                      className="text-center text-rose-500 text-base font-semibold font-['Inter']"
-                    >
+                    <Text level='p' className='strong-text text-rose-500'>
                       01 m
                     </Text>
                   </FlexContainer>
@@ -346,16 +329,16 @@ const WebinarPage = ({
 
         <FlexContainer
           direction='col'
-          className='w-full max-w-screen-lg h-52 px-6 py-7 bg-gradient-to-b from-yellow-100 to-orange-400 rounded-lg justify-start items-start gap-2.5 overflow-hidden m-auto mt-2'
+          fullWidth={true}
+          justifyCenter={true}
+          itemCenter={true}
+          className='max-w-screen-lg h-52 px-6 py-7 gradient-1 rounded-lg gap-2.5 overflow-hidden m-auto'
         >
           <FlexContainer
             direction='col'
             className='justify-start items-center gap-4'
           >
-            <Text
-              level='h5'
-              className="heading-5"
-            >
+            <Text level='h5' className='heading-5'>
               Register Now
             </Text>
 
@@ -373,10 +356,7 @@ const WebinarPage = ({
                 }}
               />
 
-              <Text
-                level='p'
-                className="text-zinc-900 text-base font-semibold font-['Inter']"
-              >
+              <Text level='p' className='strong-text'>
                 25 Slots only. Few seats left.
               </Text>
             </FlexContainer>
@@ -388,35 +368,37 @@ const WebinarPage = ({
         {/* About the Webinar */}
         <FlexContainer
           direction='col'
-          className='w-full max-w-screen-lg bg-gradient-to-b from-white p-2 py-4 m-auto mt-2 rounded-1 gap-3'
+          fullWidth={true}
+          className='max-w-screen-lg m-auto mt-5'
         >
           {/* About Webinar Section */}
           <FlexContainer
             direction='col'
-            className='max-w-screen-lg justify-start items-center gap-4 rounded-lg'
+            itemCenter={true}
+            className='max-w-screen-lg justify-start gap-4 rounded-lg'
           >
             <FlexContainer
               direction='col'
-              className='justify-start items-center gap-5'
+              itemCenter={true}
+              className='justify-start gap-5'
             >
-              <Text level='h4' className='text-zinc-900 text-2xl font-bold'>
+              <Text level='h4' className='heading-4'>
                 About webinar
               </Text>
 
               <FlexContainer
                 direction='row'
-                className='justify-start items-start gap-5'
+                className='justify-start items-start gap-3'
               >
                 {/* Date Container */}
                 <FlexContainer
                   direction='row'
-                  className='px-4 py-2 bg-black rounded justify-center items-center gap-2.5 overflow-hidden'
+                  itemCenter={true}
+                  justifyCenter={true}
+                  className='px-2 py-2 bg-black rounded-1 gap-2.5 overflow-hidden'
                 >
                   <FiCalendar className='w-3 h-3 text-white' />
-                  <Text
-                    level='p'
-                    className='text-neutral-50 text-base font-semibold'
-                  >
+                  <Text level='p' className='strong-text text-neutral-50'>
                     29 Apr, Saturday
                   </Text>
                 </FlexContainer>
@@ -424,17 +406,17 @@ const WebinarPage = ({
                 {/* Time Container */}
                 <FlexContainer
                   direction='col'
-                  className='px-4 py-2 bg-black rounded justify-center items-center gap-2.5 overflow-hidden'
+                  justifyCenter={true}
+                  itemCenter={true}
+                  className='px-2 py-2 bg-black rounded gap-2.5 overflow-hidden'
                 >
                   <FlexContainer
                     direction='row'
-                    className='justify-start items-center gap-2.5'
+                    itemCenter={true}
+                    className='justify-start gap-2.5'
                   >
                     <LuClock3 className='w-3 h-3 text-white' />
-                    <Text
-                      level='p'
-                      className='text-neutral-50 text-base font-semibold'
-                    >
+                    <Text level='p' className='strong-text text-neutral-50'>
                       11 AM
                     </Text>
                   </FlexContainer>
@@ -443,11 +425,8 @@ const WebinarPage = ({
             </FlexContainer>
 
             {/* Description */}
-            <Text
-              level='p'
-              className='w-full px-4 md:w-fit text-zinc-900 text-xl font-normal whitespace-pre-line'
-            >
-              {about}
+            <Text level='p' className='subtitle'>
+              {aboutWebinar}
             </Text>
           </FlexContainer>
         </FlexContainer>
@@ -455,37 +434,34 @@ const WebinarPage = ({
         {/* What will you learn */}
         <FlexContainer
           direction='col'
-          className='w-full max-w-screen-lg bg-gradient-to-b from-white p-2 py-4 m-auto mt-2 rounded-1 gap-3'
+          fullWidth={true}
+          className='max-w-screen-lg p-2 py-4 m-auto mt-2 rounded-1 gap-3'
         >
-          <Text
-            level='h2'
-            className="text-zinc-900 text-2xl font-bold"
-          >
+          <Text level='h4' className='heading-4'>
             What will you learn
           </Text>
-          <Text
-            level='p'
-            className='w-full px-4 md:w-fit text-zinc-900 text-xl font-normal text-left md:pl-8 whitespace-pre-line'
-          >
-            <ol className='list-decimal list-inside'>
-              <li>
-                You’ll learn with your background, will programming be helpful
-                for you?
+          <ol className='list-decimal'>
+            {whatYoullLearn?.map((item, index) => (
+              <li key={index}>
+                <Text level='p' className='subtitle'>
+                  {item}
+                </Text>
               </li>
-              <li>Decide if you should be okay buying expensive bootcamps</li>
-              <li>Understand what it takes to break into Tech</li>
-            </ol>
-          </Text>
+            ))}
+          </ol>
         </FlexContainer>
 
         {/* Meet your Instructor */}
         <FlexContainer
           direction='col'
-          className='w-full max-w-screen-lg bg-gradient-to-b from-white p-2 py-4 m-auto mt-2 rounded-1 gap-3'
+          fullWidth={true}
+          className='max-w-screen-lg p-2 py-4 m-auto mt-2 gap-4'
         >
-          <Text level='h2' className='text-zinc-900 text-2xl font-bold'>
-            Meet your instructor
-          </Text>
+          <FlexContainer justifyCenter={true} itemCenter={true}>
+            <Text level='h4' className='heading-4'>
+              Meet your instructor
+            </Text>
+          </FlexContainer>
 
           <FlexContainer
             direction='col'
@@ -497,60 +473,57 @@ const WebinarPage = ({
             >
               <FlexContainer
                 direction='row'
-                className='justify-end items-center gap-6'
+                itemCenter={true}
+                className='justify-end gap-2.5'
               >
                 <Image
                   src={host.imageUrl}
                   alt={host.name}
-                  className='w-20 h-20 rounded-full border-2 border-zinc-900'
+                  className='rounded-full w-[70px] md:w-20 lg:w-24 border-2 border-gray-950'
                 />
 
                 <FlexContainer
                   direction='col'
-                  className='justify-start items-start gap-1'
+                  className='justify-start items-start gap-2'
                 >
-                  <Text
-                    level='h3'
-                    className="text-center text-zinc-900 text-xl font-bold font-['Inter']"
-                  >
+                  <Text level='h5' className='heading-5'>
                     {host.name}
                   </Text>
-                  <Text
-                    level='p'
-                    className='w-40 text-zinc-900 text-base font-normal leading-snug'
-                  >
+                  <Text level='p' className='paragraph'>
                     {host.role}
                   </Text>
                 </FlexContainer>
+                <SiLinkedin
+                  className='w-5 h-5 cursor-pointer text-blue-600'
+                  onClick={() => window.open(host.linkedInUrl, '_blank')}
+                />
               </FlexContainer>
-
-              <SiLinkedin className='w-5 h-5 cursor-pointer text-blue-600' />
             </FlexContainer>
-
-            <Text
-              level='p'
-              className='w-full px-4 md:w-fit text-zinc-900 text-xl font-normal text-left md:pl-8 whitespace-pre-line'
-            >
-              <ol className='list-decimal list-inside'>
-                <li>Built Ed-tech startups since college</li>
-                <li>Worked with Newton School, Masai, Pesto & CueMath.</li>
-                <li>Senior Software Engineer @ PW</li>
-              </ol>
-            </Text>
+            <ol className='list-decimal pl-8 space-y-4 mt-4'>
+              {host.about?.map((item, index) => (
+                <li key={index} className='pl- ml-2'>
+                  <Text level='p' className='paragraph'>
+                    {item}
+                  </Text>
+                </li>
+              ))}
+            </ol>
           </FlexContainer>
         </FlexContainer>
 
+        {/* About the Boring Education */}
         <FlexContainer
           direction='col'
-          className='w-full max-w-screen-lg bg-gradient-to-b from-white to-pink-300 p-2 py-4 m-auto mt-2 rounded-1 gap-3'
+          fullWidth={true}
+          className='max-w-screen-lg gradient-6 p-2 py-4 m-auto mt-2 rounded-1 gap-2.5'
         >
-          <Text level='h1' textCenter className='text-2xl font-semibold mb-4'>
+          <Text level='h5' textCenter className='heading-5'>
             About the Boring Education
           </Text>
 
           <FlexContainer
             direction='row'
-            className='w-full'
+            fullWidth={true}
             itemCenter={false}
             justifyCenter={false}
           >
@@ -562,10 +535,7 @@ const WebinarPage = ({
             />
           </FlexContainer>
 
-          <Text
-            level='p'
-            className='text-sm md:text-lg lg:text-xl font-semibold'
-          >
+          <Text level='p' className='strong-text '>
             We at TBE, building An Open Source Tech Education platform to make
             learning faster with Hands-on Experience.
           </Text>
@@ -584,9 +554,10 @@ const WebinarPage = ({
         {/* What are students saying ? */}
         <FlexContainer
           direction='col'
-          className='w-full max-w-screen-lg bg-gradient-to-b from-white p-2 py-4 m-auto mt-2 rounded-1 gap-3'
+          fullWidth={true}
+          className='max-w-screen-lg p-2 py-4 m-auto mt-2 rounded-1 gap-3'
         >
-          <Text level='h2' className='text-zinc-900 text-2xl font-bold'>
+          <Text level='h4' className='heading-4'>
             What are <span className='text-rose-500'>students</span> saying ?
           </Text>
           <CardSectionContainer
