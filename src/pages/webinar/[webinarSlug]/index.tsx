@@ -1,5 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { toPng } from 'html-to-image';
+import React, { useEffect, useState } from 'react';
 import {
   FlexContainer,
   Section,
@@ -314,7 +313,7 @@ const WebinarPage = ({
               className='justify-start items-center gap-4'
             >
               <LinkButton
-                href={''}
+                href=''
                 className='w-full sm:w-[300px]'
                 buttonProps={{
                   variant: 'PRIMARY',
