@@ -17,7 +17,7 @@ import {
 import { WebinarPageProps } from '@/interfaces';
 import { getWebinarPageProps } from '@/utils';
 import { useApi, useUser, useCertificate } from '@/hooks';
-import { routes, imageMeta, TESTIMONIALS } from '@/constant';
+import { routes, TESTIMONIALS } from '@/constant';
 import { FiCalendar } from 'react-icons/fi';
 import { LuClock3 } from 'react-icons/lu';
 import { SiLinkedin } from 'react-icons/si';
