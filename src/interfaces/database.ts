@@ -142,9 +142,9 @@ export interface WebinarModel {
   };
   registrationUrl: string;
   dateAndTime: string;
-  enrolledUsersList: WebinarEnrolledUsersProps[];
   aboutWebinar: string[];
   whatYoullLearn: string[];
+  enrolledUsersList: WebinarEnrolledUsersProps[];
   toObject: () => WebinarModel;
 }
 
