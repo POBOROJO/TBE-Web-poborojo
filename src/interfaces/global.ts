@@ -61,3 +61,5 @@ export interface WebinarPageProps extends WebinarModel {
   bannerImageUrl: string;
   seoMeta: GetSEOMetaResponseType;
 }
+
+export type CertificateType = 'WEBINAR' | 'SHIKSHA';

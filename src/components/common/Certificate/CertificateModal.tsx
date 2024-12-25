@@ -1,8 +1,8 @@
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { useRef } from 'react';
 import { toPng } from 'html-to-image';
-import CertificateContent from './CertificateContent';
 import { CertificateDataPoints } from '@/interfaces';
+import { CertificateContent } from '@/components';
 
 const CertificateModal = ({
   isOpen,

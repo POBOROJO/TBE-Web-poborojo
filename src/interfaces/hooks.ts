@@ -10,5 +10,3 @@ export interface UseUserReturnType {
   isAuth: boolean;
   loading: boolean;
 }
-
-export type CertificateType = 'WEBINAR' | 'SHIKSHA';

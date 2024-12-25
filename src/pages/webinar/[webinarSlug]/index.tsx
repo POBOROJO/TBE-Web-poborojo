@@ -11,6 +11,8 @@ import {
   SEO,
   CardSectionContainer,
   TestimonialCard,
+  BackgroundImage,
+  Pill,
 } from '@/components';
 import { WebinarPageProps } from '@/interfaces';
 import { getWebinarPageProps } from '@/utils';
@@ -35,6 +37,7 @@ const WebinarPage = ({
   bannerImageUrl,
 }: WebinarPageProps) => {
   const { user, isAuth } = useUser();
+  const { certificateRef, handleDownload } = useCertificate();
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [showCertificate, setShowCertificate] = useState(false);
@@ -42,28 +45,12 @@ const WebinarPage = ({
     null | string
   >();
 
-  const certificateRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (user) {
-      setUserName(user.name || '');
-      setUserEmail(user.email || '');
+      setUserName(user.name);
+      setUserEmail(user.email);
     }
   }, [user]);
-
-  const handleDownload = async () => {
-    if (certificateRef.current) {
-      try {
-        const dataUrl = await toPng(certificateRef.current, { quality: 1 });
-        const link = document.createElement('a');
-        link.href = dataUrl;
-        link.download = `${userName}-webinar-certificate.png`;
-        link.click();
-      } catch (error) {
-        console.error('Error generating certificate image:', error);
-      }
-    }
-  };
 
   const { makeRequest } = useApi('webinar', {
     url: `${routes.api.webinar}/${slug}`,
@@ -189,41 +176,21 @@ const WebinarPage = ({
   return (
     <React.Fragment>
       <SEO seoMeta={seoMeta} />
-      <Section className='flex flex-col gap-2 px-4 pb-4'>
+      <Section className='md:px-8 md:py-2 px-2 py-2'>
         <FlexContainer className='relative'>
-          <div
-            className='absolute inset-0 bg-cover bg-center opacity-20 rounded-2'
-            style={{
-              backgroundImage: `url(${bannerImageUrl})`,
-            }}
-          ></div>
+          <BackgroundImage bannerImageUrl={bannerImageUrl} />
+          <FlexContainer className='py-10 md:py-8 gap-2' direction='col'>
+            {isFree && <Pill text='Free Webinar' variant='SECONDARY' />}
+            {!isFree && <Pill text='Paid Webinar' variant='SECONDARY' />}
 
-          <FlexContainer
-            className='bg-transparent p-3 py-10 md:py-8 lg:py-6 gap-3 md:gap-2'
-            direction='col'
-          >
-            <Text
-              level='span'
-              className='bg-yellow-500 text-sm md:text-md lg:text-lg font-semibold p-1 px-3 mb-2 rounded-1'
-            >
-              {isFree ? 'Free' : 'Paid'} Webinar
-            </Text>
-
-            <Text
-              level='h1'
-              textCenter
-              className='text-3xl md:text-3xl lg:text-5xl font-bold'
-            >
-              {name}
-            </Text>
-
-            <Text
-              level='p'
-              textCenter
-              className='text-lg md:text-xl lg:text-2xl px-[2.5%] lg:pt-1'
-            >
-              {description}
-            </Text>
+            <FlexContainer className='gap-1' direction='col'>
+              <Text level='h2' textCenter className='heading-2'>
+                {name}
+              </Text>
+              <Text level='p' textCenter className='paragraph'>
+                {description}
+              </Text>
+            </FlexContainer>
 
             <FlexContainer
               direction='row'

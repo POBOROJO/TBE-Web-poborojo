@@ -1,13 +1,14 @@
 import dynamic from 'next/dynamic';
+
 const ProgressBar = dynamic(() => import('@/components/common/ProgressBar'));
 const CertificateBanner = dynamic(
-  () => import('@/components/common/CertificateBanner')
+  () => import('@/components/common/Certificate/CertificateBanner')
 );
 const CertificateModal = dynamic(
-  () => import('@/components/common/CertificateModal')
+  () => import('@/components/common/Certificate/CertificateModal')
 );
 const CertificateContent = dynamic(
-  () => import('@/components/common/CertificateContent')
+  () => import('@/components/common/Certificate/CertificateContent')
 );
 const CourseHeroContainer = dynamic(
   () => import('@/components/containers/Page/Course/CourseHeroContainer')
@@ -136,6 +137,9 @@ const QuestionLink = dynamic(
 const WebinarHeroContainer = dynamic(
   () => import('@/components/containers/Page/Webinar/WebinarHeroContainer')
 );
+const BackgroundImage = dynamic(
+  () => import('@/components/common/Images/BackgroundImage')
+);
 
 export {
   Navbar,
@@ -198,4 +202,5 @@ export {
   CertificateModal,
   CertificateContent,
   WebinarHeroContainer,
+  BackgroundImage,
 };

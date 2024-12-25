@@ -393,3 +393,8 @@ export interface CertificateDataPoints {
   courseName: string;
   date: string;
 }
+
+export interface BackgroundImageProps {
+  bannerImageUrl: string;
+  classNames?: string;
+}
