@@ -35,6 +35,7 @@ const WebinarPage = ({
   time,
   isWebinarStarted,
   bannerImageUrl,
+  registrationUrl,
 }: WebinarPageProps) => {
   const { user, isAuth } = useUser();
   const { certificateRef, handleDownload } = useCertificate();
@@ -239,46 +240,45 @@ const WebinarPage = ({
           fullWidth={true}
           justifyCenter={true}
           itemCenter={true}
-          className='max-w-screen-lg h-52 px-6 py-7 gradient-1 rounded-lg gap-2.5 overflow-hidden m-auto'
+          className='p-3 gradient-1 rounded-2 md:w-1/2 w-full m-auto'
         >
           <FlexContainer
             direction='col'
-            className='justify-start items-center gap-4'
+            className='justify-start items-center gap-2'
           >
-            <Text level='h5' className='heading-5'>
-              Register Now
-            </Text>
-
             <FlexContainer
               direction='col'
-              className='justify-start items-center gap-4'
+              className='justify-start items-center gap-2'
+              fullWidth={true}
             >
+              <Text level='p' className='heading-5'>
+                Register Now
+              </Text>
               <LinkButton
-                href=''
-                className='w-full sm:w-[300px]'
+                href={registrationUrl}
+                target='_blank'
+                className='w-full'
                 buttonProps={{
                   variant: 'PRIMARY',
                   text: 'Join Webinar',
                   className: 'w-full',
                 }}
               />
-
-              <Text level='p' className='strong-text'>
-                25 Slots only. Few seats left.
-              </Text>
             </FlexContainer>
+
+            <Text level='p' className='pre-text'>
+              25 Slots only. Few seats left.
+            </Text>
           </FlexContainer>
         </FlexContainer>
 
         {certificateSection}
 
-        {/* About the Webinar */}
         <FlexContainer
           direction='col'
           fullWidth={true}
           className='max-w-screen-lg m-auto mt-5'
         >
-          {/* About Webinar Section */}
           <FlexContainer
             direction='col'
             itemCenter={true}
