@@ -1,4 +1,7 @@
 import dynamic from 'next/dynamic';
+const AboutTBE = dynamic(
+  () => import('@/components/containers/Cards/AboutTBE')
+);
 
 const ProgressBar = dynamic(() => import('@/components/common/ProgressBar'));
 const CertificateBanner = dynamic(
@@ -203,4 +206,5 @@ export {
   CertificateContent,
   WebinarHeroContainer,
   BackgroundImage,
+  AboutTBE,
 };

@@ -142,7 +142,6 @@ export interface WebinarModel {
   };
   registrationUrl: string;
   dateAndTime: string;
-  aboutWebinar: string[];
   whatYoullLearn: string[];
   enrolledUsersList: WebinarEnrolledUsersProps[];
   toObject: () => WebinarModel;
