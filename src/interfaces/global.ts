@@ -60,6 +60,15 @@ export interface ServerSessionProp {
 export interface WebinarPageProps extends WebinarModel {
   bannerImageUrl: string;
   seoMeta: GetSEOMetaResponseType;
+  date: string;
+  time: string;
+  isWebinarStarted: boolean;
 }
 
 export type CertificateType = 'WEBINAR' | 'SHIKSHA';
+
+export type FormatDateType = {
+  dateAndTime: string;
+  dateFormat?: Intl.DateTimeFormatOptions;
+  timeFormat?: Intl.DateTimeFormatOptions;
+};

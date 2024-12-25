@@ -9,6 +9,8 @@ import {
   getSelectedSheetQuestionMeta,
   getSelectedProjectChapterMeta,
   isUserAuthenticated,
+  formatDate,
+  isProgramActive,
 } from '.';
 
 const getPreFetchProps = async ({ resolvedUrl }: any) => {
@@ -276,6 +278,12 @@ const getWebinarPageProps = async (context: any) => {
     host,
   } = webinar;
 
+  const { date, time } = formatDate({
+    dateAndTime,
+  });
+
+  const isWebinarStarted = isProgramActive(dateAndTime);
+
   const seoMeta = {
     title: `${name} | The Boring Webinars`,
     siteName: 'The Boring Education',
@@ -299,7 +307,9 @@ const getWebinarPageProps = async (context: any) => {
       isFree,
       about,
       host,
-      dateAndTime,
+      date,
+      time,
+      isWebinarStarted,
       registrationUrl,
       bannerImageUrl:
         'https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg',

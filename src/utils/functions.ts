@@ -2,21 +2,29 @@ import { envConfig } from '@/constant';
 import {
   BaseInterviewSheetResponseProps,
   BaseShikshaCourseResponseProps,
+  FormatDateType,
   ProjectDocumentModel,
   ProjectPickedPageProps,
   User,
 } from '@/interfaces';
 
-const formatDate = (date: string) => {
-  return new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
+const formatDate = ({
+  dateAndTime,
+  dateFormat = {
     day: 'numeric',
-    weekday: 'short',
+    month: 'short',
+    weekday: 'long',
+  },
+  timeFormat = {
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
-  });
+  },
+}: FormatDateType) => {
+  return {
+    date: new Date(dateAndTime).toLocaleDateString('en-US', dateFormat),
+    time: new Date(dateAndTime).toLocaleTimeString('en-US', timeFormat),
+  };
 };
 
 const formatTime = (time: number) => time.toString().padStart(2, '0');
@@ -134,7 +142,8 @@ const isUserAuthenticated = async (req: any): Promise<User | null> => {
   }
 };
 
-const isProgramActive = (liveOn: Date) => new Date(liveOn) <= new Date();
+const isProgramActive = (liveOn: Date | string) =>
+  new Date(liveOn) <= new Date();
 
 const mapCourseResponseToCard = (
   coursesData: BaseShikshaCourseResponseProps[]

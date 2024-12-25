@@ -17,7 +17,6 @@ import { WebinarPageProps } from '@/interfaces';
 import { getWebinarPageProps } from '@/utils';
 import { useApi, useUser, useCertificate } from '@/hooks';
 import { routes, imageMeta, TESTIMONIALS } from '@/constant';
-import { isProgramActive } from '@/utils';
 import { FiCalendar } from 'react-icons/fi';
 import { LuClock3 } from 'react-icons/lu';
 import { SiLinkedin } from 'react-icons/si';
@@ -32,7 +31,9 @@ const WebinarPage = ({
   whatYoullLearn,
   slug,
   host,
-  dateAndTime,
+  date,
+  time,
+  isWebinarStarted,
   bannerImageUrl,
 }: WebinarPageProps) => {
   const { user, isAuth } = useUser();
@@ -81,8 +82,6 @@ const WebinarPage = ({
     }
   };
 
-  const webinarStarted = isProgramActive(new Date(dateAndTime));
-
   let certificateSection;
   let generateCertificateCard;
 
@@ -92,7 +91,7 @@ const WebinarPage = ({
         <FlexContainer
           fullWidth={true}
           className={`max-w-lg bg-white rounded-1 border-2 border-gray-500 ${
-            webinarStarted ? '' : 'opacity-80'
+            isWebinarStarted ? '' : 'opacity-80'
           }`}
         >
           <div ref={certificateRef} className='w-full'>
@@ -100,15 +99,15 @@ const WebinarPage = ({
               type='webinar'
               username={userName}
               courseName={name}
-              date={dateAndTime.slice(0, 10)}
+              date={date + ' ' + time}
             />
           </div>
         </FlexContainer>
         <button
           onClick={handleDownload}
-          disabled={!webinarStarted}
+          disabled={!isWebinarStarted}
           className={`rounded py-1 px-2 text-white ${
-            webinarStarted
+            isWebinarStarted
               ? 'bg-blue-500 hover:bg-blue-600'
               : 'bg-gray-400 cursor-not-allowed'
           }`}
@@ -178,116 +177,58 @@ const WebinarPage = ({
       <Section className='md:px-8 md:py-2 px-2 py-2'>
         <FlexContainer className='relative'>
           <BackgroundImage bannerImageUrl={bannerImageUrl} />
-          <FlexContainer className='py-10 md:py-8 gap-2' direction='col'>
-            {isFree && <Pill text='Free Webinar' variant='SECONDARY' />}
-            {!isFree && <Pill text='Paid Webinar' variant='SECONDARY' />}
+          <FlexContainer className='py-10 md:py-8 gap-4' direction='col'>
+            <FlexContainer className='gap-2' direction='col'>
+              {isFree && <Pill text='Free Webinar' variant='SECONDARY' />}
+              {!isFree && <Pill text='Paid Webinar' variant='SECONDARY' />}
 
-            <FlexContainer className='gap-1' direction='col'>
-              <Text level='h2' textCenter className='heading-2'>
-                {name}
-              </Text>
-              <Text level='p' textCenter className='paragraph'>
-                {description}
-              </Text>
+              <FlexContainer className='gap-1' direction='col'>
+                <Text level='h2' textCenter className='heading-2'>
+                  {name}
+                </Text>
+                <Text level='p' textCenter className='paragraph'>
+                  {description}
+                </Text>
+              </FlexContainer>
             </FlexContainer>
 
-            <FlexContainer
-              direction='row'
-              className='gap-2 max-w-[80%] mt-3'
-              wrap={false}
-            >
+            <FlexContainer direction='row' className='gap-2' wrap={false}>
               <Image
                 alt='host-img'
                 src={host.imageUrl}
-                className='rounded-full w-[70px] md:w-20 lg:w-24 border-2 border-gray-950'
+                className='rounded-full w-20 h-20 bg-contain border border-dark'
               />
-              <FlexContainer
-                direction='col'
-                itemCenter={false}
-                className='md:gap-1'
-              >
-                <Text
-                  level='h2'
-                  className='text-md md:text-2xl lg:text-3xl font-semibold'
-                >
+              <FlexContainer direction='col' itemCenter={false}>
+                <Text level='h4' className='heading-4'>
                   {host.name}
                 </Text>
-                <Text level='p' className='text-sm md:text-lg lg:text-xl'>
+                <Text level='p' className='paragraph'>
                   {host.role}
                 </Text>
               </FlexContainer>
             </FlexContainer>
 
-            {/* Date and Time & Starts in Container */}
-            <FlexContainer direction='col' className='gap-4'>
+            <FlexContainer
+              direction='row'
+              className='h-6 justify-start items-center gap-x-9'
+            >
               <FlexContainer
                 direction='row'
-                className='h-6 justify-start items-center gap-x-9'
+                className='justify-start items-center gap-2.5'
               >
-                <FlexContainer
-                  direction='row'
-                  className='justify-start items-center gap-2.5'
-                >
-                  <FiCalendar className='w-4 h-4' />
-                  <Text level='p' className='strong-text'>
-                    29 Apr, Saturday
-                  </Text>
-                </FlexContainer>
-                <FlexContainer
-                  direction='row'
-                  className='justify-start items-center gap-2.5'
-                >
-                  <LuClock3 className='w-4 h-4' />
-                  <Text level='p' className='strong-text'>
-                    11 AM
-                  </Text>
-                </FlexContainer>
-              </FlexContainer>
-
-              <FlexContainer
-                direction='col'
-                className='justify-start items-center gap-4'
-              >
+                <FiCalendar className='w-4 h-4' />
                 <Text level='p' className='strong-text'>
-                  Starts in
+                  {date}
                 </Text>
-
-                <FlexContainer
-                  direction='row'
-                  className='gap-2.5'
-                  justifyCenter={true}
-                  itemCenter={true}
-                >
-                  {/* Days */}
-                  <FlexContainer
-                    direction='col'
-                    className='h-9 p-2 border border-rose-500 rounded-1'
-                  >
-                    <Text level='p' className='strong-text text-rose-500'>
-                      03 d
-                    </Text>
-                  </FlexContainer>
-
-                  {/* Hours */}
-                  <FlexContainer
-                    direction='col'
-                    className='h-9 p-2 border border-rose-500 rounded-1'
-                  >
-                    <Text level='p' className='strong-text text-rose-500'>
-                      02 h
-                    </Text>
-                  </FlexContainer>
-
-                  {/* Minutes */}
-                  <FlexContainer
-                    direction='col'
-                    className='h-9 p-2 border border-rose-500 rounded-1'
-                  >
-                    <Text level='p' className='strong-text text-rose-500'>
-                      01 m
-                    </Text>
-                  </FlexContainer>
-                </FlexContainer>
+              </FlexContainer>
+              <FlexContainer
+                direction='row'
+                className='justify-start items-center gap-2.5'
+              >
+                <LuClock3 className='w-4 h-4' />
+                <Text level='p' className='strong-text'>
+                  {time}
+                </Text>
               </FlexContainer>
             </FlexContainer>
           </FlexContainer>
