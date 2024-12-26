@@ -398,3 +398,12 @@ export interface BackgroundImageProps {
   bannerImageUrl: string;
   classNames?: string;
 }
+
+export interface BannerProps {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  imageSrc: string;
+  variant?: 'VARIANT_A' | 'VARIANT_B';
+}

@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+const Banner = dynamic(() => import('@/components/common/Banner'));
 const AboutTBE = dynamic(
   () => import('@/components/containers/Cards/AboutTBE')
 );
@@ -59,9 +60,6 @@ const CardContainerA = dynamic(
 );
 const FlexContainer = dynamic(
   () => import('@/components/containers/Page/common/FlexContainer')
-);
-const CanYouBeAProgrammer = dynamic(
-  () => import('@/components/containers/Page/Landing/CanYouBeAProgrammer')
 );
 const TestimonialCard = dynamic(
   () => import('@/components/containers/Cards/Items/TestimonialCard')
@@ -163,7 +161,6 @@ export {
   PrimaryCard,
   CardContainerA,
   FlexContainer,
-  CanYouBeAProgrammer,
   TestimonialCard,
   Testimonials,
   Footer,
@@ -207,4 +204,5 @@ export {
   WebinarHeroContainer,
   BackgroundImage,
   AboutTBE,
+  Banner,
 };
