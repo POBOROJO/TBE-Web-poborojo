@@ -118,6 +118,8 @@ export interface UserCourseModel {
   courseId: typeof Schema.Types.ObjectId;
   course: CourseModel;
   chapters: UserCourseChapterModel[];
+  certificateId: typeof Schema.Types.ObjectId;
+  isCompleted: boolean;
 }
 
 export interface UserCourseChapterModel {
@@ -154,4 +156,5 @@ export interface CertificateModel extends Document {
   userId: string;
   date: Date;
   program: string;
+  programId:string;
 }

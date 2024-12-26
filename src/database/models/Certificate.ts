@@ -21,6 +21,10 @@ const CertificateSchema = new Schema<CertificateModel>(
       type: String,
       required: true,
     },
+    programId:{
+      type: String,
+      required: false,
+    }
   },
   {
     timestamps: true,

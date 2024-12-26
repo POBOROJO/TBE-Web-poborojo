@@ -42,6 +42,15 @@ const UserCourseSchema = new Schema<UserCourseModel>(
       required: [true, 'Course id is required'],
       index: true,
     },
+    certificateId:{
+      type: Schema.Types.ObjectId,
+      ref: databaseModels.CERTIFICATE,
+      required: false,
+    },
+    isCompleted: {
+      type: Boolean,
+      default: false,
+    },
     chapters: [UserChapterSchema],
   },
   {

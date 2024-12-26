@@ -32,6 +32,8 @@ const CoursePage = ({
     chapters.find((chapter) => chapter._id.toString() === currentChapterId)
       ?.isCompleted
   );
+  const [certificateId, setCertificateId] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isSmallScreen = useMediaQuery(SCREEN_BREAKPOINTS.SM);
