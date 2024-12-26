@@ -184,7 +184,10 @@ const WebinarPage = ({
       <Section className='md:px-8 md:py-2 px-2 py-2'>
         <FlexContainer className='relative'>
           <BackgroundImage bannerImageUrl={bannerImageUrl} />
-          <FlexContainer className='py-10 md:py-8 gap-4' direction='col'>
+          <FlexContainer
+            className='py-6 md:py-8 gap-4 md:px-0 px-2'
+            direction='col'
+          >
             <FlexContainer className='gap-2' direction='col'>
               {isFree && <Pill text='Free Webinar' variant='SECONDARY' />}
               {!isFree && <Pill text='Paid Webinar' variant='SECONDARY' />}
@@ -199,13 +202,19 @@ const WebinarPage = ({
               </FlexContainer>
             </FlexContainer>
 
-            <FlexContainer className='gap-2' wrap={false}>
+            <FlexContainer className='gap-2'>
               <Image
                 alt={host.name}
                 src={host.imageUrl}
-                className='rounded-full w-20 h-20 bg-contain border border-dark'
+                fullHeight={true}
+                fullWidth={true}
+                className='rounded-full w-16 h-16 bg-contain border border-dark'
               />
-              <FlexContainer direction='col' itemCenter={false}>
+              <FlexContainer
+                direction='col'
+                itemCenter={false}
+                className='md:items-start items-center'
+              >
                 <Text level='h4' className='heading-4'>
                   {host.name}
                 </Text>
@@ -215,14 +224,23 @@ const WebinarPage = ({
               </FlexContainer>
             </FlexContainer>
 
-            <FlexContainer className='h-6 justify-start items-center gap-x-9'>
-              <FlexContainer className='justify-start items-center gap-2.5'>
+            <FlexContainer
+              itemCenter={true}
+              className='h-6 justify-start gap-1 md:gap-4'
+            >
+              <FlexContainer
+                itemCenter={true}
+                className='justify-start gap-2.5'
+              >
                 <FiCalendar className='w-4 h-4' />
                 <Text level='p' className='strong-text'>
                   {date}
                 </Text>
               </FlexContainer>
-              <FlexContainer className='justify-start items-center gap-2.5'>
+              <FlexContainer
+                itemCenter={true}
+                className='justify-start gap-2.5'
+              >
                 <LuClock3 className='w-4 h-4' />
                 <Text level='p' className='strong-text'>
                   {time}
@@ -280,7 +298,7 @@ const WebinarPage = ({
                 <Text level='h4' className='heading-4'>
                   About webinar
                 </Text>
-                <FlexContainer className='gap-3'>
+                <FlexContainer className='gap-1 md:gap-2'>
                   <FlexContainer
                     justifyCenter={true}
                     className='px-1 py-1 bg-black rounded gap-1'
@@ -322,7 +340,7 @@ const WebinarPage = ({
               <Text level='h4' className='heading-4'>
                 What will you learn
               </Text>
-              <ol className='list-decimal w-full flex flex-col gap-1'>
+              <ol className='list-decimal w-full flex flex-col gap-1 ml-2'>
                 {whatYoullLearn?.map((item, index) => (
                   <li key={index}>
                     <Text level='p' className='paragraph'>
@@ -341,21 +359,27 @@ const WebinarPage = ({
                 direction='col'
                 itemCenter={false}
                 justifyCenter={false}
-                className='justify-start items-start gap-2 w-full'
+                className='justify-start items-start gap-4 w-full'
               >
-                <FlexContainer className='justify-start items-start gap-2'>
-                  <FlexContainer className='gap-3'>
+                <FlexContainer
+                  justifyCenter={false}
+                  className='justify-start items-start gap-2 w-full'
+                >
+                  <FlexContainer
+                    justifyCenter={false}
+                    className='md:gap-3 gap-1 w-full justify-center md:justify-start items-start'
+                  >
                     <Image
                       src={host.imageUrl}
                       alt={host.name}
-                      className='rounded-full w-20 h-20 bg-contain border border-dark'
+                      className='rounded-full w-16 h-16 bg-contain border border-dark'
                     />
 
                     <FlexContainer
                       direction='col'
                       itemCenter={false}
                       justifyCenter={false}
-                      className='justify-start items-start'
+                      className='md:items-start items-center'
                     >
                       <Text level='h5' className='heading-5'>
                         {host.name}
@@ -365,7 +389,7 @@ const WebinarPage = ({
                       </Text>
                     </FlexContainer>
                     <SiLinkedin
-                      className='w-5 h-5 cursor-pointer text-blue-600'
+                      className='md:w-5 md:h-5 w-4 h-4 cursor-pointer text-blue-600'
                       onClick={() => window.open(host.linkedInUrl, '_blank')}
                     />
                   </FlexContainer>
@@ -388,10 +412,10 @@ const WebinarPage = ({
         <FlexContainer
           direction='col'
           fullWidth={true}
-          className='max-w-screen-lg p-2 py-4 m-auto mt-2 rounded-1 gap-3'
+          className='md:max-w-screen-lg py-4 m-auto mt-2 gap-3'
         >
-          <Text level='h4' className='heading-4'>
-            What are <span className='text-rose-500'>students</span> saying ?
+          <Text level='h4' className='heading-4' textCenter={true}>
+            What are <span className='text-primary'>students</span> saying ?
           </Text>
           <CardSectionContainer
             gap='gap-2'
