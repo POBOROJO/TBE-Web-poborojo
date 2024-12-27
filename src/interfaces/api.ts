@@ -301,4 +301,5 @@ export interface AddCertificateRequestPayloadProps {
   userId: string;
   userName: string;
   program: string;
+  programId: string;
 }

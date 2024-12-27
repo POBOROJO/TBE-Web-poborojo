@@ -321,23 +321,31 @@ const getACourseForUserFromDB = async (userId: string, courseId: string) => {
   }
 };
 
-export const updateCourseCertificate =async (courseId: string, certificateId: string) => {
+const updateCourseCertificate = async (courseId: string, certificateId: string, userId: string) => {
   try {
-    const course = await Course.findOneAndUpdate(
-      { _id: courseId },
+    const userCourse = await UserCourse.findOneAndUpdate(
+      { 
+        courseId: courseId,
+        userId: userId 
+      },
       {
         $set: {
-          certificate: certificateId,
+          certificateId: certificateId,
+          isCompleted: true
         },
       },
       { new: true }
     );
-    return { data: course };
+
+    if (!userCourse) {
+      return { error: 'User course not found' };
+    }
+
+    return { data: userCourse };
   } catch (error) {
-    return { error: 'Failed to update certificate to course' };
+    return { error: 'Failed to update certificate to user course' };
   }
 };
-
 export {
   addACourseToDB,
   updateACourseInDB,
@@ -353,4 +361,5 @@ export {
   updateUserCourseChapterInDB,
   getACourseForUserFromDB,
   getAllCourseFromDB,
+  updateCourseCertificate
 };
